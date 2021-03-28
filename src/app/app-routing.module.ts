@@ -38,13 +38,18 @@ const routes: Routes = [
         pathMatch: 'full'
       },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+        path: 'login',
+        loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
+  {
+    path: 'liste-medecin',
+    loadChildren: () => import('./liste-medecin/liste-medecin.module').then( m => m.ListeMedecinPageModule)
+  },
+
 
 ];
 
