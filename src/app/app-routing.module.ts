@@ -50,7 +50,10 @@ const routes: Routes = [
     loadChildren: () => import('./liste-medecin/liste-medecin.module').then( m => m.ListeMedecinPageModule)
   },
 
-
+  {
+    path: 'liste-hopital',
+    loadChildren: () => import('./liste-hopital/liste-hopital.module').then( m => m.ListeHopitalPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,9 +1,90 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>listeHopital</ion-title>
-  </ion-toolbar>
+    <ion-buttons slot="start">
+    <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+  <!--<ion-title style="text-align: end;">
+    list Medecin
+  </ion-title>-->
+  <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
+  <ion-button slot="end" style="font-size: 12px;">se connecter</ion-button>
+</ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content  color="tertiary">
+  <ion-img src='../assets/hopitals.jpg'></ion-img>
+  <h3 style="font-family: cursive;color:rgb(22, 107, 86);font-size: 15px;margin:10px">Votre santé est notre <br> Priorité.</h3>
+  <ion-searchbar animated></ion-searchbar>
+
+  <h1 style="font-weight: bold;margin:10px" class="title">Hopital </h1>
+
+    <ion-card>
+      <ion-card-content>
+        <div class="c">
+          <img src='../assets/cims.png' />
+          <div style="margin: 10px ">
+            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
+          </div>
+        </div>
+        <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <div class="c">
+          <img src='../assets/cims.png' />
+          <div style="margin: 10px ">
+            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
+          </div>
+        </div>
+        <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <div class="c">
+          <img src='../assets/cims.png' />
+          <div style="margin: 10px ">
+            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
+          </div>
+        </div>
+        <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      </ion-card-content>
+    </ion-card>
+
+   <ion-card>
+      <ion-card-content>
+        <div class="c">
+          <img src='../assets/cims.png' />
+          <div style="margin: 10px ">
+            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
+          </div>
+        </div>
+        <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      </ion-card-content>
+    </ion-card>
+
+   <ion-card>
+      <ion-card-content>
+        <div class="c">
+          <img src='../assets/cims.png' />
+          <div style="margin: 10px ">
+            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
+          </div>
+        </div>
+        <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+      </ion-card-content>
+    </ion-card>
+
+  <p style="margin: 5px;color:rgb(184, 182, 182);font-size: 15px;">© Copyright 2021 Med.tn Tous droits réservés</p>
 </ion-content>
+
+
