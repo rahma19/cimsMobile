@@ -17,29 +17,29 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'login',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-          },
-        ]
-      },
-      {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'profile',
         pathMatch: 'full'
       }
     ]
   },
-      {
+     /* {
         path: '',
         redirectTo: 'tabs',
+        pathMatch: 'full'
+      },*/
+      {
+        path: '',
+        redirectTo: 'home',
         pathMatch: 'full'
       },
   {
         path: 'home',
         loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'signup',
@@ -53,7 +53,11 @@ const routes: Routes = [
   {
     path: 'liste-hopital',
     loadChildren: () => import('./liste-hopital/liste-hopital.module').then( m => m.ListeHopitalPageModule)
+  },  {
+    path: 'fixer-rendezvous',
+    loadChildren: () => import('./fixer-rendezvous/fixer-rendezvous.module').then( m => m.FixerRendezvousPageModule)
   },
+
 ];
 
 @NgModule({
