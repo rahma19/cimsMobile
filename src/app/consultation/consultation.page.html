@@ -11,23 +11,39 @@
 </ion-toolbar>
 </ion-header>
 
+<!--<ion-stepper #stepper (selectIndexChange)="selectChange($event)">
+  <ion-step label="Step1"
+            description="Step1 description">
+    <h2>Step1 Content</h2>
+    <p>Step1 Content</p>
+    <button ion-button small ionicStepperNext>Next</button>
+  </ion-step>
+  <ion-step label="Step2 - Step2 - Step2"
+            description="Step1 description">
+    <h2>Step2 Content</h2>
+    <p>Step2 Content</p>
+    <button ion-button color="light" small ionicStepperPrevious>Previous</button>
+  </ion-step>
+</ion-stepper>-->
 
 <ion-content  color="tertiary">
   <ion-list>
-
-    <ion-item>
-      <ion-label floating>Username</ion-label>
+    <ion-item style="width:80%;margin:10px">
+      <ion-label position="floating">Saisissez votre Index </ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
-  
-    <ion-item>
-      <ion-label floating>Password</ion-label>
+    <ion-button slot="end"  style="font-size: 12px;" (click)="affiche()">Valider </ion-button>
+   <div [hidden]=test>
+    <p style="color:rgb(126, 125, 125);font-size: 15px;margin:10px">Vous aurez un code par sms pour <br> confirmer votre index !</p>
+    <ion-item style="width:80%;margin:10px">
+      <ion-label position="floating">Confirmez votre Index</ion-label>
       <ion-input type="password"></ion-input>
     </ion-item>
-  
+    <ion-button slot="end"  style="font-size: 12px;">Confirmer </ion-button>
+   </div>
   </ion-list>
 
-  <p slot="bottom" style="color:rgb(184, 182, 182);font-size: 15px;">© Copyright 2021 Cims Tous droits réservés</p>
+  <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
 </ion-content>
 
 
