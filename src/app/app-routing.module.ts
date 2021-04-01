@@ -57,6 +57,10 @@ const routes: Routes = [
     path: 'fixer-rendezvous',
     loadChildren: () => import('./fixer-rendezvous/fixer-rendezvous.module').then( m => m.FixerRendezvousPageModule)
   },
+  {
+    path: 'consultation',
+    loadChildren: () => import('./consultation/consultation.module').then( m => m.ConsultationPageModule)
+  },
 
 ];
 
