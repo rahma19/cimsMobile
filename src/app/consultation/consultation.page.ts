@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-consultation',
@@ -7,12 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultationPage implements OnInit {
 test:boolean=true;
-  constructor() { }
+firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  isEditable = false;
+  
+  constructor(private _formBuilder: FormBuilder) { }
 affiche(){
   this.test=false;
 }
   ngOnInit() {
     this.test=true;
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
   }
 
 }

@@ -5,15 +5,20 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatStepperModule} from '@angular/material/stepper';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TabsComponent } from './tabs/tabs.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [AppComponent,TabsComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), 
+    AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule],
+  exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule],
   providers: [
     StatusBar,
     SplashScreen,
