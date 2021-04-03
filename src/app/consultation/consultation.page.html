@@ -11,30 +11,14 @@
 </ion-toolbar>
 </ion-header>
 
-<!--<ion-stepper #stepper (selectIndexChange)="selectChange($event)">
-  <ion-step label="Step1"
-            description="Step1 description">
-    <h2>Step1 Content</h2>
-    <p>Step1 Content</p>
-    <button ion-button small ionicStepperNext>Next</button>
-  </ion-step>
-  <ion-step label="Step2 - Step2 - Step2"
-            description="Step1 description">
-    <h2>Step2 Content</h2>
-    <p>Step2 Content</p>
-    <button ion-button color="light" small ionicStepperPrevious>Previous</button>
-  </ion-step>
-</ion-stepper>-->
-
 <ion-content  color="tertiary">
   <div style="margin:10px;color:#154f57;font-family:Open Sans,Arial, Helvetica, sans-serif;">
     <h1 style="font-weight: bold;">Payer Votre Consultation!</h1>
 </div>
 
   <mat-horizontal-stepper linear #stepper>
-    <mat-step [stepControl]="firstFormGroup" >
+    <mat-step label="Remplissage" matStepperIcon="edit" state="phone" [stepControl]="firstFormGroup" >
       <div #firstFormGroup>
-        <ng-template matStepLabel>Remplissage</ng-template>
         <ion-list>
           <ion-item style="width:80%;margin:10px">
             <ion-label position="floating">Saisissez votre Index </ion-label>
@@ -68,16 +52,48 @@
         </div>
       </form>
     </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Paiement</ng-template>
+    <mat-step label="Paiement" state="chat">
       <p style="font-weight: bold;color: black;">You are now done.</p>
       <div>
         <button mat-button style="padding: 12px;background-color:teal;color: white;float:left;margin-right: 10px;" matStepperPrevious>Retour</button>
         <button mat-button style="padding: 12px;background-color:teal;color: white;float:right;margin-right: 10px;" (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>
+     <!-- Icon overrides. -->
+  <!-- #docregion override-icons -->
+  <ng-template matStepperIcon="phone">
+    <mat-icon>call_end</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="chat">
+    <mat-icon>forum</mat-icon>
+  </ng-template>
   </mat-horizontal-stepper>
-  <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
 </ion-content>
 
+<!-- 
+<mat-horizontal-stepper>
+  <mat-step label="Step 1"  matStepperIcon="edit" state="phone">
+    <p>Put down your phones.</p>
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 2" state="chat">
+    <p>Socialize with each other.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 3">
+    <p>You're welcome.</p>
+  </mat-step>
+
+  <ng-template matStepperIcon="phone">
+    <mat-icon>call_end</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="chat">
+    <mat-icon>forum</mat-icon>
+  </ng-template>
+</mat-horizontal-stepper>-->
 

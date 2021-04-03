@@ -10,13 +10,18 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConsultationPage } from './consultation.page';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,MatStepperModule,MatFormFieldModule,
     IonicModule,MatInputModule,ReactiveFormsModule,
-    ConsultationPageRoutingModule
+    ConsultationPageRoutingModule,MatIconModule
+  ],
+  exports: [
+        MatStepperModule,MatFormFieldModule,
+    MatInputModule,MatIconModule
   ],
   declarations: [ConsultationPage]
 })

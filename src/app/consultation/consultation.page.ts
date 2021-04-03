@@ -1,3 +1,4 @@
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -5,6 +6,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   selector: 'app-consultation',
   templateUrl: './consultation.page.html',
   styleUrls: ['./consultation.page.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
+  }]
 })
 export class ConsultationPage implements OnInit {
 test:boolean=true;

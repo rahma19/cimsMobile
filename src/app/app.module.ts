@@ -13,11 +13,13 @@ import { TabsComponent } from './tabs/tabs.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [AppComponent,TabsComponent],
   entryComponents: [],
-  imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), 
-    AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule],
+  imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,
+    AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,
+    MatIconModule],
   exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule],
   providers: [
     StatusBar,
