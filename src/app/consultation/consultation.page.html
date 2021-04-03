@@ -17,8 +17,8 @@
 </div>
 
   <mat-horizontal-stepper linear #stepper>
-    <mat-step label="Remplissage" matStepperIcon="edit" state="phone" [stepControl]="firstFormGroup" >
-      <div #firstFormGroup>
+    <mat-step label="Etape 1" matStepperIcon="edit" > <!-- [stepControl]="firstFormGroup"-->
+      <div>
         <ion-list>
           <ion-item style="width:80%;margin:10px">
             <ion-label position="floating">Saisissez votre Index </ion-label>
@@ -39,20 +39,32 @@
         </div>
       </div>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Confirmation</ng-template>
+    <mat-step label="Etape 2" state="thumb">
+      <!--<form [formGroup]="secondFormGroup">
         <mat-form-field>
           <mat-label>Address</mat-label>
           <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"  >
         </mat-form-field>
+      </form>-->
+      <div>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            <ion-card-title>Acte</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Keep close to Nature's heart... and break clear away, once in awhile,
+            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+          </ion-card-content>
+        </ion-card>
         <div>
           <button mat-button style="padding: 12px;background-color:teal;color: white;float:left;margin-right: 10px;" matStepperPrevious>Retour</button>
           <button mat-button style="padding: 12px;background-color:teal;color: white;float:right;" matStepperNext>Payer</button>
         </div>
-      </form>
+      </div>
+    
     </mat-step>
-    <mat-step label="Paiement" state="chat">
+    <mat-step label="Valider" state="thumb">
       <p style="font-weight: bold;color: black;">You are now done.</p>
       <div>
         <button mat-button style="padding: 12px;background-color:teal;color: white;float:left;margin-right: 10px;" matStepperPrevious>Retour</button>
@@ -66,6 +78,9 @@
   </ng-template>
   <ng-template matStepperIcon="chat">
     <mat-icon>forum</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="thumb">
+    <mat-icon>thumb_up</mat-icon>
   </ng-template>
   </mat-horizontal-stepper>
 </ion-content>
