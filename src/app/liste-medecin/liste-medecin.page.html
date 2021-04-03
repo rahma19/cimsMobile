@@ -14,10 +14,21 @@
 <ion-content  color="tertiary">
 <div style="margin:10px;color:#154f57;font-family:Open Sans,Arial, Helvetica, sans-serif;">
   <h1 style="font-weight: bold;">Prenez rapidement un <br> rendez-vous avec votre <br> médecin !</h1>
-  <p>Sélectionnez votre médecin, choisissez la date et <br> heure de votre rdv et recevez votre sms/mail de <br> confirmation. C’est aussi simple que ça !</p>
+  <p>Sélectionnez votre médecin, choisissez la date et  heure de votre rdv et recevez votre sms/mail de  confirmation. C’est aussi simple que ça !</p>
 </div>
-<ion-searchbar animated></ion-searchbar>
-
+<h3 style="color:#154f57;">Filtrer par</h3>
+<ion-searchbar animated placeholder="Nom du medecin"></ion-searchbar>
+<ion-item style="border-radius: 10px;margin:5px;">
+  <ion-label>Specialité</ion-label>
+  <ion-select>
+    <ion-select-option value="f">Cardiologue</ion-select-option>
+    <ion-select-option value="1">Dentiste</ion-select-option>
+    <ion-select-option value="3">Dermathologue</ion-select-option>
+    <ion-select-option value="2">Géneraliste</ion-select-option>
+    <ion-select-option value="8">Nutritionniste</ion-select-option>
+    <ion-select-option value="m">Chirurgien Esthétique</ion-select-option>
+  </ion-select>
+</ion-item>
   <h1 class="title">Cardiologue à Ariana Tunisie </h1>
   <div class="order-items">
     <ion-card>
