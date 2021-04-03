@@ -8,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class FixerRendezvousPage implements OnInit {
   currentDate = new Date();
   currentMonth: string;
-  constructor() { }
+  test:boolean=true;
+  res:boolean=true;
 
+  constructor() { }
+  affiche(){
+    this.test=false;
+  }
+  afficher(){
+    this.res=false;
+  }
   ngOnInit() {
   }
   onViewTitleChanged(title: string) {

@@ -13,7 +13,7 @@
 
 
 <ion-content  color="tertiary">
-  <calendar id="myCalendar"
+  <!--<calendar id="myCalendar"
   locale="fr-FR"
   calendarMode="month" 
   startHour="6"
@@ -22,19 +22,26 @@
   startingDayWeek="1"
   [currentDate]="currentDate"
   (onTitleChanged)="onViewTitleChanged($event)">
-</calendar>
-<ion-card>
+</calendar>-->
+<ion-card style="margin-top: 30px ">
   <ion-card-content>
-    <div class="c">
-      <img src='../assets/cims.png' />
-      <div style="margin: 10px ">
-        <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
-        <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
-      </div>
+      <div >
+        <h3 style="color: black;font-weight: bold;">Choisir la date et l'heure du rendez-vous</h3><br>
+        <p (click)="affiche()"><ion-icon color="primary" name="location-outline" ></ion-icon> Ariana Tunisie</p>  
     </div>
-    <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+    <div [hidden]=test>
+hghghg <br>fhfhfh<br>  <p (click)="afficher()">click</p> <br>
+    </div>
+    <div [hidden]=res>
+      <h3 style="color: black;font-weight: bold;text-align: center;">Saisissez vos informations</h3><br>
+      <app-input placeholder="Nom"></app-input>
+      <app-input placeholder="Prenom"></app-input>
+      <app-input placeholder="Num Tel"></app-input>
+
+    </div>
   </ion-card-content>
 </ion-card>
+
 <ion-footer>
   <ion-title> 
      <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>

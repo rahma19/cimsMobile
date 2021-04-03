@@ -24,9 +24,13 @@
             <ion-label position="floating">Saisissez votre Index </ion-label>
             <ion-input type="text" required></ion-input>
           </ion-item>
+          <ion-item style="width:80%;margin:10px">
+            <ion-label position="floating">Numero de telephone </ion-label>
+            <ion-input type="text" required></ion-input>
+          </ion-item>
           <ion-button slot="end"  style="font-size: 12px;" (click)="affiche()">Valider </ion-button>
          <div [hidden]=test>
-          <p style="color:rgb(126, 125, 125);font-size: 15px;margin:10px">Vous aurez un code par sms pour <br> confirmer votre index !</p>
+          <p style="color:rgb(126, 125, 125);font-size: 15px;margin:10px">Vous aurez un code sur ce numero pour <br> confirmer votre index !</p>
           <ion-item style="width:80%;margin:10px">
             <ion-label position="floating">Confirmez votre Index</ion-label>
             <ion-input type="password" required></ion-input>

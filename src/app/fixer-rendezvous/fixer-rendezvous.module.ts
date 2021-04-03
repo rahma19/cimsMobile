@@ -7,12 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { FixerRendezvousPageRoutingModule } from './fixer-rendezvous-routing.module';
 
 import { FixerRendezvousPage } from './fixer-rendezvous.page';
+import { InputModule } from '../input/input.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule,InputModule,
     FixerRendezvousPageRoutingModule
   ],
   declarations: [FixerRendezvousPage]
