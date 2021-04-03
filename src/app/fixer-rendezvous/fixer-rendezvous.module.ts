@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { FixerRendezvousPageRoutingModule } from './fixer-rendezvous-routing.module';
+import {CalendarModule} from 'primeng/calendar';
 
 import { FixerRendezvousPage } from './fixer-rendezvous.page';
 import { InputModule } from '../input/input.module';
@@ -12,7 +13,7 @@ import { InputModule } from '../input/input.module';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule,CalendarModule,
     IonicModule,InputModule,
     FixerRendezvousPageRoutingModule
   ],

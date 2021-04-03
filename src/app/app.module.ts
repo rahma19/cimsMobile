@@ -14,12 +14,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import {CalendarModule} from 'primeng/calendar';
+
 @NgModule({
   declarations: [AppComponent,TabsComponent],
   entryComponents: [],
   imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,
-    MatIconModule],
+    MatIconModule,CalendarModule],
   exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule],
   providers: [
     StatusBar,

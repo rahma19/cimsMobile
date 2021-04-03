@@ -10,7 +10,7 @@ export class FixerRendezvousPage implements OnInit {
   currentMonth: string;
   test:boolean=true;
   res:boolean=true;
-
+  value:any="";
   constructor() { }
   affiche(){
     this.test=false;

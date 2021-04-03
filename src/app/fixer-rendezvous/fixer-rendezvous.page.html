@@ -13,31 +13,22 @@
 
 
 <ion-content  color="tertiary">
-  <!--<calendar id="myCalendar"
-  locale="fr-FR"
-  calendarMode="month" 
-  startHour="6"
-  endHour="20"
-  step="30"
-  startingDayWeek="1"
-  [currentDate]="currentDate"
-  (onTitleChanged)="onViewTitleChanged($event)">
-</calendar>-->
 <ion-card style="margin-top: 30px ">
   <ion-card-content>
       <div >
-        <h3 style="color: black;font-weight: bold;">Choisir la date et l'heure du rendez-vous</h3><br>
-        <p (click)="affiche()"><ion-icon color="primary" name="location-outline" ></ion-icon> Ariana Tunisie</p>  
+        <h3 style="color: black;font-weight: bold;text-align: center;">Choisir la date et l'heure du rendez-vous</h3><br>
+        <p (click)="affiche()">25 Mars 2021</p> 
+         <p-calendar [(ngModel)]="value"></p-calendar>
     </div>
     <div [hidden]=test>
-hghghg <br>fhfhfh<br>  <p (click)="afficher()">click</p> <br>
+10:00 <br>10:30<br>  <p (click)="afficher()">11:00</p> <br>
     </div>
     <div [hidden]=res>
       <h3 style="color: black;font-weight: bold;text-align: center;">Saisissez vos informations</h3><br>
       <app-input placeholder="Nom"></app-input>
       <app-input placeholder="Prenom"></app-input>
       <app-input placeholder="Num Tel"></app-input>
-
+      <ion-button style="font-size: 12px;float: right;margin: 10px;">Confirmer </ion-button>
     </div>
   </ion-card-content>
 </ion-card>
