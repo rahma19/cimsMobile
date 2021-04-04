@@ -14,7 +14,6 @@
     <!--content-->
     <ion-content color="tertiary" >
       
-      <div style="height: 100%;">
         <ion-card [routerLink]="['/consultation']">
           <ion-card-content>
             <img src='../assets/consult.jpg' style="width: 100%;"/>
@@ -23,18 +22,13 @@
           </ion-card-content>
         </ion-card>
         
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-            <ion-card-title>Acte</ion-card-title>
-          </ion-card-header>
-        
+        <ion-card [routerLink]="['/consultation']">
           <ion-card-content>
-            Keep close to Nature's heart... and break clear away, once in awhile,
-            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+            <img src='../assets/radio.jpg' style="width: 100%;"/>
+            <ion-card-title style="margin: 10px;">Vous avez un rendez-vous ?</ion-card-title>        
+            <h1>Payez votre radio/analyse... maintenant</h1>
           </ion-card-content>
         </ion-card>
-      </div>
       
       <ion-footer>
         <ion-title> 

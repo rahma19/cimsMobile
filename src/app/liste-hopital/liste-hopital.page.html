@@ -15,16 +15,25 @@
 <ion-content  color="tertiary">
   <ion-img src='../assets/hopitals.jpg'></ion-img>
   <h3 style="font-family: cursive;color:rgb(22, 107, 86);font-size: 15px;margin:10px">Votre santé est notre <br> Priorité.</h3>
-  <ion-searchbar animated></ion-searchbar>
-
+  <ion-searchbar placeholder="Nom de l hopital" animated></ion-searchbar>
+  <ion-item style="border-radius: 10px;margin:5px;">
+    <ion-label>Region</ion-label>
+    <ion-select>
+      <ion-select-option value="f">Ariana</ion-select-option>
+      <ion-select-option value="1">Ben Arous</ion-select-option>
+      <ion-select-option value="3">Manouba</ion-select-option>
+      <ion-select-option value="2">Grande Ariana</ion-select-option>
+      <ion-select-option value="8">Megrin</ion-select-option>
+      <ion-select-option value="m">Carthage</ion-select-option>
+    </ion-select>
+  </ion-item>
   <h1 style="font-weight: bold;margin:10px" class="title">Hopital </h1>
-
     <ion-card>
       <ion-card-content>
         <div class="c">
-          <img src='../assets/cims.png' />
+          <img src='../assets/matri.jpg' />
           <div style="margin: 10px ">
-            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p style="font-weight: bold;">Hopital mahmoud el matri</p><br>
             <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
           </div>
         </div>
@@ -37,11 +46,11 @@
         <div class="c">
           <img src='../assets/cims.png' />
           <div style="margin: 10px ">
-            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p style="font-weight: bold;">Hopital Mahdi CHAKROUN</p><br>
             <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
           </div>
         </div>
-        <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+        <ion-button expand="block" [routerLink]="['/liste-medecin']" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
       </ion-card-content>
     </ion-card>
 
@@ -50,11 +59,11 @@
         <div class="c">
           <img src='../assets/cims.png' />
           <div style="margin: 10px ">
-            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p style="font-weight: bold;">Hopital Mahdi CHAKROUN</p><br>
             <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
           </div>
         </div>
-        <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+        <ion-button expand="block" class="btn" [routerLink]="['/liste-medecin']"><ion-icon name="eye-outline"></ion-icon></ion-button>
       </ion-card-content>
     </ion-card>
 
@@ -63,11 +72,11 @@
         <div class="c">
           <img src='../assets/cims.png' />
           <div style="margin: 10px ">
-            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p style="font-weight: bold;">Hopital Mahdi CHAKROUN</p><br>
             <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
           </div>
         </div>
-        <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+        <ion-button expand="block" class="btn" [routerLink]="['/liste-medecin']"><ion-icon name="eye-outline"></ion-icon></ion-button>
       </ion-card-content>
     </ion-card>
 
@@ -76,11 +85,11 @@
         <div class="c">
           <img src='../assets/cims.png' />
           <div style="margin: 10px ">
-            <p style="font-weight: bold;">Dr Mahdi CHAKROUN</p><br>
+            <p style="font-weight: bold;">Hopital Mahdi CHAKROUN</p><br>
             <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
           </div>
         </div>
-        <ion-button expand="block" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+        <ion-button expand="block" class="btn" [routerLink]="['/liste-medecin']"><ion-icon name="eye-outline"></ion-icon></ion-button>
       </ion-card-content>
     </ion-card>
     <ion-footer>

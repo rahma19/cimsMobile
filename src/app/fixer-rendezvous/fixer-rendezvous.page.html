@@ -13,15 +13,12 @@
 
 
 <ion-content  color="tertiary">
-<div style="height: 90%;">
-  <ion-card style="margin-top: 30px ">
+  <ion-card style="margin-top: 30px;">
     <ion-card-content>
-        <div >
           <h3 style="color: black;font-weight: bold;text-align: center;">Choisir la date et l'heure du rendez-vous</h3><br>
-          <p (click)="affiche()">25 Mars 2021</p> 
-           <p-calendar [(ngModel)]="value"></p-calendar>
-      </div>
-      <div [hidden]=test>
+          <p-calendar [(ngModel)]="date" (click)="affiche()" [inline]="true" [showWeek]="true"></p-calendar>
+          <div [hidden]=test>
+            <p>{{date | date: 'dd/MM/yyyy'}}</p> 
   10:00 <br>10:30<br>  <p (click)="afficher()">11:00</p> <br>
       </div>
       <div [hidden]=res>
@@ -33,7 +30,6 @@
       </div>
     </ion-card-content>
   </ion-card>
-</div>
 
 <ion-footer>
   <ion-title> 

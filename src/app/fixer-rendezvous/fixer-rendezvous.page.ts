@@ -9,6 +9,7 @@ export class FixerRendezvousPage implements OnInit {
   currentDate = new Date();
   currentMonth: string;
   test:boolean=true;
+  date:Date;
   res:boolean=true;
   value:any="";
   constructor() { }
