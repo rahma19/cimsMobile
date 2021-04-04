@@ -12,29 +12,29 @@
 </ion-header>
 
     <!--content-->
-    <ion-content color="tertiary" class="ion-padding">
+    <ion-content color="tertiary" >
       
-      <ion-card [routerLink]="['/consultation']">
-        <ion-card-header>
-          <ion-card-title>Vous avez un rendez-vous ?</ion-card-title>
-        </ion-card-header>
-      
-        <ion-card-content>
-          <h1>Payez votre consultation maintenant</h1>
-        </ion-card-content>
-      </ion-card>
-      
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-          <ion-card-title>Acte</ion-card-title>
-        </ion-card-header>
-      
-        <ion-card-content>
-          Keep close to Nature's heart... and break clear away, once in awhile,
-          and climb a mountain or spend a week in the woods. Wash your spirit clean.
-        </ion-card-content>
-      </ion-card>
+      <div style="height: 100%;">
+        <ion-card [routerLink]="['/consultation']">
+          <ion-card-content>
+            <img src='../assets/consult.jpg' style="width: 100%;"/>
+            <ion-card-title style="margin: 10px;">Vous avez un rendez-vous ?</ion-card-title>        
+            <h1>Payez votre consultation maintenant</h1>
+          </ion-card-content>
+        </ion-card>
+        
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            <ion-card-title>Acte</ion-card-title>
+          </ion-card-header>
+        
+          <ion-card-content>
+            Keep close to Nature's heart... and break clear away, once in awhile,
+            and climb a mountain or spend a week in the woods. Wash your spirit clean.
+          </ion-card-content>
+        </ion-card>
+      </div>
       
       <ion-footer>
         <ion-title> 
