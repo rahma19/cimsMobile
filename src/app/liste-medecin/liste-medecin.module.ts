@@ -7,11 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { ListeMedecinPageRoutingModule } from './liste-medecin-routing.module';
 
 import { ListeMedecinPage } from './liste-medecin.page';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule,Ng2SearchPipeModule,
     IonicModule,
     ListeMedecinPageRoutingModule
   ],

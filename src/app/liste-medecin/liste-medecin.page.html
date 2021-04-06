@@ -17,16 +17,19 @@
   <p>Sélectionnez votre médecin, choisissez la date et  heure de votre rdv et recevez votre sms/mail de  confirmation. C’est aussi simple que ça !</p>
 </div>
 <h3 style="color:#154f57;">Filtrer par</h3>
-<ion-searchbar animated placeholder="Nom du medecin" (input)="med.filterGlobal($event.target.value, 'contains')"></ion-searchbar>
+<ion-searchbar animated="true" placeholder="Nom du medecin" [(ngModel)]="selDmn" ></ion-searchbar>
 <ion-item style="border-radius: 10px;margin:5px;">
-  <ion-label>Service</ion-label>     
-  <ion-select class="form-control" (change)="med.filterGlobal($event.target.value, 'contains')" [(ngModel)]="selDmn" >
+  <ion-label>Service</ion-label>  
+  <select style="width: 100%;" (change)="med.filterGlobal($event.target.value, 'contains')" [(ngModel)]="selDmn" >
+    <option *ngFor="let medecin of medecins" [selected]="medecin.service" value="{{medecin.service}}" >{{medecin.service}}</option>
+</select>        
+ <!--<ion-select >
     <ion-select-option *ngFor="let medecin of medecins" value="{{medecin.service}}" style="width: 450px;">{{medecin.service}}</ion-select-option>
-  </ion-select>
+  </ion-select>-->
 </ion-item>
   <h1 class="title">{{selDmn}} à Ariana Tunisie </h1>
   <div class="order-items">
-    <ion-card *ngFor="let medecin of medecins" #med>
+    <ion-card *ngFor="let medecin of medecins | filter:selDmn " #med >
       <ion-card-content>
         <div class="item-info">
           <p>Dr {{medecin.nom_med}} {{medecin.prenom_med}} </p>

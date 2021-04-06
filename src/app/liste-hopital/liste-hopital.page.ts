@@ -9,6 +9,8 @@ import { DataService } from '../data.service';
 })
 export class ListeHopitalPage implements OnInit {
 hopitals:any[];
+selDmn:any="";
+
   constructor(private dataService: DataService,private router:Router) { }
 
   ngOnInit() {

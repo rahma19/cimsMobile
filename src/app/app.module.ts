@@ -18,13 +18,14 @@ import {CalendarModule} from 'primeng/calendar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataService } from './data.service';
 import { GlobalHttpInterceptorService } from './GlobalHttpInterceptorService';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [AppComponent,TabsComponent],
   entryComponents: [],
   imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,
-    MatIconModule,CalendarModule,HttpClientModule],
+    MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule],
   exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule],
   providers: [StatusBar,SplashScreen,DataService, { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
