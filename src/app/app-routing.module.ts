@@ -46,14 +46,15 @@ const routes: Routes = [
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
   {
-    path: 'liste-medecin',
+    path: 'liste-medecin/:cod_hop',
     loadChildren: () => import('./liste-medecin/liste-medecin.module').then( m => m.ListeMedecinPageModule)
   },
 
   {
     path: 'liste-hopital',
     loadChildren: () => import('./liste-hopital/liste-hopital.module').then( m => m.ListeHopitalPageModule)
-  },  {
+  },
+  {
     path: 'fixer-rendezvous',
     loadChildren: () => import('./fixer-rendezvous/fixer-rendezvous.module').then( m => m.FixerRendezvousPageModule)
   },

@@ -15,18 +15,18 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {CalendarModule} from 'primeng/calendar';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DataService } from './data.service';
+import { GlobalHttpInterceptorService } from './GlobalHttpInterceptorService';
 
 @NgModule({
   declarations: [AppComponent,TabsComponent],
   entryComponents: [],
   imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,
-    MatIconModule,CalendarModule],
+    MatIconModule,CalendarModule,HttpClientModule],
   exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  providers: [StatusBar,SplashScreen,DataService, { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

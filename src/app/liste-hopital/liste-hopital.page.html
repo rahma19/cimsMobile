@@ -28,20 +28,20 @@
     </ion-select>
   </ion-item>
   <h1 style="font-weight: bold;margin:10px" class="title">Hopital </h1>
-    <ion-card>
+    <ion-card *ngFor="let hopital of hopitals">
       <ion-card-content>
         <div class="c">
-          <img src='../assets/matri.jpg' />
+          <img [src]='hopital.img_hop' />
           <div style="margin: 10px ">
-            <p style="font-weight: bold;">Hopital mahmoud el matri</p><br>
-            <p><ion-icon color="primary" name="location-outline"></ion-icon> Ariana Tunisie</p>  
+            <p style="font-weight: bold;">{{hopital.nom_hop}}</p><br>
+            <p><ion-icon color="primary" name="location-outline"></ion-icon> {{hopital.adr_hop}} </p>  
           </div>
         </div>
-        <ion-button expand="block" [routerLink]="['/liste-medecin']" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+        <ion-button expand="block" (click)="afficheMed(hopital)" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
       </ion-card-content>
     </ion-card>
 
-    <ion-card>
+    <!--<ion-card>
       <ion-card-content>
         <div class="c">
           <img src='../assets/cims.png' />
@@ -91,7 +91,8 @@
         </div>
         <ion-button expand="block" class="btn" [routerLink]="['/liste-medecin']"><ion-icon name="eye-outline"></ion-icon></ion-button>
       </ion-card-content>
-    </ion-card>
+    </ion-card>-->
+
     <ion-footer>
       <ion-title> 
          <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
