@@ -14,11 +14,33 @@
 <ion-content>
   <h1>Creer votre <br />Compte</h1>
 
-  <form id="form">
-    <app-input placeholder="Votre nom"></app-input>
-    <app-input placeholder="Email"></app-input>
-    <app-input type="password" placeholder="mot de passe"></app-input>
-    <ion-button expand="block" shape="round">Rejoignez-nous</ion-button>
+  <form #f="ngForm"  (ngSubmit)="Submit(f)" id="form">
+    <table>
+      <tr>
+        <td><ion-input name="nom_pren_benef" [(ngModel)]="nom_pren_benef" type="text" placeholder="nom"></ion-input></td>
+        <td><ion-input name="pren_benef" [(ngModel)]="pren_benef" type="text" placeholder="prenom"></ion-input></td>
+      </tr>
+      <tr>
+        <td><ion-input name="pren_mere_benef" [(ngModel)]="pren_mere_benef" type="text" placeholder="prenom mere"></ion-input></td>
+        <td><ion-input name="pren_pere_benef" [(ngModel)]="pren_pere_benef" type="text" placeholder="prenom pere"></ion-input></td>
+      </tr>
+       <tr>
+        <td><ion-input name="tel_benef" [(ngModel)]="tel_benef" type="text" placeholder="num tel"></ion-input></td>
+        <td> Sexe :
+          <p-radioButton name="sexe_benef" value="F" [(ngModel)]="sexe"></p-radioButton> <br>
+        <p-radioButton name="sexe_benef" value="M" [(ngModel)]="sexe"></p-radioButton> </td>
+      </tr>
+      <tr>
+        <td> Hopital : <ion-select name="cod_hop"  [(ngModel)]="codhop" >
+          <ion-select-option  *ngFor="let hopital of hopitals" value="{{hopital.cod_hop}}" style="width: 450px;">{{hopital.nom_hop}}</ion-select-option>
+        </ion-select></td>
+          <td><ion-input name="password" [(ngModel)]="password" type="password" placeholder="mot de passe"></ion-input></td>
+      </tr>
+    </table>
+   <!--<ion-item class="ion-margin-bottom">
+
+    </ion-item>-->
+    <ion-button expand="block" type="submit" shape="round">Rejoignez-nous</ion-button>
   </form>
 
   <p>En appuyant sur «Rejoignez-nous», vous acceptez <br />nos termes & conditions.</p>

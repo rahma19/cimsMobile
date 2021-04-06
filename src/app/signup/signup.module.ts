@@ -8,11 +8,12 @@ import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
 import { InputModule } from '../input/input.module';
+import {RadioButtonModule} from 'primeng/radiobutton';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule,RadioButtonModule,
     IonicModule,
     InputModule,
     SignupPageRoutingModule

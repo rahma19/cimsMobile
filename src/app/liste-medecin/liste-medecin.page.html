@@ -23,9 +23,7 @@
   <select style="width: 100%;" (change)="med.filterGlobal($event.target.value, 'contains')" [(ngModel)]="selDmn" >
     <option *ngFor="let medecin of medecins" [selected]="medecin.service" value="{{medecin.service}}" >{{medecin.service}}</option>
 </select>        
- <!--<ion-select >
-    <ion-select-option *ngFor="let medecin of medecins" value="{{medecin.service}}" style="width: 450px;">{{medecin.service}}</ion-select-option>
-  </ion-select>-->
+
 </ion-item>
   <h1 class="title">{{selDmn}} à Ariana Tunisie </h1>
   <div class="order-items">
