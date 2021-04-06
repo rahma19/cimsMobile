@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  constructor() { }
+user:any;
+  constructor(private dataService:DataService) { }
 
   ngOnInit() {
   }
-
+  Submit(form) {
+    this.dataService.getCurrentUser(form);
+  }
+ 
 }

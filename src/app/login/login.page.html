@@ -17,9 +17,9 @@
     <img src="assets/cims.png" />
   </div>
 
-  <form id="form">
-    <app-input placeholder="Email"></app-input>
-    <app-input type="password" placeholder="mot de passe"></app-input>
-    <ion-button expand="block" shape="round">S'authentifier</ion-button>
+  <form  #f="ngForm"  (ngSubmit)="Submit(f)" id="form">
+    <ion-input name="pseudo" [(ngModel)]="pseudo" type="text" placeholder="pseudo"></ion-input>  
+    <ion-input name="password" [(ngModel)]="password" type="password" placeholder="password"></ion-input>
+        <ion-button expand="block" type="submit" shape="round">S'authentifier</ion-button>
   </form>
 </ion-content>
