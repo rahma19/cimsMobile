@@ -16,10 +16,14 @@
     <h1>S'authentifier</h1>
     <img src="assets/cims.png" />
   </div>
-
+      
   <form  #f="ngForm"  (ngSubmit)="Submit(f)" id="form">
-    <ion-input name="pseudo" [(ngModel)]="pseudo" type="text" placeholder="pseudo"></ion-input>  
-    <ion-input name="password" [(ngModel)]="password" type="password" placeholder="password"></ion-input>
+    <ion-item class="ion-margin-bottom">
+      <ion-input name="pseudo" [(ngModel)]="pseudo" type="text" placeholder="pseudo"></ion-input>  
+    </ion-item>
+    <ion-item class="ion-margin-bottom">
+      <ion-input name="password" [(ngModel)]="password" type="password" placeholder="password"></ion-input>
+    </ion-item>
         <ion-button expand="block" type="submit" shape="round">S'authentifier</ion-button>
   </form>
 </ion-content>

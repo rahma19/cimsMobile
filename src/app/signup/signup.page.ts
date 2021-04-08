@@ -14,6 +14,7 @@ export class SignupPage implements OnInit {
   pren_benef?:any="";
   tel_benef?:any="";
   password?:any="";
+  pseudo:any="";
   pren_pere_benef?:any="";
   sexe?:any="";
   pren_mere_benef?:any="";
