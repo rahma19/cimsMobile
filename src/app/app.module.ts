@@ -20,14 +20,15 @@ import { DataService } from './data.service';
 import { GlobalHttpInterceptorService } from './GlobalHttpInterceptorService';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [AppComponent,TabsComponent],
   entryComponents: [],
-  imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,
+  imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,MatSelectModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,
-    MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule],
-  exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule],
+    MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule,MatFormFieldModule],
+  exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,MatSelectModule],
   providers: [StatusBar,SplashScreen,DataService, { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

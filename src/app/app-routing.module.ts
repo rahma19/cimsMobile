@@ -55,13 +55,17 @@ const routes: Routes = [
     loadChildren: () => import('./liste-hopital/liste-hopital.module').then( m => m.ListeHopitalPageModule)
   },
   {
-    path: 'fixer-rendezvous',
+    path: 'fixer-rendezvous/:id',
     loadChildren: () => import('./fixer-rendezvous/fixer-rendezvous.module').then( m => m.FixerRendezvousPageModule)
   },
   {
     path: 'consultation',
     loadChildren: () => import('./consultation/consultation.module').then( m => m.ConsultationPageModule)
+  },  {
+    path: 'payer-rendezvous',
+    loadChildren: () => import('./payer-rendezvous/payer-rendezvous.module').then( m => m.PayerRendezvousPageModule)
   },
+
 
 ];
 

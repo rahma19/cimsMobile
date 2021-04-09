@@ -34,7 +34,7 @@
           <p>{{medecin.service}}</p>
           <p><ion-icon name="location-outline"></ion-icon> {{medecin.specialite}}</p>
 
-          <ion-button expand="block" [routerLink]="['/fixer-rendezvous']" class="main-button">Prendre Rendez-vous</ion-button>
+          <ion-button expand="block" [routerLink]="['/fixer-rendezvous',medecin._id]" class="main-button">Prendre Rendez-vous</ion-button>
         </div>
       </ion-card-content>
     </ion-card>

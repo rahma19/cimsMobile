@@ -25,6 +25,10 @@ getAllMedecinsHop(code_hop): Observable<any[]> {
   return this.http.get<any[]>(environment.api+"users/medecins"+`/${code_hop}`);
 }
 
+getMedecinById(id): Observable<any[]> {
+  return this.http.get<any[]>(environment.api+"users/medecin"+`/${id}`);
+}
+
 getCurrentUser(f:any){
   let addedData = JSON.stringify(f.value);
          console.log ("addedData", addedData);

@@ -18,15 +18,22 @@
           <h3 style="color: black;font-weight: bold;text-align: center;">Choisir la date et l'heure du rendez-vous</h3><br>
           <p-calendar [(ngModel)]="date" (click)="affiche()" [inline]="true" [showWeek]="true"></p-calendar>
           <div [hidden]=test>
+            <mat-form-field appearance="fill" style="width: 100%;" >
+              <mat-label>Choisir</mat-label>
+              <mat-select [(ngModel)]="selectedValue">
+                <mat-option *ngFor="let heur of heurs" [value]="heur.value" (click)="afficher()">
+                  {{heur.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
             <p>{{date | date: 'dd/MM/yyyy'}}</p> 
-  10:00 <br>10:30<br>  <p (click)="afficher()">11:00</p> <br>
       </div>
       <div [hidden]=res>
         <h3 style="color: black;font-weight: bold;text-align: center;">Saisissez vos informations</h3><br>
         <app-input placeholder="Nom"></app-input>
         <app-input placeholder="Prenom"></app-input>
         <app-input placeholder="Num Tel"></app-input>
-        <ion-button style="font-size: 12px;float: right;margin: 10px;">Confirmer </ion-button>
+        <ion-button style="font-size: 12px;float: right;margin: 10px;" [routerLink]="['/payer-rendezvous']">Confirmer </ion-button>
       </div>
     </ion-card-content>
   </ion-card>

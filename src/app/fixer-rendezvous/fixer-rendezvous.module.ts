@@ -9,14 +9,18 @@ import {CalendarModule} from 'primeng/calendar';
 
 import { FixerRendezvousPage } from './fixer-rendezvous.page';
 import { InputModule } from '../input/input.module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,CalendarModule,
-    IonicModule,InputModule,
-    FixerRendezvousPageRoutingModule
+    FormsModule,CalendarModule,MatSelectModule,
+    IonicModule,InputModule,MatFormFieldModule,
+    FixerRendezvousPageRoutingModule,MatInputModule
   ],
+  exports:[ MatFormFieldModule,MatInputModule,MatSelectModule],
   declarations: [FixerRendezvousPage]
 })
 export class FixerRendezvousPageModule {}
