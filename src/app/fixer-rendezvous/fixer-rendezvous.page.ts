@@ -15,9 +15,17 @@ export class FixerRendezvousPage implements OnInit {
   res:boolean=true;
   value:any="";
   heurs: any[] = [
+    {value: '08', viewValue: '08'},
+    {value: '09', viewValue: '09'},
     {value: '10', viewValue: '10'},
     {value: '11', viewValue: '11'},
-    {value: '12', viewValue: '12'}
+    {value: '12', viewValue: '12'},
+    {value: '13', viewValue: '13'},
+    {value: '14', viewValue: '14'},
+    {value: '15', viewValue: '15'},
+    {value: '16', viewValue: '16'},
+    {value: '17', viewValue: '17'},
+    {value: '18', viewValue: '18'}
   ];
   identifiant:any="";
   selectedValue:any="";
