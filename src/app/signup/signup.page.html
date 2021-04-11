@@ -28,20 +28,24 @@
         <ion-item class="ion-margin-bottom">
           <ion-input name="pren_benef" [(ngModel)]="pren_benef" type="text" placeholder="prenom"></ion-input>
         </ion-item>
-        <ion-item class="ion-margin-bottom" style="  display: inline-flex;align-items: center;width: 50%;">
+        <!--<ion-item class="ion-margin-bottom" style="  display: inline-flex;align-items: center;width: 50%;">
           <ion-select name="cod_hop"  [(ngModel)]="codhop" >
             <ion-select-option  *ngFor="let hopital of hopitals" value="{{hopital.cod_hop}}" style="width: 450px;">{{hopital.nom_hop}}</ion-select-option>
           </ion-select>
-       </ion-item>
+       </ion-item>-->
         <ion-item class="ion-margin-bottom" style="  display: inline-flex;align-items: center;width: 50%;">
           <ion-input name="tel_benef" [(ngModel)]="tel_benef" type="text" placeholder="num tel"></ion-input>
         </ion-item>
-        <ion-item class="ion-margin-bottom">
+        <div style="  display: inline-flex;align-items: center;width: 50%;" class="p-field p-col-12 p-md-4 form-controle">
+          <label for="icon">Date de naissance</label><br>
+          <p-calendar name="date_nai_benef" [(ngModel)]="date_nai_benef" ></p-calendar>
+        </div>
+            <!--<ion-item class="ion-margin-bottom">
           <ion-input name="pren_mere_benef" [(ngModel)]="pren_mere_benef" type="text" placeholder="prenom mere"></ion-input>
         </ion-item>
         <ion-item  class="ion-margin-bottom">
           <td><ion-input name="pren_pere_benef" [(ngModel)]="pren_pere_benef" type="text" placeholder="prenom pere"></ion-input></td>
-        </ion-item>
+        </ion-item>-->
         <ion-item class="ion-margin-bottom">
           Hopital : <ion-select name="cod_hop"  [(ngModel)]="codhop" >
             <ion-select-option  *ngFor="let hopital of hopitals" value="{{hopital.cod_hop}}" style="width: 450px;">{{hopital.nom_hop}}</ion-select-option>

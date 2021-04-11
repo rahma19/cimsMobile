@@ -9,12 +9,13 @@ import { SignupPageRoutingModule } from './signup-routing.module';
 import { SignupPage } from './signup.page';
 import { InputModule } from '../input/input.module';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,RadioButtonModule,
-    IonicModule,
+    IonicModule,CalendarModule,
     InputModule,
     SignupPageRoutingModule
   ],

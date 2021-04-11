@@ -28,7 +28,7 @@ import {ToastModule} from 'primeng/toast';
   entryComponents: [],
   imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,MatSelectModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,ToastModule,
-    MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule,MatFormFieldModule],
+    MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule,MatFormFieldModule,CalendarModule],
   exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,MatSelectModule],
   providers: [StatusBar,SplashScreen,DataService, { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
