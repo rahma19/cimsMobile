@@ -1,26 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-liste-medecin',
   templateUrl: './liste-medecin.page.html',
   styleUrls: ['./liste-medecin.page.scss'],
+  providers: [MessageService]
+
 })
 export class ListeMedecinPage implements OnInit {
 identifiant:any;
 medecins:any[];
 selDmn:any="";
-  constructor(private activatedRoute:ActivatedRoute,private dataService:DataService) { }
+user:any="";
+
+  constructor(private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService,private router:Router) { }
 
   ngOnInit() {
     this.identifiant= this.activatedRoute.snapshot.params['cod_hop'];
     console.log(this.identifiant);
+    this.user=this.dataService.user;
     this.dataService.getAllMedecinsHop(this.identifiant).subscribe(data=>{
       console.log(data['data']);
       this.medecins=data['data'];
       console.log(this.medecins);
     })
+  }
+
+  fixezrdv(medecin:any){
+    if (this.user != null){
+      this.router.navigate(['/fixer-rendezvous',medecin._id]);
+    }
+    else
+    this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
+
   }
 
 }

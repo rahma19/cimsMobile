@@ -14,6 +14,7 @@
 <ion-content  color="tertiary">
 <div style="margin:10px;color:#154f57;font-family:Open Sans,Arial, Helvetica, sans-serif;">
   <h1 style="font-weight: bold;">Prenez rapidement un <br> rendez-vous avec votre <br> médecin !</h1>
+  <p-toast position="top-right"></p-toast>
   <p>Sélectionnez votre médecin, choisissez la date et  heure de votre rdv et recevez votre sms/mail de  confirmation. C’est aussi simple que ça !</p>
 </div>
 <h3 style="color:#154f57;">Filtrer par</h3>
@@ -34,7 +35,7 @@
           <p>{{medecin.service}}</p>
           <p><ion-icon name="location-outline"></ion-icon> {{medecin.specialite}}</p>
 
-          <ion-button expand="block" [routerLink]="['/fixer-rendezvous',medecin._id]" class="main-button">Prendre Rendez-vous</ion-button>
+          <ion-button expand="block" (click)="fixezrdv(medecin)" class="main-button">Prendre Rendez-vous</ion-button>
         </div>
       </ion-card-content>
     </ion-card>

@@ -61,8 +61,9 @@ const routes: Routes = [
   {
     path: 'consultation',
     loadChildren: () => import('./consultation/consultation.module').then( m => m.ConsultationPageModule)
-  },  {
-    path: 'payer-rendezvous',
+  },
+  {
+    path: 'payer-rendezvous/:id',
     loadChildren: () => import('./payer-rendezvous/payer-rendezvous.module').then( m => m.PayerRendezvousPageModule)
   },
 

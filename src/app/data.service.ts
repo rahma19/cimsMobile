@@ -39,4 +39,8 @@ getCurrentUser(f:any){
           this.router.navigate(['/home']);
         });
         }
+
+fixerRendezVous(user:any,med:any){
+  
+}
 }
