@@ -59,21 +59,34 @@
             <table>
               <tr>
                 <th>Nom/Prenom </th>
-                <td>Rahma Missaoui</td>
+                <td>{{user.nom_pren_benef}} {{user.pren_benef}}</td>
               </tr>
               <tr>
                 <th>Service </th>
-                <td>Dermathologie</td>
+                <td>{{rdv.service}}</td>
               </tr>
               <tr>
                 <th>Medecin </th>
-                <td>Dr Mariem Ayedi</td>
+                <td>{{rdv.cod_med}}</td>
               </tr>
               <tr>
-                <th>Rendez-vous </th>
-                <td>25/04/2021</td>
+                <th> Date Rendez-vous </th>
+                <td>{{rdv.date_rdv}}</td>
               </tr>
-            </table>
+              <tr>
+                <th> Heure Rendez-vous </th>
+                <td>{{rdv.heure_rdv}}</td>
+              </tr>
+              <tr>
+                <th>Montant à payer </th>
+                <td>{{rdv.montant}}</td>
+              </tr>
+              <tr>
+                <th>Numéro de téléphone </th>
+                <td>{{rdv.gsm}}</td>
+              </tr>
+              
+             </table>
         
             <div style="margin: 10px;float: right;">
               <table>

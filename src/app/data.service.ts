@@ -43,4 +43,9 @@ getCurrentUser(f:any){
 fixerRendezVous(user:any,med:any){
   
 }
+
+getAllRdvs(){
+  return this.http.get<any[]>(environment.api+"rdv/rdvs");
+
+}
 }
