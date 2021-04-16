@@ -30,6 +30,8 @@ export class FixerRendezvousPage implements OnInit {
   identifiant:any="";
   selectedValue:any="";
   medecin:any="";
+  user=null;
+
   constructor(private activatedRoute:ActivatedRoute,private dataService:DataService) { }
 
   affiche(){
@@ -45,7 +47,9 @@ export class FixerRendezvousPage implements OnInit {
       console.log(data['data']);
       this.medecin=data['data'];
       console.log(this.medecin);
-    })
+    });
+
+    this.user=this.dataService.user;
   }
 
   onViewTitleChanged(title: string) {

@@ -10,6 +10,7 @@ import { DataService } from '../data.service';
 export class ListeHopitalPage implements OnInit {
 hopitals:any[];
 selDmn:any="";
+user=null;
 
   constructor(private dataService: DataService,private router:Router) { }
 
@@ -18,7 +19,9 @@ selDmn:any="";
       console.log(data['data']);
       this.hopitals=data['data'];
       console.log(this.hopitals);
-    })
+    });
+
+    this.user=this.dataService.user;
   }
 
   afficheMed(hopital){

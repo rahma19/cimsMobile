@@ -66,7 +66,9 @@ const routes: Routes = [
     path: 'payer-rendezvous/:id',
     loadChildren: () => import('./payer-rendezvous/payer-rendezvous.module').then( m => m.PayerRendezvousPageModule)
   },
-
+    {path:'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  }
 
 ];
 

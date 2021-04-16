@@ -7,7 +7,8 @@
     list Medecin
   </ion-title>-->
   <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
-  <ion-button slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
+  <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
+  <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
 </ion-toolbar>
 </ion-header>
 
@@ -139,7 +140,7 @@
 <!-- 
 <mat-horizontal-stepper>
   <mat-step label="Step 1"  matStepperIcon="edit" state="phone">
-    <p>Put down your phones.</p>
+    <p>Put down your phones.</p>y
     <div>
       <button mat-button matStepperNext>Next</button>
     </div>

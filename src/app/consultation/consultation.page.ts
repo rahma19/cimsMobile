@@ -19,7 +19,7 @@ firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
   rdv:any;
-  user:any;
+  user=null;
   i:any;
 
   httpOptions = {
@@ -28,6 +28,7 @@ firstFormGroup: FormGroup;
     })
   }
   constructor(private _formBuilder: FormBuilder,private dataService: DataService,private router:Router,private http:HttpClient) { }
+
 affiche(){
   this.test=false;
 }
@@ -57,6 +58,7 @@ affiche(){
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-  }
 
+    this.user=this.dataService.user;
+  }
 }

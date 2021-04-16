@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,8 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  constructor(private menu: MenuController) { }
+user:any=false;
+  constructor(private menu: MenuController,private dataService:DataService) { }
 
   openFirst() {
     this.menu.enable(true, 'first');
@@ -24,4 +25,7 @@ export class HomePage {
     this.menu.open('custom');
   }
 
+  ngOnInit() {
+    this.user=this.dataService.user;
+  }
 }
