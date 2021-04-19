@@ -15,7 +15,7 @@ export class SignupPage implements OnInit {
   tel_benef?:any="";
   password?:any="";
   date_nai_benef:any="";
-  pseudo:any="";
+  email:any="";
   pren_pere_benef?:any="";
   sexe?:any="";
   pren_mere_benef?:any="";
@@ -27,6 +27,8 @@ export class SignupPage implements OnInit {
     })
   }
   hopitals:any[];
+  test: boolean;
+  code=Math.floor(Math.random() * 999999) + 100000;
   
     constructor(private dataService: DataService,private router:Router,private http:HttpClient) { }
   
@@ -37,8 +39,26 @@ export class SignupPage implements OnInit {
         console.log(this.hopitals);
       })
     }
+
+    notify(){
+      this.test=false;
+      let ch=this.email;
+      
+      let object={"to":ch,"sub":"Confirmation","text":this.code+" est le code de confirmation de votre nouveau compte sur CIMS "};
+      return this.http.post(environment.api+"users/mailing", object).subscribe((res:any) => {
+        console.log("success");
+        console.log(this.code);
+       // this.messageService.add({severity:'success', summary: 'Success', detail: 'email envoyée avec succées'});
+       },
+         error => {
+         // this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
+          console.log("error");
+      })
+    }
+
+
   Submit(form) {
-    
+    if(this.code==form.value.confemail){
     console.log ("form.value", form.value)
          let addedData = JSON.stringify(form.value);
          console.log ("addedData", addedData);
@@ -50,5 +70,9 @@ export class SignupPage implements OnInit {
            error => {
              //this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
            });
-   }
+   } else {
+   // this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
+     console.log("erreruurr"); 
+  }
+}
 }
