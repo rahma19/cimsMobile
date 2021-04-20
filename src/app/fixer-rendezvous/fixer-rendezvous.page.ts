@@ -14,19 +14,19 @@ export class FixerRendezvousPage implements OnInit {
   date:Date;
   res:boolean=true;
   value:any="";
-  heurs: any[] = [
-    {value: '08', viewValue: '08'},
-    {value: '09', viewValue: '09'},
-    {value: '10', viewValue: '10'},
-    {value: '11', viewValue: '11'},
-    {value: '12', viewValue: '12'},
-    {value: '13', viewValue: '13'},
-    {value: '14', viewValue: '14'},
-    {value: '15', viewValue: '15'},
-    {value: '16', viewValue: '16'},
-    {value: '17', viewValue: '17'},
-    {value: '18', viewValue: '18'}
-  ];
+  heurs:any[]=[];
+  tab:any[]=[];
+  heurMed:any[]=[
+    {heur:'8:00',value:'8:00'},
+    {heur:'8:30',value:'8:30'},
+    {heur:'9:00',value:'9:00'},
+    {heur:'9:30',value:'9:30'},
+    {heur:'10:00',value:'10:00'},
+    {heur:'10:30',value:'10:30'},
+    {heur:'11:00',value:'11:00'},
+    {heur:'11:30',value:'11:30'},
+    {heur:'12:00',value:'12:00'},
+  ]
   identifiant:any="";
   selectedValue:any="";
   medecin:any="";
@@ -34,9 +34,42 @@ export class FixerRendezvousPage implements OnInit {
 
   constructor(private activatedRoute:ActivatedRoute,private dataService:DataService) { }
 
-  affiche(){
+  
+  affiche(date:any){
+    this.tab=[];
     this.test=false;
+    let month=date.getMonth()+1;
+    let dt=date.getDate()+"-"+month+"-"+date.getFullYear();
+    this.dataService.getHeurMedecin(this.identifiant,dt).subscribe(data=>{
+      console.log(data['data']);
+      this.heurs=data['data'];
+      console.log(this.heurs);
+      this.afficheDateDispo()
+    });
+     console.log(this.tab);
   }
+
+afficheDateDispo(){
+  
+  for(let i=0;i<this.heurMed.length;i++)
+  {
+    let j=0;
+    let teste=true;
+     while(j<this.heurs.length && teste==true)
+        { 
+          if(this.heurMed[i].value==this.heurs[j].heur)
+               { console.log(this.heurMed[i].value+"/ "+this.heurs[j].heur);
+                 teste=false;
+                 j++;
+                }
+           else
+             j++;  
+         }
+           if(j>=this.heurs.length )
+                { this.tab.push(this.heurMed[i].value);}          
+ }
+}
+
   afficher(){
     this.res=false;
   }

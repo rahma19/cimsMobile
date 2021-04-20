@@ -9,6 +9,8 @@
   <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
   <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
   <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
+  <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" icon="pi pi-user" style="font-size: 12px; " icon="pi pi-user"></ion-button>
+
 </ion-toolbar>
 </ion-header>
 

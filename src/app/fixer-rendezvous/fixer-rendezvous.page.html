@@ -17,13 +17,13 @@
   <ion-card style="margin-top: 30px;">
     <ion-card-content>
           <h3 style="color: black;font-weight: bold;text-align: center;">Choisir la date et l'heure du rendez-vous</h3><br>
-          <p-calendar [(ngModel)]="date" (click)="affiche()" [inline]="true" [showWeek]="true"></p-calendar>
+          <p-calendar [(ngModel)]="date" (click)="affiche(date)" [inline]="true" [showWeek]="true"></p-calendar>
           <div [hidden]=test>
             <mat-form-field appearance="fill" style="width: 100%;" >
               <mat-label>Choisissez l'heure du rendez-vous</mat-label>
-              <mat-select [(ngModel)]="selectedValue">
-                <mat-option *ngFor="let heur of heurs" [value]="heur.value" (click)="afficher()">
-                  {{heur.viewValue}}
+              <mat-select [(ngModel)]="selectedValue" name="heur">
+                <mat-option *ngFor="let heur of tab " [value]="heur" (click)="afficher()">
+                  {{heur}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

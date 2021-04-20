@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DataService {
-  user:any;
+  user:any=null;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -42,6 +42,10 @@ getCurrentUser(f:any){
 
 fixerRendezVous(user:any,med:any){
   
+}
+
+getHeurMedecin(code_med:any,date:any): Observable<any[]>{
+  return this.http.get<any[]>(environment.api+"rdv/heurs/"+`/${code_med}`+`/${date}`);
 }
 
 getAllRdvs(){
