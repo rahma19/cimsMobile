@@ -19,7 +19,7 @@
 
   <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
     <mat-step label="Etape 1" matStepperIcon="edit" > <!-- [stepControl]="firstFormGroup"-->
-      <div style="margin-top: 30px;">
+  <!--  <div style="margin-top: 30px;">
         <ion-list>
           <ion-item style="width:80%;margin:10px">
             <ion-label position="floating">Saisissez votre Index </ion-label>
@@ -36,13 +36,42 @@
             <ion-label position="floating">Confirmez votre Index</ion-label>
             <ion-input type="password" required></ion-input>
           </ion-item>
-          <!--<ion-button slot="end"  style="font-size: 12px;">Confirmer </ion-button>-->
-         </div>
-        </ion-list>
+          <ion-button slot="end"  style="font-size: 12px;">Confirmer </ion-button>
+         </div>--> 
+         <p-card>
+          <h2>Information Personelles</h2>
+          <br/>
+        <table id="customers">
+          <tr>
+            <th>Nom/Prenom </th>
+            <th>Service </th>
+            <th>Medecin </th>
+            <th> Date Rendez-vous </th>
+            <th> Heure Rendez-vous </th>
+            <th>Montant à payer </th>
+            <th>Numéro de téléphone </th>
+           
+          </tr>
+          <tr *ngFor="let rdvs of rdv">
+            <td>{{user.nom_pren_benef}} {{user.pren_benef}}</td>
+            <td>{{rdvs.service}}</td>
+            <td>{{rdvs.cod_med}}</td>
+            <td>{{rdvs.date_rdv}}</td>
+            <td>{{rdvs.heure_rdv}}</td>
+            <td>{{rdvs.montant}}</td>
+            <td>{{rdvs.gsm}}</td>
+            <td>  <button mat-button matStepperNext (click)="payer(rdvs)">Next</button></td>
+          </tr>
+         
+         
+          
+         </table>
+        </p-card> 
+ 
         <div>
           <button mat-button style="padding: 12px;background-color:teal;color: white;float:right;" matStepperNext>Confirmer</button>
         </div>
-      </div>
+     
     </mat-step>
     <mat-step label="Etape 2" state="thumb">
       <!--<form [formGroup]="secondFormGroup">
@@ -57,37 +86,7 @@
             <ion-card-title>Informations Personnelles</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <table>
-              <tr>
-                <th>Nom/Prenom </th>
-                <td>{{user.nom_pren_benef}} {{user.pren_benef}}</td>
-              </tr>
-              <tr>
-                <th>Service </th>
-                <td>{{rdv.service}}</td>
-              </tr>
-              <tr>
-                <th>Medecin </th>
-                <td>{{rdv.cod_med}}</td>
-              </tr>
-              <tr>
-                <th> Date Rendez-vous </th>
-                <td>{{rdv.date_rdv}}</td>
-              </tr>
-              <tr>
-                <th> Heure Rendez-vous </th>
-                <td>{{rdv.heure_rdv}}</td>
-              </tr>
-              <tr>
-                <th>Montant à payer </th>
-                <td>{{rdv.montant}}</td>
-              </tr>
-              <tr>
-                <th>Numéro de téléphone </th>
-                <td>{{rdv.gsm}}</td>
-              </tr>
-              
-             </table>
+     
         
             <div style="margin: 10px;float: right;">
               <table>

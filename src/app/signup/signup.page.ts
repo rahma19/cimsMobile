@@ -27,7 +27,7 @@ export class SignupPage implements OnInit {
     })
   }
   hopitals:any[];
-  test: boolean;
+  test: boolean=true;
   code=Math.floor(Math.random() * 999999) + 100000;
   
     constructor(private dataService: DataService,private router:Router,private http:HttpClient) { }

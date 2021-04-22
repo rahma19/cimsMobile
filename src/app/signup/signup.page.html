@@ -51,10 +51,11 @@
             <ion-select-option  *ngFor="let hopital of hopitals" value="{{hopital.cod_hop}}" style="width: 450px;">{{hopital.nom_hop}}</ion-select-option>
           </ion-select>
           </ion-item>
-          <ion-item style="  display: inline-flex;align-items: center;width: 50%;" class="ion-margin-bottom">
+          <ion-item style="  display: inline-flex;align-items: center;width: 100%;" class="ion-margin-bottom">
             <ion-input name="email" [(ngModel)]="email" type="text" placeholder="email"></ion-input>
           </ion-item>
           <ion-button expand="block" type="submit" shape="round" (click)="notify()">Envoyer mail de confirmation</ion-button>
+          <div [hidden]="test">
           <ion-item style="  display: inline-flex;align-items: center;width: 50%;" class="ion-margin-bottom">
             <ion-input name="confemail" [(ngModel)]="confemail" type="text" placeholder="Entrez le code"></ion-input>
           </ion-item>
@@ -62,6 +63,7 @@
           <ion-input name="password" [(ngModel)]="password" type="password" placeholder="mot de passe"></ion-input>
         </ion-item>
     <ion-button expand="block" type="submit" shape="round">Rejoignez-nous</ion-button>
+  </div>
   </form>
 
   <p>En appuyant sur «Rejoignez-nous», vous acceptez <br />nos termes & conditions.</p>

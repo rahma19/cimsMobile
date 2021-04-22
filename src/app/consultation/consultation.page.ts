@@ -18,7 +18,7 @@ test:boolean=true;
 firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
-  rdv:any;
+  rdv:any[]=[];
   user=null;
   i:any;
 
@@ -41,7 +41,7 @@ affiche(){
 {
   if (data['data'][i].etat==false){
       console.log(data['data']);
-      this.rdv=data['data'][i];
+      this.rdv.push(data['data'][i]);
       console.log(this.rdv);}
       (error) =>{
         console.log("error");
@@ -50,7 +50,6 @@ affiche(){
     }
 
     })
-    
     this.test=true;
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
