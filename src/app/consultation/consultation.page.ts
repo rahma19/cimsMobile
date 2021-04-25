@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
-
+import { StripeService } from "ngx-stripe";
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-consultation',
   templateUrl: './consultation.page.html',
@@ -27,7 +28,21 @@ firstFormGroup: FormGroup;
       'Content-Type': 'application/json',
     })
   }
-  constructor(private _formBuilder: FormBuilder,private dataService: DataService,private router:Router,private http:HttpClient) { }
+
+  //stripe
+  elements: any;
+  card: any;
+  elementsOptions: any = {
+    locale: 'es'
+  };
+  stripeTest: FormGroup;
+//champs des paiement
+montant:any[]=[];
+regime:any;
+num_assure:any;
+date_valide:any;
+num_carnet:any;
+  constructor(private _formBuilder: FormBuilder,private dataService: DataService,private router:Router,private http:HttpClient, private stripeService: StripeService) { }
 
 affiche(){
   this.test=false;
@@ -59,5 +74,75 @@ affiche(){
     });
 
     this.user=this.dataService.user;
-  }
+//Stripe
+this.stripeTest = this._formBuilder.group({
+  name: ['', [Validators.required]]
+});
+this.stripeService.elements(this.elementsOptions)
+  .subscribe(elements => {
+    this.elements = elements;
+    // Only mount the element the first time
+    if (!this.card) {
+      this.card = this.elements.create('card', {
+        style: {
+          base: {
+            iconColor: '#666EE8',
+            color: '#31325F',
+            lineHeight: '40px',
+            fontWeight: 300,
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSize: '18px',
+            '::placeholder': {
+              color: '#CFD7E0'
+            }
+          }
+        }
+      });
+      this.card.mount('#card-element');
+    }
+  });
+
+
+
+      //recuperer tout les type du regime
+  this.dataService.getAllRegime().subscribe(data=>{
+    console.log(data['data']);
+    this.montant=data['data'];
+    console.log(this.montant);
+  })
+
 }
+
+//fonction paiement stripe
+buy() {
+  const name = this.stripeTest.get('name').value;
+  
+  this.stripeService
+    .createToken(this.card, { name })
+    .subscribe(obj => {
+      if (obj) {
+        console.log("Token is --> ",obj.token.id);
+  
+  this.http.post(environment.api+"rdv/payme",{
+  token : obj.token.id
+  }).subscribe(
+  (res)=>{
+  console.log("The response from server is ",res);
+  console.log('Payment Done')
+  },
+  (err)=>{
+  console.log('The error is ',err)
+  })
+  } else  {
+        // Error creating the token
+         console.log("Error comes ");
+      }
+    });
+  }
+  }
+  
+
+
+
+
+

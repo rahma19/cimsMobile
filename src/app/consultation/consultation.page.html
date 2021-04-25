@@ -80,35 +80,44 @@
           <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"  >
         </mat-form-field>
       </form>-->
-      <div>
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Informations Personnelles</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-     
-        
-            <div style="margin: 10px;float: right;">
-              <table>
-                <tr>
-                  <td>
-                    <h3  style="float:right;text-align: center; color: black;">Montant a payer</h3><br><br>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <button mat-button style="padding: 12px;background-color:rgb(133, 167, 167);color: white;float:right;border-radius: 5px;" matStepperNext>3,500 Dt</button>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </ion-card-content>
-        </ion-card>
-        <div>
-          <button mat-button style="padding: 12px;background-color:teal;color: white;float:left;margin-right: 10px;" matStepperPrevious>Retour</button>
-          <button mat-button style="padding: 12px;background-color:teal;color: white;float:right;" matStepperNext>Payer</button>
+      <h2 style="color: brown; font-weight: bold;font-size: 36px;">Payment</h2> 
+      <form class="mb-5" novalidate (ngSubmit)="buy()" [formGroup]="stripeTest" >
+        <div class="form-group">
+          <mat-form-field class="example-full-width"  formControlName="name" style="width: 50%; height: 25px; padding: 10px;">
+            <mat-label>Votre nom complet</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="width: 50%; padding: 10px;" required>
+            <mat-label>Choisir votre régime </mat-label>
+            <mat-select   [(ngModel)]="regime" name="regime" formControlName="regime">
+              <mat-option *ngFor="let montants of montant" [selected]="montants.type" value="{{montants.regime}}">
+                {{montants.type}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-      </div>
+      
+        <div class="form-group">
+          <mat-form-field class="example-full-width"  formControlName="num_assure"[(ngModel)]="num_assure" name="num_assure" style="width: 50%; height: 25px; padding: 10px;">
+            <mat-label>Numéro assurance</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+          <mat-form-field class="example-full-width"  formControlName="num_carnet" [(ngModel)]="num_carnet" name="num_carnet" style="width: 50%;  padding: 10px;">
+            <mat-label>Numéro de carnet</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+        </div>
+       
+        <div class="form-group">
+          <p-calendar style="width: 100%; margin-top: 20%; padding: 10px;" [(ngModel)]="date_valide" placeholder="Date Validité du carnet" name="date_valide" required></p-calendar>
+        </div>
+      
+        <div class="form-group">
+         
+         <div id="card-element" class="field"></div>
+        </div>
+<button class="btn btn-warning w-25 border shadow" type="submit" data-toggle="modal" data-target="#exampleModalCenter">BUY </button>
+      </form>
     
     </mat-step>
     <mat-step label="Valider" state="thumb">

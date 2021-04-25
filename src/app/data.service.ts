@@ -29,12 +29,13 @@ getMedecinById(id): Observable<any[]> {
   return this.http.get<any[]>(environment.api+"users/medecin"+`/${id}`);
 }
 
-getCurrentUser(f:any){
+getCurrentUser(f:any,path:any){
   let addedData = JSON.stringify(f.value);
          console.log ("addedData", addedData);
-    return this.http.post(environment.api+"auth/loginPatient", addedData,this.httpOptions).subscribe((res:any) => {
+    return this.http.post(environment.api+path, addedData,this.httpOptions).subscribe((res:any) => {
           localStorage.setItem("token",res.token)
           this.user=res.user;
+        
           console.log(this.user);
           this.router.navigate(['/home']);
         });
@@ -52,4 +53,8 @@ getAllRdvs(){
   return this.http.get<any[]>(environment.api+"rdv/rdvs");
 
 }
+
+getAllRegime(){
+  return this.http.get<any[]>(environment.api+"users/regime");
+ }
 }
