@@ -41,8 +41,8 @@
     <option *ngFor="let hopital of hopitals" [selected]="hopital.nom_hop" value="{{hopital.cod_hop}}" >{{hopital.nom_hop}}</option>
 </select>
 </ion-item>
-<button pButton pRipple  label="Envoyer mail de confirmation" (click)="notify()" style="width: 50%;margin-left: 25%;" class=" p-button-rounded"></button>
-       
+
+<ion-button expand="block" (click)="notify()" class="main-button">Envoyer mail de confirmation</ion-button>
          <div [hidden]="test">
             <div class="p-field p-col-12 p-md-4" style="color: grey; font-size: 15px;">
               <p>Merci de vérifier dans vos e-mailsque vous avez reçu un message avec votre code.
@@ -53,7 +53,7 @@
               <ion-input name="email" [(ngModel)]="confemail" name="code" type="text" placeholder="Entrez le code"></ion-input>  
             </ion-item> 
   <h4 (click)="notify()" style="color:brown; margin-left:5%" class=" p-button-rounded" > Renvoyer le code </h4>
-  <button pButton pRipple type="submit" label="S'authentifier" style="width: 50%;margin-left: 25%;" class=" p-button-rounded"></button>
-    </div>
+  <ion-button expand="block"  type="submit" class="main-button">S'authentifier</ion-button>
+</div>
  </form>
 </ion-content>
