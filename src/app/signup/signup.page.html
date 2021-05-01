@@ -16,6 +16,7 @@
 
   <form #f="ngForm"  (ngSubmit)="Submit(f)" id="form">
    <div style="text-align: center;">
+    <input type="hidden" pInputText [(ngModel)]="cod" name="cod_benef"  required >        
     <h5>Merci de saisir vos informations</h5>
    <div style="margin: 10px;">
     <p-radioButton name="sexe_benef" value="F" [(ngModel)]="sexe"></p-radioButton>Femme
@@ -54,14 +55,11 @@
           <ion-item style="  display: inline-flex;align-items: center;width: 100%;" class="ion-margin-bottom">
             <ion-input name="email" [(ngModel)]="email" type="text" placeholder="email"></ion-input>
           </ion-item>
-          <ion-button expand="block" type="submit" shape="round" (click)="notify()">Envoyer mail de confirmation</ion-button>
+          <ion-button expand="block" type="submit" shape="round" (click)="notify('est le code de confirmation de votre nouveau compte sur CIMS ',code)">Envoyer mail de confirmation</ion-button>
           <div [hidden]="test">
-          <ion-item style="  display: inline-flex;align-items: center;width: 50%;" class="ion-margin-bottom">
-            <ion-input name="confemail" [(ngModel)]="confemail" type="text" placeholder="Entrez le code"></ion-input>
+          <ion-item style="  display: inline-flex;align-items: center;width: 100%;" class="ion-margin-bottom">
+            <ion-input name="code" [(ngModel)]="confemail" type="text" placeholder="Entrez le code"></ion-input>
           </ion-item>
-        <ion-item style="  display: inline-flex;align-items: center;width: 50%;" class="ion-margin-bottom">
-          <ion-input name="password" [(ngModel)]="password" type="password" placeholder="mot de passe"></ion-input>
-        </ion-item>
     <ion-button expand="block" type="submit" shape="round">Rejoignez-nous</ion-button>
   </div>
   </form>

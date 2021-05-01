@@ -25,40 +25,51 @@ getAllMedecinsHop(code_hop): Observable<any[]> {
   return this.http.get<any[]>(environment.api+"users/medecins"+`/${code_hop}`);
 }
 
-getMedecinById(id): Observable<any[]> {
-  return this.http.get<any[]>(environment.api+"users/medecin"+`/${id}`);
-}
 
 getCurrentUser(f:any,path:any){
-  let addedData = JSON.stringify(f.value);
-         console.log ("addedData", addedData);
-    return this.http.post(environment.api+path, addedData,this.httpOptions).subscribe((res:any) => {
-          localStorage.setItem("token",res.token)
-          this.user=res.user;
-        
-          console.log(this.user);
-          this.router.navigate(['/home']);
-        });
-        }
+let addedData = JSON.stringify(f.value);
+       console.log ("addedData", addedData);
+  return this.http.post(environment.api+path, addedData,this.httpOptions).subscribe((res:any) => {
+        localStorage.setItem("token",res.token)
+        this.user=res.user;
+      
+        console.log(this.user);
+        this.router.navigate(['/home']);
+      });
+      }
 
-fixerRendezVous(user:any,med:any){
-  
-}
 
-getHeurMedecin(code_med:any,date:any): Observable<any[]>{
-  return this.http.get<any[]>(environment.api+"rdv/heurs/"+`/${code_med}`+`/${date}`);
-}
 
 getAllRdvs(){
-  return this.http.get<any[]>(environment.api+"rdv/rdvs");
+return this.http.get<any[]>(environment.api+"rdv/rdvs");
 
 }
 
 getRdvBenef(cod_benef):  Observable<any[]> {
-  return this.http.get<any[]>(environment.api+"rdv/RdvBenef"+`/${cod_benef}`);
+return this.http.get<any[]>(environment.api+"rdv/RdvBenef"+`/${cod_benef}`);
 }
 
- getSoinBenef(cod_benef:any): Observable<any> {
+getMedecinById(id): Observable<any[]> {
+return this.http.get<any[]>(environment.api+"users/medecin"+`/${id}`);
+}
+
+getHeurMedecin(code_med:any,date:any): Observable<any[]>{
+return this.http.get<any[]>(environment.api+"rdv/heurs/"+`/${code_med}`+`/${date}`);
+}
+
+ajouterHeurMed(f:any){
+let addedData = JSON.stringify(f.value);
+console.log ("addedData", addedData);
+return this.http.post(environment.api+"rdv/heurs", addedData,this.httpOptions);
+}
+
+fixerRdv(f:any){
+let addedData = JSON.stringify(f.value);
+console.log ("addedData", addedData);
+return this.http.post(environment.api+"rdv/rdvs", addedData,this.httpOptions);
+}
+
+getSoinBenef(cod_benef:any): Observable<any> {
   return this.http.get<any>(environment.api+"rdv/soin"+`/${cod_benef}`);
 }
 
@@ -70,8 +81,8 @@ getAllRegime(): Observable<any[]>{
 return this.http.get<any[]>(environment.api+"users/regimes");
 }
 
-getHopitalByCode(cod_hop:any): Observable<any>{
-return this.http.get<any[]>(environment.api+"users/hopital/"+`/${cod_hop}`);
+getHopitalByCode(cod_hop:any): Observable<any[]>{
+return this.http.get<any[]>(environment.api+"users/hopital"+`/${cod_hop}`);
 }
 
 
@@ -79,7 +90,7 @@ updateSoinBenef(f,id){
 return this.http.patch(environment.api+"rdv/soins"+`/${id}`,f );
 }
 
-getSoinsBenef(cod_benef){
+getSoinsBenef(cod_benef): Observable<any[]>{
 return this.http.get<any[]>(environment.api+"rdv/soin"+`/${cod_benef}`);
 
 }
@@ -87,10 +98,10 @@ ajoutSoin(f){
 let addedData = JSON.stringify(f.value);
 console.log ("addedData", addedData);
 return this.http.post(environment.api+"rdv/soins", addedData,this.httpOptions);
-
 }
 updateRdv(f,id){
 return this.http.patch(environment.api+"rdv/updaterdv"+`/${id}`,f );
 }
+
 
 }

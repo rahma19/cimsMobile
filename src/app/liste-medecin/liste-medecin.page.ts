@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
 
 @Component({
@@ -16,7 +18,7 @@ medecins:any[];
 selDmn:any="";
 user:any="";
 
-  constructor(private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService,private router:Router) { }
+  constructor(private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService,private router:Router,private http:HttpClient) { }
 
   ngOnInit() {
     this.identifiant= this.activatedRoute.snapshot.params['cod_hop'];
@@ -37,5 +39,9 @@ user:any="";
     this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
 
   }
-
+  logout(){
+    this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
+    this.router.navigate(['/login']);
+ 
+ }
 }

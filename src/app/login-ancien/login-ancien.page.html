@@ -1,0 +1,67 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="primary">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/signup">S'inscrire</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div>
+  <ion-button slot="start" routerLink="/login-ancien">Nouveau ?</ion-button>
+
+</div>
+  <div id="header">
+    <h1>Vous etes Ancien ?</h1>
+    <img src="assets/cims.png" />
+  </div>
+      
+  <form  #f="ngForm"  (ngSubmit)="Submit(f)" id="form">
+
+    <div style="margin-top: 30px;">
+      <ion-list>
+        <ion-item style="width:80%;margin:20px">
+          <ion-label position="floating">Saisissez votre Index </ion-label>
+          <ion-input class="form-control" type="text" name="cod_benef" [(ngModel)]="codben" required #ind="ngModel"></ion-input>
+        </ion-item>
+        <div [hidden]="!ind.errors?.required || ind.pristine" class="alert alert-danger">
+          L'index est un champ obligatoire
+      </div>
+        <ion-item style="width:80%;margin:10px">
+          <ion-label position="floating">Email </ion-label>
+          <ion-input class="form-control" type="email" name="email" [(ngModel)]="mail" required  #ml="ngModel"></ion-input>
+        </ion-item>
+        <div [hidden]="!ml.errors?.required || ml.pristine" class="alert alert-danger">
+          Le mail est un champ obligatoire
+      </div>
+        <ion-item style="width:80%;margin:10px">
+          <span>Hopitals</span>
+          <select name="cod_hop" class="form-control"  [(ngModel)]="codhop" required #hop="ngModel" style="width: 100%;border:solid 1px grey;">
+            <option *ngFor="let hopital of hopitals" value="{{hopital.cod_hop}}" >{{hopital.nom_hop}}</option>
+        </select>
+        </ion-item>
+        <div [hidden]="!hop.errors?.required || hop.pristine" class="alert alert-danger">
+          L'hopital est un champ obligatoire
+      </div>
+        <ion-button slot="end" style="font-size: 12px;" (click)="affiche()">Valider </ion-button>
+       <div [hidden]=test>
+        <p style="color:rgb(126, 125, 125);font-size: 15px;margin:10px">Vous aurez un code sur cet email pour <br> confirmer votre index !</p>
+        <ion-item style="width:80%;margin:10px">
+          <ion-label position="floating">Confirmez votre Index</ion-label>
+          <ion-input type="text" [(ngModel)]="code" name="code" required></ion-input>
+        </ion-item>
+       
+        <!--<ion-button slot="end"  style="font-size: 12px;">Confirmer </ion-button>-->
+       </div>
+      </ion-list>
+      <div>
+        <ion-button expand="block" type="submit" [disabled]="code==''" shape="round">S'authentifier</ion-button>
+      </div>
+    </div>
+  </form>
+</ion-content>

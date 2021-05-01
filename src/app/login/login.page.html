@@ -12,6 +12,10 @@
 </ion-header>
 
 <ion-content>
+  <!--<div>
+  <ion-button slot="start" routerLink="/login-ancien">Ancien ?</ion-button>
+
+</div>-->
   <div id="header">
     <h1>S'authentifier</h1>
     <img src="assets/cims.png" />
@@ -37,7 +41,7 @@
  </div>
  <ion-item style="border-radius: 10px;margin:5px;">
   <ion-label>Choisir un hopital</ion-label>
-  <select style="width: 100%;" (change)="hop.filterGlobal($event.target.value, 'contains')" [(ngModel)]="selDmn" name="cod_hop" >
+  <select style="width: 100%;"  [(ngModel)]="selDmn" name="cod_hop" >
     <option *ngFor="let hopital of hopitals" [selected]="hopital.nom_hop" value="{{hopital.cod_hop}}" >{{hopital.nom_hop}}</option>
 </select>
 </ion-item>

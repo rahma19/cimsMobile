@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
 
@@ -8,11 +9,14 @@ import { DataService } from '../data.service';
   selector: 'app-signup',
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
+  providers:[MessageService]
 })
 export class SignupPage implements OnInit {
   nom_pren_benef?:any="";
   pren_benef?:any="";
   tel_benef?:any="";
+  cod:any="";
+  code=Math.floor(Math.random() * 999999) + 100000;
   password?:any="";
   date_nai_benef:any="";
   email:any="";
@@ -28,9 +32,8 @@ export class SignupPage implements OnInit {
   }
   hopitals:any[];
   test: boolean=true;
-  code=Math.floor(Math.random() * 999999) + 100000;
   
-    constructor(private dataService: DataService,private router:Router,private http:HttpClient) { }
+    constructor(private dataService: DataService,private router:Router,private http:HttpClient,private messageService:MessageService) { }
   
     ngOnInit() {
       this.dataService.getAllHopitals().subscribe(data=>{
@@ -40,39 +43,48 @@ export class SignupPage implements OnInit {
       })
     }
 
-    notify(){
+    notify(subject,code){
       this.test=false;
       let ch=this.email;
       
-      let object={"to":ch,"sub":"Confirmation","text":this.code+" est le code de confirmation de votre nouveau compte sur CIMS "};
+      let object={"to":ch,"sub":"Confirmation","text":code+subject};
       return this.http.post(environment.api+"users/mailing", object).subscribe((res:any) => {
         console.log("success");
-        console.log(this.code);
-       // this.messageService.add({severity:'success', summary: 'Success', detail: 'email envoyée avec succées'});
+        console.log(code);
+        
+        this.messageService.add({severity:'success', summary: 'Success', detail: 'email envoyée avec succées'});
        },
          error => {
-         // this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
+          this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
           console.log("error");
-      })
+      });
+     
     }
 
 
-  Submit(form) {
-    if(this.code==form.value.confemail){
-    console.log ("form.value", form.value)
-         let addedData = JSON.stringify(form.value);
-         console.log ("addedData", addedData);
-       this.http.post(environment.api+"auth/signupPatient", addedData,this.httpOptions).subscribe((res) => {
-         this.router.navigate(['/login']);
-         //  this.messageService.add({severity:'success', summary: 'Message', detail:'Succes'});  
-          
-         },
-           error => {
-             //this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-           });
-   } else {
-   // this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-     console.log("erreruurr"); 
-  }
-}
+    Submit(form){
+      console.log(this.code);     
+      console.log(form.value.code);  
+     if(this.code==form.value.code){
+       form.value.cod_benef=Math.floor(Math.random() * 999999) + 100000+form.value.nom_pren_benef;
+     console.log ("form.value", form.value)
+     let month=form.value.date_nai_benef.getMonth();
+     let date =form.value.date_nai_benef.getDate()+"-"+month+"-"+form.value.date_nai_benef.getFullYear();
+     form.value.date_nai_benef=date;
+     let addedData = JSON.stringify(form.value);
+     console.log ("addedData", addedData);
+   this.http.post(environment.api+"auth/signupPatientanc", addedData,this.httpOptions).subscribe((res) => {
+     this.messageService.add({severity:'success', summary: 'Message', detail:'Succes'});
+     //this.notify("voici votre index",res['user']._id); 
+     this.notify("voici votre index",form.value.cod_benef); 
+     this.router.navigate(['/login']);
+     },
+       error => {
+       this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
+       });
+    } else {
+     this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
+      console.log("erreruurr"); 
+    }}
+
 }
