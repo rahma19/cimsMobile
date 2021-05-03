@@ -29,37 +29,30 @@ title = "angular-stripe";
   quantity = 1;
   stripePromise = loadStripe(environment.stripe_key);
 
+//app
+reg:any="";
+numC:any="";
+numA:any="";
+dateV:any="";
 
   test:boolean=true;
 firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  isEditable = false;
-  rdv:any[]=[];
-  user=null;
-  i:any;
 
+  montantrdv: any;
+  isup: boolean;
+  eta:boolean=false;
+  testsoin: any;
+
+  handler:any = null;
+rdv:any[]=[];
+user:any=null;
+i:any;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
   }
-//app
-  reg:any="";
-numC:any="";
-numA:any="";
-dateV:any="";
-
-
-
- 
-  montantrdv: any;
-  isup: boolean;
-  eta:boolean=false;
-  testsoin: any;
- 
-  handler:any = null;
-
-
 //champs des paiement
 montant:any[]=[];
 regime:any;
@@ -68,14 +61,19 @@ date_valide:any;
 num_carnet:any;
 rendezvous:any;
 soins:any[]=[];
+soin:any;
 disabled: boolean = true;
  somme:Number;
-  constructor(private _formBuilder: FormBuilder,private dataService: DataService,private router:Router,private http:HttpClient, private stripeService: StripeService) { }
 
-  ngOnInit() {
-    this.user=this.dataService.user;
+
+  constructor(private _formBuilder: FormBuilder,private router:Router,private http:HttpClient, private dataservice: DataService, private stripeService: StripeService) { }
+
+  ngOnInit(): void {
+    this.user=this.dataservice.user;
     console.log(this.user);
-    this.dataService.getRdvBenef(this.user.cod_benef).subscribe(data=>{
+   console.log(this.user.cod_benef);
+
+    this.dataservice.getRdvBenef(this.user.cod_benef).subscribe(data=>{
       console.log(data['data']);
       for(let i=0;i<data['data'].length;i++)
     {
@@ -84,7 +82,7 @@ disabled: boolean = true;
           this.rdv.push(data['data'][i]);
            console.log(this.rdv);
           }
-      } 
+      }
     },
     (error) =>{
       console.log("error");
@@ -93,8 +91,9 @@ disabled: boolean = true;
     this.http.get(environment.api+"rdv/soin"+`/${this.user.cod_benef}`).subscribe(data=>{
       console.log(data['data']);
       this.soins=data['data'];
-      console.log(this.soins);
-      
+      this.soin=this.soins[0];
+      console.log(this.soin);
+
       if(this.soins.length==0)
         this.testsoin=false
       else
@@ -118,14 +117,18 @@ console.log(this.testsoin);
     });
 
 
+
+
+
       //recuperer tout les type du regime
-      this.dataService.getAllRegime().subscribe(data=>{
+      this.dataservice.getAllRegime().subscribe(data=>{
         console.log(data['data']);
         this.montant=data['data'];
+        this.somme=data['data'][0].montant;
         console.log(this.montant);
       })
 
-}
+  }
 
 //fonction paiement stripe
 async checkout() {
@@ -171,7 +174,7 @@ passrdv(rdv){
          //   this.msgs = [{severity:'info', summary:'Succés de modification', detail:''}];
         console.log(res['data']);
         console.log("success");
-       
+
       },
         (error) =>{
              //   this.msgs = [{severity:'error', summary:'Erreur lors de la modification du l offre ', detail:''}];
@@ -189,19 +192,20 @@ passrdv(rdv){
   if(this.rendezvous.specialite=="specialiste")
     somme+=7000;
     this.somme=somme;
+    console.log(this.somme);
   }
 
 
 Submit(f){
    f.value.etat=true;
-   console.log(f.value);
-   this.dataService.updateRdv(f,this.rendezvous._id).subscribe((res:any) => {
+   this.dataservice.updateRdv(f.value,this.rendezvous._id).subscribe((res:any) => {
+     console.log("succes");
    //  this.messageService.add({severity:'success', summary: ' Message', detail:'Ajout avec succes'});
      this.rdv=f.value;
      this.isup=true;
-     if(this.testsoin==true)
-     
-         this.dataService.updateSoinBenef(f.value,this.soins[0]._id).subscribe( (Response) => {
+    if(this.testsoin==true)
+
+         this.dataservice.updateSoinBenef(f.value,this.soin._id).subscribe( (Response) => {
          console.log("success");
       },
        (error) =>{
@@ -209,8 +213,8 @@ Submit(f){
    });
    else
    if(this.testsoin==false)
-       this.dataService.ajoutSoin(f).subscribe((res) => {
-         console.log("success");   
+       this.dataservice.ajoutSoin(f).subscribe((res) => {
+         console.log("success");
           },
            error => {
              console.log("error");
@@ -218,15 +222,19 @@ Submit(f){
    },
    err =>{
     // this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
- 
+ console.log(err);
    });
  }
 
 
+ unread(item){
+   console.log("hiuhiuhu")
+ }
+
 
   }
-  
-  
+
+
 
 
 

@@ -18,9 +18,22 @@
 </div>
 
   <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
-    <mat-step label="Etape 1" matStepperIcon="edit" > <!-- [stepControl]="firstFormGroup"-->
-  <!--  <div style="margin-top: 30px;">
-        <ion-list>
+    <mat-step label="Etape 1" matStepperIcon="edit" >
+      <h2>Bonjour {{user.nom_pren_benef}} {{user.pren_benef}} </h2>
+      <ion-list>
+        <ion-item-sliding *ngFor="let item of rdv">
+          <ion-item>
+            <ion-label>vous avez une consultation le {{item.date_rdv}} a {{item.heure_rdv}} </ion-label>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="unread(item)">Detail</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+
+      </ion-list>
+
+      <!-- [stepControl]="firstFormGroup"-->
+  <!--  <div style="margin-top: 30px;">        <ion-list>
           <ion-item style="width:80%;margin:10px">
             <ion-label position="floating">Saisissez votre Index </ion-label>
             <ion-input type="text" required></ion-input>
@@ -37,7 +50,7 @@
             <ion-input type="password" required></ion-input>
           </ion-item>
           <ion-button slot="end"  style="font-size: 12px;">Confirmer </ion-button>
-         </div>--> 
+         </div>-->
          <p-table  [value]="rdv" dataKey="nom_pren_benef">
           <ng-template pTemplate="header">
            <tr>
@@ -46,16 +59,16 @@
                                   <th  [ngStyle]="{'width':'250px'}">Date Rendez-vous</th>
                                   <th >Heure</th>
                                   <th >Rendez-vous à payer</th>
-      
-                               
-                                 
+
+
+
            </tr>
-                              
+
        </ng-template>
-      
+
         <ng-template pTemplate="body" let-rdvs let-expanded="expanded" >
            <tr>
-           <td > 
+           <td >
            <a href="#" [pRowToggler]="rdvs">
            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
            </a>
@@ -64,26 +77,26 @@
            <td>{{rdvs.date_rdv}} </td>
            <td >{{rdvs.heure_rdv}} </td>
            <td><button class="btn btn-warning w-25 border shadow" [ngStyle]="{backgroundColor:'var(--pink-100)'}" matStepperNext (click)="passrdv(rdvs)" >Payer</button></td>
-         
-         
-          
+
+
+
             </tr>
          </ng-template>
         <ng-template pTemplate="rowexpansion" let-rdvs >
-         
+
             <tr>
             <td [attr.colspan]="5"><h3 style="color: brown; font-weight: bold; font-size: 24px; font-family: lucida hand Writing;"><i class="pi pi-user"></i> Détails de {{user.nom_pren_benef}}</h3>
-         
+
             <div class="ui-g ui-fluid" style="font-size:16px;">
             <div class="ui-g-6 ui-md-6">
             <h4  style="color: brown; font-weight: bold; font-size: 25px; font-family: lucida hand Writing; text-align: center;">INFORMATIONS DU RENDEZ-VOUS</h4>
-                  
+
             <div class="ui-g">
             <div class="ui-g-12" style="color: cornflowerblue; padding: 10px; font-size: 20px;">
             <i class="pi pi-id-card"></i> <b>Nom de l'hopital: </b> {{rdvs.nom_hop}}
             </div>
-            
-         
+
+
             <div class="ui-g-12" style="color: cornflowerblue; padding: 10px; font-size: 20px;">
               <i class="pi pi-home"></i><b>Ville:</b> {{rdvs.adr_hop}}
             </div>
@@ -91,7 +104,7 @@
             <i class="pi pi-id-card"></i><b>Nom médecin:</b> {{rdvs.nom_med}} {{rdvs.prenom_med}}
             </div>
             </div>
-          
+
             </div>
             <div>
             <div class="ui-g">
@@ -100,28 +113,28 @@
             </div>
             <div class="ui-g-12" style="color: cornflowerblue; padding: 10px; font-size: 20px;">
               <i class="pi pi-phone"></i> <b> Téléphone:</b> {{rdvs.gsm}}
-             
+
               </div>
-            
+
             </div>
-                </div>                                            
-                               
-                
-                
+                </div>
+
+
+
            </div>
            </td></tr>
-       
+
         </ng-template>
         </p-table>
- 
+
         <div>
           <button mat-button style="padding: 12px;background-color:teal;color: white;float:right;" matStepperNext>Confirmer</button>
         </div>
-     
+
     </mat-step>
     <mat-step label="Etape 2" state="thumb">
 
-      <h2 style="color: brown; font-weight: bold;font-size: 36px;">Paiement</h2> 
+      <h2 style="color: brown; font-weight: bold;font-size: 36px;">Paiement</h2>
       <form #f="ngForm" (ngSubmit)="Submit(f)" class="mb-5">
         <input type="hidden" name="etat" [(ngModel)]="eta" />
 
@@ -139,8 +152,8 @@
             <input id="disabled-input" type="text" pInputText [disabled]="disabled" />
           </div>
         </div>
-        
-      
+
+
         <div class="form-group">
           <mat-form-field class="example-full-width"  style="width: 50%; height: 25px; padding: 10px;">
             <mat-label>Numéro assurance</mat-label>
@@ -158,7 +171,7 @@
         <button class="btn btn-danger w-25 border shadow" type="submit" >Payer</button> <!--(click)="checkout()"-->
    </div>
       </form>
-     <!-- <h2 style="color: brown; font-weight: bold;font-size: 36px;">Payment</h2> 
+     <!-- <h2 style="color: brown; font-weight: bold;font-size: 36px;">Payment</h2>
       <form class="mb-5" novalidate (ngSubmit)="buy()" [formGroup]="stripeTest" >
         <div class="form-group">
           <mat-form-field class="example-full-width"  formControlName="name" style="width: 50%; height: 25px; padding: 10px;">
@@ -174,7 +187,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-      
+
         <div class="form-group">
           <mat-form-field class="example-full-width"  formControlName="num_assure"[(ngModel)]="num_assure" name="num_assure" style="width: 50%; height: 25px; padding: 10px;">
             <mat-label>Numéro assurance</mat-label>
@@ -185,21 +198,21 @@
             <textarea matInput></textarea>
           </mat-form-field>
         </div>
-       
+
         <div class="form-group">
           <p-calendar style="width: 100%; margin-top: 20%; padding: 10px;" [(ngModel)]="date_valide" placeholder="Date Validité du carnet" name="date_valide" required></p-calendar>
         </div>
-      
+
         <div class="form-group">
-         
+
          <div id="card-element" class="field"></div>
         </div>
 <button class="btn btn-warning w-25 border shadow" type="submit" data-toggle="modal" data-target="#exampleModalCenter">BUY </button>
       </form>-->
-     
-    
+
+
     </mat-step>
-   
+
      <!-- Icon overrides. -->
   <!-- #docregion override-icons -->
   <ng-template matStepperIcon="phone">
@@ -214,11 +227,11 @@
   </mat-horizontal-stepper>
 </ion-content>
 <ion-footer>
-    <ion-title> 
+    <ion-title>
        <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
     </ion-title>
 </ion-footer>
-<!-- 
+<!--
 <mat-horizontal-stepper>
   <mat-step label="Step 1"  matStepperIcon="edit" state="phone">
     <p>Put down your phones.</p>y

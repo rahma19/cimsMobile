@@ -14,7 +14,7 @@ export class DataService {
       'Content-Type': 'application/json',
     })
   }
-  
+
   constructor(private http: HttpClient,private router:Router) { }
 
   getAllHopitals(): Observable<any[]> {
@@ -32,7 +32,7 @@ let addedData = JSON.stringify(f.value);
   return this.http.post(environment.api+path, addedData,this.httpOptions).subscribe((res:any) => {
         localStorage.setItem("token",res.token)
         this.user=res.user;
-      
+
         console.log(this.user);
         this.router.navigate(['/home']);
       });
@@ -46,7 +46,7 @@ return this.http.get<any[]>(environment.api+"rdv/rdvs");
 }
 
 getRdvBenef(cod_benef):  Observable<any[]> {
-return this.http.get<any[]>(environment.api+"rdv/RdvBenef"+`/${cod_benef}`);
+  return this.http.get<any[]>(environment.api+"users/RdvBenef"+`/${cod_benef}`);
 }
 
 getMedecinById(id): Observable<any[]> {

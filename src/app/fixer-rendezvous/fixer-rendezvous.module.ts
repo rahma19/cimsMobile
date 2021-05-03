@@ -12,15 +12,17 @@ import { InputModule } from '../input/input.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { ImprimeRecuComponent } from '../imprime-recu/imprime-recu.component';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule,DialogModule,
     FormsModule,CalendarModule,MatSelectModule,
     IonicModule,InputModule,MatFormFieldModule,
     FixerRendezvousPageRoutingModule,MatInputModule
   ],
   exports:[ MatFormFieldModule,MatInputModule,MatSelectModule],
-  declarations: [FixerRendezvousPage]
+  declarations: [FixerRendezvousPage,ImprimeRecuComponent]
 })
 export class FixerRendezvousPageModule {}

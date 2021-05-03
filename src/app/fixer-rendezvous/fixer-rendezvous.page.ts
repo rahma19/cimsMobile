@@ -16,9 +16,9 @@ export class FixerRendezvousPage implements OnInit {
   identifiant:any="";
   medecin?:any=null;
   soin?:any[];
-  soins:any;
-  testsoin:Boolean=false;
-  hop:any[];
+  soins?:any;
+  testsoin?:Boolean;
+  hop?:any[];
   isup=false;
   reg:any="";
   numC:any="";
@@ -56,6 +56,8 @@ heurMed:any[]=[
   ngOnInit(): void {
     this.identifiant= this.activatedRoute.snapshot.params['id'];
     console.log(this.identifiant);
+    this.user=this.dataService.user;
+
     this.dataService.getMedecinById(this.identifiant).subscribe(data=>{
       console.log(data['data']);
       this.medecin=data['data'];
@@ -67,8 +69,6 @@ heurMed:any[]=[
       });
     });
 
-    this.user=this.dataService.user;
-
     this.dataService.getSoinsBenef(this.user.cod_benef).subscribe(data=>{
       console.log(data['data']);
       this.soin=data['data'];
@@ -76,7 +76,7 @@ heurMed:any[]=[
       this.soins=this.soin[0];
       if(this.soin.length==0)
         {this.testsoin=false}
-      
+
       if(this.soin.length!=0)
         {
         this.testsoin=true;
@@ -92,10 +92,10 @@ console.log(this.testsoin);
       this.montants=data['data'];
       console.log(this.montants);
     });
-      
+
   }
 
-  
+
   affiche(date:any){
     this.tab=[];
     this.test=false;
@@ -111,8 +111,8 @@ console.log(this.testsoin);
       let j=0;
       let test=true;
        while(j<this.heurs.length || test==true)
-     
-          { 
+
+          {
             console.log(this.heurs[j].heur);
             if(this.heurMed[i].value==this.heurs[j].heur)
                  { console.log(this.heurMed[i].value+"/ "+this.heurs[j].heur);
@@ -120,16 +120,16 @@ console.log(this.testsoin);
                    j++;
                   }
              else
-               j++;  
+               j++;
            }
              if(j>this.heurs.length)
-                  { this.tab.push(this.heurMed[i].value);}          
+                  { this.tab.push(this.heurMed[i].value);}
    }*/
     });
   }
 
 afficheDateDispo(){
-  
+
   for(let i=0;i<this.heurMed.length;i++)
   {
     let j=0;
@@ -143,10 +143,10 @@ afficheDateDispo(){
             j++;
            }
       else
-        j++;  
+        j++;
          }
            if(j>=this.heurs.length)
-                { this.tab.push(this.heurMed[i].value);}          
+                { this.tab.push(this.heurMed[i].value);}
  }
 }
 
@@ -160,7 +160,7 @@ if(this.medecin.specialite=="specialiste")
 }
 
   afficher(){
-    this.res=false;   
+    this.res=false;
    if(this.testsoin==true)
     { console.log(this.soin[0].regime);
 
@@ -179,10 +179,31 @@ if(this.medecin.specialite=="specialiste")
   }
 
 Submit(f){
+  let form={
+    nom_med:this.medecin.nom_med,
+    pren_med:this.medecin.pren_med,
+    cod_med:this.medecin._id,
+    service:this.medecin.service,
+    specialite:this.medecin.specialite,
+    nom_hop:this.hop[0].nom_hop,
+    adr_hop:this.hop[0].adr_hop,
+    date_nai_benef:this.user.date_nai_benef,
+    nom_pren_benef:this.user.nom_pren_benef,
+    pren_benef:this.user.pren_benef,
+    cod_benef:this.user.cod_benef,
+    gsm:this.user.tel_benef,
+    regime:f.regime,
+    num_carnet:f.num_carnet,
+    date_valide:f.date_valide,
+    num_assure:f.value.num_assure,
+    montant_rdv:this.montant,
+
+
+  }
  let month=f.value.date_rdv.getMonth()+1;
   let date =f.value.date_rdv.getDate()+"-"+month+"-"+f.value.date_rdv.getFullYear();
-  f.value.date_rdv=date; 
-  
+  f.value.date_rdv=date;
+
   f.value.etat=true;
   console.log(f.value);
   this.dataService.fixerRdv(f).subscribe((res:any) => {
@@ -200,9 +221,9 @@ Submit(f){
   if(this.testsoin==false)
  { let m=f.value.date_valide.getMonth()+1;
   let dt =f.value.date_valide.getDate()+"-"+m+"-"+f.value.date_valide.getFullYear();
-  f.value.date_valide=dt; 
-      this.dataService.ajoutSoin(f).subscribe((res) => { 
-        console.log("success");   
+  f.value.date_valide=dt;
+      this.dataService.ajoutSoin(f).subscribe((res) => {
+        console.log("success");
          },
           error => {
             console.log("error");

@@ -68,11 +68,11 @@ const routes: Routes = [
   },
     {path:'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  },  {
+  },
+  {
     path: 'login-ancien',
     loadChildren: () => import('./login-ancien/login-ancien.module').then( m => m.LoginAncienPageModule)
-  }
-
+  },
 
 ];
 
