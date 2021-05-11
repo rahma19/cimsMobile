@@ -23,14 +23,16 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import { MatSelectModule } from '@angular/material/select';
 import {ToastModule} from 'primeng/toast';
 import { NgxStripeModule } from 'ngx-stripe';
-import { ImprimeRecuComponent } from './imprime-recu/imprime-recu.component';
 import {DialogModule} from 'primeng/dialog';
+import { ImprimeRecuComponent } from './imprime-recu/imprime-recu.component';
+import { DetailRdvPage } from './detail-rdv/detail-rdv.page';
+import { DetailRdvPageModule } from './detail-rdv/detail-rdv.module';
 
 @NgModule({
   declarations: [AppComponent,TabsComponent,ImprimeRecuComponent],
   entryComponents: [],
   imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,MatSelectModule,
-    AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,ToastModule,
+    AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,ToastModule,DetailRdvPageModule,
     MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule,MatFormFieldModule,CalendarModule,DialogModule,
     NgxStripeModule.forRoot('pk_test_51Ij5m9IPiJHJ7ZlG94Xwog7FwWTBzW7P2b7Ikx3yyIoVYqD08gTA2owW2b0NGZPi538y1As1nRb8eJvX8wlVHPqQ004GAY8dTY')
   ],

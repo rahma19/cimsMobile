@@ -45,10 +45,6 @@ return this.http.get<any[]>(environment.api+"rdv/rdvs");
 
 }
 
-getRdvBenef(cod_benef):  Observable<any[]> {
-  return this.http.get<any[]>(environment.api+"users/RdvBenef"+`/${cod_benef}`);
-}
-
 getMedecinById(id): Observable<any[]> {
 return this.http.get<any[]>(environment.api+"users/medecin"+`/${id}`);
 }
@@ -102,6 +98,8 @@ return this.http.post(environment.api+"rdv/soins", addedData,this.httpOptions);
 updateRdv(f,id){
 return this.http.patch(environment.api+"rdv/updaterdv"+`/${id}`,f );
 }
-
+getRdvBenef(cod_benef):  Observable<any[]> {
+  return this.http.get<any[]>(environment.api+"rdv/RdvBenef"+`/${cod_benef}`);
+}
 
 }

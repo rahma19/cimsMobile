@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Ionic Modal</ion-title>
+    <ion-icon name='close-circle' color="primary" (click)='dismiss()' style='float: right;'></ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-content color="light">
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <h2>Nom de l'hopital:</h2>
+        <p>{{rdvs.nom_hop}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Ville:</h2>
+        <p>{{rdvs.adr_hop}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Nom et prenom du médecin:</h2>
+        <p>{{rdvs.nom_med}} {{rdvs.prenom_med}}</p>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2>Service : </h2>
+        <p>{{rdvs.service }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -17,17 +17,42 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'notif',
+        children: [
+          {
+              path: '',
+              loadChildren: () => import('./notif/notif.module').then( m => m.NotifPageModule)
+            }
+        ]
+      }, {
+        path: 'listeRdv',
+        children: [
+          {
+              path: '',
+              loadChildren: () => import('./liste-rdv/liste-rdv.module').then( m => m.ListeRdvPageModule)
+            }
+        ]
+      }, {
+        path: 'Historique',
+        children: [
+          {
+              path: '',
+              loadChildren: () => import('./historique-paie/historique-paie.module').then( m => m.HistoriquePaiePageModule)
+            }
+        ]
+      },
+      {
         path: '',
         redirectTo: 'profile',
         pathMatch: 'full'
       }
     ]
   },
-     /* {
-        path: '',
+      {
+        path: 'profile',
         redirectTo: 'tabs',
         pathMatch: 'full'
-      },*/
+      },
       {
         path: '',
         redirectTo: 'home',
@@ -73,6 +98,12 @@ const routes: Routes = [
     path: 'login-ancien',
     loadChildren: () => import('./login-ancien/login-ancien.module').then( m => m.LoginAncienPageModule)
   },
+  {
+    path: 'detail-rdv',
+    loadChildren: () => import('./detail-rdv/detail-rdv.module').then( m => m.DetailRdvPageModule)
+  },
+
+
 
 ];
 

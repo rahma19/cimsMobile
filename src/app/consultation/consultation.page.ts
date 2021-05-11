@@ -7,6 +7,8 @@ import { DataService } from '../data.service';
 import { StripeService } from "ngx-stripe";
 import { environment } from 'src/environments/environment';
 import { loadStripe } from '@stripe/stripe-js';
+import { ModalController } from '@ionic/angular';
+import { DetailRdvPage } from '../detail-rdv/detail-rdv.page';
 @Component({
   selector: 'app-consultation',
   templateUrl: './consultation.page.html',
@@ -66,7 +68,18 @@ disabled: boolean = true;
  somme:Number;
 
 
-  constructor(private _formBuilder: FormBuilder,private router:Router,private http:HttpClient, private dataservice: DataService, private stripeService: StripeService) { }
+  constructor(public modalCtrl: ModalController,private _formBuilder: FormBuilder,private router:Router,private http:HttpClient, private dataservice: DataService, private stripeService: StripeService) { }
+
+  
+  async showModal(item) {
+    const modal = await this.modalCtrl.create({
+      component: DetailRdvPage,
+      componentProps: {
+        rdv: item
+      }
+    });
+    return await modal.present();
+  }
 
   ngOnInit(): void {
     this.user=this.dataservice.user;
