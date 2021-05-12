@@ -9,7 +9,7 @@
   <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
   <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
   <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
-  <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="eye-outline"></ion-icon></ion-button>
+  <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>
 </ion-toolbar>
 </ion-header>
 
@@ -22,10 +22,10 @@
 <h3 style="color:#154f57;">Filtrer par</h3>
 <ion-searchbar animated="true" placeholder="Nom du medecin" [(ngModel)]="selDmn" ></ion-searchbar>
 <ion-item style="border-radius: 10px;margin:5px;">
-  <ion-label>Service</ion-label>  
+  <ion-label>Service</ion-label>
   <select style="width: 100%;" (change)="med.filterGlobal($event.target.value, 'contains')" [(ngModel)]="selDmn" >
     <option *ngFor="let medecin of medecins" [selected]="medecin.service" value="{{medecin.service}}" >{{medecin.service}}</option>
-</select>        
+</select>
 
 </ion-item>
   <h1 class="title">{{selDmn}} à Ariana Tunisie </h1>
@@ -44,7 +44,7 @@
 
   </div>
   <ion-footer>
-    <ion-title> 
+    <ion-title>
        <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
     </ion-title>
 </ion-footer></ion-content>

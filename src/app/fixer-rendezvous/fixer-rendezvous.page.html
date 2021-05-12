@@ -9,12 +9,13 @@
   <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
   <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
   <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
+  <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>
 </ion-toolbar>
 </ion-header>
 
 
 <ion-content  color="tertiary">
-  <ion-card style="margin-top: 30px;">
+  <ion-card ><!--style="margin-top: 30px;"-->
     <ion-card-content>
       <form #f="ngForm"  (ngSubmit)="Submit(f)">
           <h3 style="color: black;font-weight: bold;text-align: center;">Choisir la date et l'heure du rendez-vous</h3><br>
@@ -128,11 +129,12 @@
   <div *ngIf="isup">
     <app-imprime-recu [rdv]="rdv"></app-imprime-recu>
     </div>
-<ion-footer>
-  <ion-title>
-     <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
-  </ion-title>
-</ion-footer>
+
+    <ion-footer>
+      <ion-title>
+         <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
+      </ion-title>
+    </ion-footer>
 </ion-content>
 
 

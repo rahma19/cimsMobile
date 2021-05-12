@@ -9,7 +9,7 @@
   <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
   <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
   <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
-  <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="eye-outline"></ion-icon></ion-button>
+  <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>
 
 </ion-toolbar>
 </ion-header>
@@ -32,7 +32,7 @@
           <img [src]='hopital.img_hop' />
           <div style="margin: 10px ">
             <p style="font-weight: bold;">{{hopital.nom_hop}}</p><br>
-            <p><ion-icon color="primary" name="location-outline"></ion-icon> {{hopital.adr_hop}} </p>  
+            <p><ion-icon color="primary" name="location-outline"></ion-icon> {{hopital.adr_hop}} </p>
           </div>
         </div>
         <ion-button expand="block" (click)="afficheMed(hopital)" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
@@ -40,7 +40,7 @@
     </ion-card>
 
     <ion-footer>
-      <ion-title> 
+      <ion-title>
          <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
       </ion-title>
   </ion-footer></ion-content>

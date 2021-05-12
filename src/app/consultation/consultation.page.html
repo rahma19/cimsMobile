@@ -9,6 +9,8 @@
   <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
   <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
   <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
+  <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>
+
 </ion-toolbar>
 </ion-header>
 
@@ -18,14 +20,14 @@
 </div>
 
   <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
-    <mat-step label="Etape 1" matStepperIcon="edit" >
+    <mat-step label="Information" matStepperIcon="edit" >
       <h2 style="color:#43cebb">Bonjour {{user.nom_pren_benef}} {{user.pren_benef}} </h2>
       <h2 style="color:black">Consultations a venir</h2>
       <ion-list>
-        <ion-item-sliding *ngFor="let item of rdv">
+        <ion-item-sliding *ngFor="let item of rv">
           <ion-item>
             <ion-label>Le {{item.date_rdv}} a {{item.heure_rdv}} </ion-label>
-            <button mat-button style="padding: 12px;background-color:#43cebb;color: white;float:right;" (click)="passrdv(rdvs)"  matStepperNext >Confirmer</button>
+            <button mat-button style="padding: 12px;background-color:#43cebb;color: white;float:right;" (click)="passrdv(item)"  matStepperNext >Confirmer</button>
 
           </ion-item>
           <ion-item-options side="end">
@@ -63,14 +65,13 @@
         </div>-->
 
     </mat-step>
-    <mat-step label="Etape 2" state="thumb">
-
-      <h2 style="color: brown; font-weight: bold;font-size: 36px;">Paiement</h2>
+    <mat-step label="Paiement" state="thumb">
       <form #f="ngForm" (ngSubmit)="Submit(f)" class="mb-5">
         <input type="hidden" name="etat" [(ngModel)]="eta" />
         <input type="hidden" name="cod_benef" [(ngModel)]="user.cod_benef" />
 
          <div *ngIf="testsoin==true">
+          <h3 style="color: black;font-weight: bold;text-align: center;">Confirmez vos informations</h3><br>
 
           <div class="form-group">
            <ion-item appearance="fill" style="width: 100%; padding: 10px;" required>
@@ -101,51 +102,61 @@
             </ion-item>
         </div>
         <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br><h4> {{somme}}</h4>
-        <button style="background-color:  #FFC909;float:right" class="btn w-25 border shadow" type="submit" >Payer</button> <!--(click)="checkout()"-->
+        <ion-button expand="round" type="submit" style="background-color: #43cebb;">
+          Payer
+        </ion-button>
    </div>
 
      <!--if soin null-->
-     <div class="container" [hidden]="testsoin" style="width: 100%;">
+     <div class="container text-black" [hidden]="testsoin" style="width: 100%;">
 
       <h3 style="color: black;font-weight: bold;text-align: center;">Saisissez vos informations</h3><br>
 
-     <div class="mb-6" style="width: 100%;">
-      <ion-item appearance="fill" style="width: 100%;" required>
-        <ion-label>Régime </ion-label>
-        <mat-select   [(ngModel)]="reg" name="regime">
-          <mat-option *ngFor="let montants of montant" (click)="calculerMontant(montants.montant)" [selected]="montants.type" value="{{montants.regime}}">
-            {{montants.type}}
-          </mat-option>
-        </mat-select>
-      </ion-item>
-     </div>
+      <div class="form-group"  style="width: 100%;">
+        <div class="ui-inputgroup">
+          <span class="ui-float-label">
+            <mat-form-field appearance="fill" style="width: 100%; padding: 15px;" >
+              <mat-label>        <label style="color: black;">Régime </label>
+              </mat-label>
+              <mat-select   [(ngModel)]="reg" name="regime">
+                <mat-option *ngFor="let montants of montant" (click)="calculerMontant(montants.montant)" [selected]="montants.type" value="{{montants.regime}}">
+                  {{montants.type}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </span>
+        </div>
+            </div>
 
   <div class="mb-6" style="width: 100%;">
-      <label class=" block text-center text-gray-500 text-sm mb-2">
+      <label style="color: black;" class=" block text-center text-balck text-sm mb-2">
          Numero du carnet :
       </label>
-      <input name="num_carnet" [(ngModel)]="numC" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
+      <input name="num_carnet" style="width: 100%;" [(ngModel)]="numC" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
   </div>
 
-  <div class="mb-6" style="width: 100%;">
-    <label class=" block text-center text-gray-500 text-sm mb-2">
-       Date valide :
-    </label>
-    <p-calendar inputId="basic" name="date_valide" [(ngModel)]="dateV" ></p-calendar>
-  </div>
+  <div style="width: 100%;" class="p-field p-col-12 p-md-4">
+    <label for="basic">Date valide</label>
+    <p-calendar inputId="basic"  name="date_valide" [(ngModel)]="dateV"></p-calendar>
+</div>
+
 
     <div class="mb-6" style="width: 100%;">
-      <label class=" block text-center text-gray-500 text-sm mb-2">
+      <label style="color: black;" class=" block text-center text-balck text-sm mb-2">
          Numero d'assurance :
       </label>
-      <input name="num_assure" [(ngModel)]="numA"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
+      <input name="num_assure" style="width: 100%;" [(ngModel)]="numA"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
   </div>
   <div>
-    <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br><input name="montant_rdv" [(ngModel)]="somme" disabled/>
+    <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br>
+    <h4 style="color: black;"> {{somme}}</h4>
+    <div  style="float:right;margin:10px">
+      <ion-button expand="round" color="#FFC909" color="warning" type="submit">
+        Payer
+      </ion-button>
+</div>
   </div>
-      <div  style="float: left;margin:10px">
-        <button pButton pRipple type="submit" label="Payer" class="button-raised button-text text-black" style="background-color: #FFC909;"></button>
-  </div>
+
   </div>
 
       </form>
@@ -165,6 +176,10 @@
   </mat-horizontal-stepper>
 
 </ion-content>
+
+<div *ngIf="isup">
+  <app-imprime-recu [rdv]="rdv"></app-imprime-recu>
+  </div>
 
 <ion-footer>
     <ion-title>

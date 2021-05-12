@@ -5,16 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { HistoriquePaiePageRoutingModule } from './historique-paie-routing.module';
-
+import { ImprimeRecuComponent } from '../imprime-recu/imprime-recu.component';
 import { HistoriquePaiePage } from './historique-paie.page';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule,Ng2SearchPipeModule,
     HistoriquePaiePageRoutingModule
   ],
-  declarations: [HistoriquePaiePage]
+  declarations: [HistoriquePaiePage,ImprimeRecuComponent]
 })
 export class HistoriquePaiePageModule {}

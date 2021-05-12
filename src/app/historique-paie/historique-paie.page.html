@@ -3,27 +3,35 @@
     <ion-buttons slot="start">
     <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
-  <!--<ion-title style="text-align: end;">
-    list Medecin
-  </ion-title>-->
-  <ion-searchbar animated="true" placeholder="Chercher une date" [(ngModel)]="selDmn" ></ion-searchbar>
+  <ion-searchbar animated="true" placeholder="Chercher un rendez-vous" [(ngModel)]="selDmn" ></ion-searchbar>
   <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>
 
 </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <h1 style="margin: 13px;color:#43cebb;">Votre historique du paiement</h1>
+  <h1 style="margin: 13px;color:#43cebb;">Votre historique des paiements</h1>
   <ion-list>
-    <ion-item *ngFor="let item of rdv">
+    <ion-item *ngFor="let item of rv | filter:selDmn ">
       <ion-avatar slot="start">
         <img src="../../assets/cims.png">
       </ion-avatar>
       <ion-label>
-        <h2>Le {{item.date_rdv}}</h2>
+        <h2 style="font-weight: bold;">Le {{item.date_rdv}}</h2>
         <h3>Dr. {{item.nom_med}} {{item.prenom_med}}</h3>
-        <p> Montant payé : {{item.montant_rdv}} Dt</p> <ion-button slot="end" style="font-size: 12px; ">Imprimer</ion-button>
+        <p> Montant payé : {{item.montant_rdv}} Dt</p>
+        <ion-button slot="end" style="font-size: 12px;float: right;" color="warning" (click)="imprimer(item)">Imprimer</ion-button>
       </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
+
+<div *ngIf="isup">
+  <app-imprime-recu [rdv]="rdv"></app-imprime-recu>
+  </div>
+
+  <ion-footer>
+    <ion-title>
+       <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
+    </ion-title>
+  </ion-footer>

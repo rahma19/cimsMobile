@@ -12,52 +12,50 @@
 </ion-header>
 
 <ion-content>
-  <!--<div>
-  <ion-button slot="start" routerLink="/login-ancien">Ancien ?</ion-button>
-
-</div>-->
   <div id="header">
     <h1>S'authentifier</h1>
     <img src="assets/cims.png" />
   </div>
-      
+
  <!-- <form  #f="ngForm"  (ngSubmit)="Submit(f)" id="form">
     <ion-item class="ion-margin-bottom">
-      <ion-input name="email" [(ngModel)]="email" type="text" placeholder="email"></ion-input>  
+      <ion-input name="email" [(ngModel)]="email" type="text" placeholder="email"></ion-input>
     </ion-item>
     <ion-item class="ion-margin-bottom">
       <ion-input name="password" [(ngModel)]="password" type="password" placeholder="password"></ion-input>
     </ion-item>
         <ion-button expand="block" type="submit" shape="round">S'authentifier</ion-button>
   </form>-->
-  <form  #f="ngForm"  (ngSubmit)="Submit(f)">
-    <div style="width: 100%;">
+  <form  #f="ngForm" class="container" (ngSubmit)="Submit(f)">
+    <div style="width: 100%;margin-top: 10px;">
+      <!--<ion-item class="ion-margin-bottom">
+        <ion-input name="email" [(ngModel)]="email" type="text" placeholder="email"></ion-input>
+      </ion-item>-->
       <ion-item class="ion-margin-bottom">
-        <ion-input name="email" [(ngModel)]="email" type="text" placeholder="email"></ion-input>  
-      </ion-item>
-      <ion-item class="ion-margin-bottom">
-        <ion-input name="cod_benef" [(ngModel)]="cod_benef" type="text" placeholder="saisissez votre index"></ion-input>  
+        <ion-input name="cod_benef" [(ngModel)]="cod_benef" type="text" placeholder="saisissez votre index"></ion-input>
       </ion-item>
  </div>
- <ion-item style="border-radius: 10px;margin:5px;">
-  <ion-label>Choisir un hopital</ion-label>
-  <select style="width: 100%;"  [(ngModel)]="selDmn" name="cod_hop" >
-    <option *ngFor="let hopital of hopitals" [selected]="hopital.nom_hop" value="{{hopital.cod_hop}}" >{{hopital.nom_hop}}</option>
-</select>
-</ion-item>
+  <mat-form-field appearance="fill" style="width: 100%;" required>
+    <mat-label>Choisir hopital </mat-label>
+    <mat-select  [(ngModel)]="selDmn" name="cod_hop"  >
+      <mat-option  *ngFor="let hopital of hopitals" [selected]="hopital.nom_hop" value="{{hopital.cod_hop}}">
+        {{hopital.nom_hop}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<ion-button expand="block" (click)="notify()" class="main-button">Envoyer mail de confirmation</ion-button>
+<ion-button expand="block" (click)="notify()" class="main-button">Confirmer</ion-button>
          <div [hidden]="test">
             <div class="p-field p-col-12 p-md-4" style="color: grey; font-size: 15px;">
-              <p>Merci de vérifier dans vos e-mailsque vous avez reçu un message avec votre code.
+              <p>Merci de vérifier dans votre email que vous avez reçu un message avec votre code.
                   <br/> Celui-ci est composé de 6 chiffres.</p>
                   <p>Le code a ete envoyé avec succees à : {{email}}</p>
-            </div>   
+            </div>
             <ion-item class="ion-margin-bottom">
-              <ion-input name="email" [(ngModel)]="confemail" name="code" type="text" placeholder="Entrez le code"></ion-input>  
-            </ion-item> 
+              <ion-input [(ngModel)]="confemail" name="code" type="text" placeholder="Entrez le code"></ion-input>
+            </ion-item>
   <h4 (click)="notify()" style="color:brown; margin-left:5%" class=" p-button-rounded" > Renvoyer le code </h4>
-  <ion-button expand="block"  type="submit" class="main-button">S'authentifier</ion-button>
+  <ion-button expand="block" style="margin: 10px;" type="submit" class="main-button">S'authentifier</ion-button>
 </div>
  </form>
 </ion-content>

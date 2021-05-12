@@ -7,11 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { ListeRdvPageRoutingModule } from './liste-rdv-routing.module';
 
 import { ListeRdvPage } from './liste-rdv.page';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule,FullCalendarModule,
     IonicModule,
     ListeRdvPageRoutingModule
   ],

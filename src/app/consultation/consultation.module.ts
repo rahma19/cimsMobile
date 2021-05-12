@@ -12,10 +12,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConsultationPage } from './consultation.page';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import { ImprimeRecuComponent } from '../imprime-recu/imprime-recu.component';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule,DialogModule,
     FormsModule,MatStepperModule,MatFormFieldModule,
     IonicModule,MatInputModule,ReactiveFormsModule,
     ConsultationPageRoutingModule,MatIconModule,MatSelectModule
@@ -24,6 +26,6 @@ import {MatSelectModule} from '@angular/material/select';
         MatStepperModule,MatFormFieldModule,
     MatInputModule,MatIconModule,MatSelectModule
   ],
-  declarations: [ConsultationPage]
+  declarations: [ConsultationPage,ImprimeRecuComponent]
 })
 export class ConsultationPageModule {}

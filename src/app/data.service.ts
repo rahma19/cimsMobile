@@ -77,9 +77,16 @@ getAllRegime(): Observable<any[]>{
 return this.http.get<any[]>(environment.api+"users/regimes");
 }
 
+getRdvById(id){
+  return this.http.get<any[]>(environment.api+"rdv/rv"+`/${id}`);
+ }
+ 
 getHopitalByCode(cod_hop:any): Observable<any[]>{
 return this.http.get<any[]>(environment.api+"users/hopital"+`/${cod_hop}`);
 }
+update(f,id){
+  return this.http.patch(environment.api+"auth/modifPat"+`/${id}`,f );
+ }
 
 
 updateSoinBenef(f,id){

@@ -12,8 +12,10 @@ import { DataService } from '../data.service';
 export class HistoriquePaiePage implements OnInit {
   selDmn:any="";
   user=null;
-rdv:any[]=[];
+rdv:any
+isup=false;
 
+rv:any[]=[];
   constructor(private dataService: DataService,private router:Router,private http:HttpClient) { }
 
   ngOnInit() {
@@ -24,8 +26,8 @@ rdv:any[]=[];
     {
        if (data['data'][i].etat==true){
           console.log(data['data']);
-          this.rdv.push(data['data'][i]);
-           console.log(this.rdv);
+          this.rv.push(data['data'][i]);
+           console.log(this.rv);
           }
       }
     },
@@ -37,5 +39,11 @@ rdv:any[]=[];
     this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
     this.router.navigate(['/login']);
 
+ }
+
+ imprimer(item){
+this.rdv=item;
+console.log(this.rdv);
+this.isup=true;
  }
 }

@@ -36,7 +36,6 @@ reg:any="";
 numC:any="";
 numA:any="";
 dateV:any="";
-
   test:boolean=true;
 firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -47,7 +46,8 @@ firstFormGroup: FormGroup;
   testsoin: any;
 
   handler:any = null;
-rdv:any[]=[];
+rdv:any;
+rv:any[]=[];
 user:any=null;
 i:any;
   httpOptions = {
@@ -69,8 +69,12 @@ disabled: boolean = true;
 
 
   constructor(public modalCtrl: ModalController,private _formBuilder: FormBuilder,private router:Router,private http:HttpClient, private dataservice: DataService, private stripeService: StripeService) { }
+  logout(){
+    this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
+    this.router.navigate(['/login']);
 
-  
+ }
+
   async showModal(item) {
     const modal = await this.modalCtrl.create({
       component: DetailRdvPage,
@@ -92,8 +96,8 @@ disabled: boolean = true;
     {
        if (data['data'][i].etat==false){
           console.log(data['data']);
-          this.rdv.push(data['data'][i]);
-           console.log(this.rdv);
+          this.rv.push(data['data'][i]);
+           console.log(this.rv);
           }
       }
     },
@@ -101,27 +105,7 @@ disabled: boolean = true;
       console.log("error");
     } );
 
-    this.http.get(environment.api+"rdv/soin"+`/${this.user.cod_benef}`).subscribe(data=>{
-      console.log(data['data']);
-      this.soins=data['data'];
-      this.soin=this.soins[0];
-      console.log(this.soin);
-
-      if(this.soins.length==0)
-        this.testsoin=false
-      else
-      if(this.soins.length!=0)
-        {
-        this.testsoin=true;
-        this.reg=this.soins[0].regime;
-       // this.dateV=this.soin[0].date_valide;
-        }
-    });
-console.log(this.testsoin);
-
-      console.log(this.rdv);
-
-    this.test=true;
+  //  this.test=true;
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
@@ -164,8 +148,24 @@ async checkout() {
 }
 
 passrdv(rdv){
-  this.rendezvous=rdv;
-  console.log(this.rendezvous);
+  this.rdv=rdv;
+  console.log(this.rdv);
+  this.http.get(environment.api+"rdv/soin"+`/${this.user.cod_benef}`).subscribe(data=>{
+    console.log(data['data']);
+    this.soins=data['data'];
+    this.soin=this.soins[0];
+    console.log(this.soin);
+
+    if(this.soins.length==0)
+      this.testsoin=false
+    else
+    if(this.soins.length!=0)
+      {
+      this.testsoin=true;
+      this.reg=this.soins[0].regime;
+     // this.dateV=this.soin[0].date_valide;
+      }
+  });
 }
 
 
@@ -211,7 +211,7 @@ passrdv(rdv){
 
 Submit(f){
    f.value.etat=true;
-   this.dataservice.updateRdv(f.value,this.rendezvous._id).subscribe((res:any) => {
+   this.dataservice.updateRdv(f.value,this.rdv._id).subscribe((res:any) => {
      console.log("succes");
    //  this.messageService.add({severity:'success', summary: ' Message', detail:'Ajout avec succes'});
      this.rdv=f.value;
