@@ -8,7 +8,15 @@ import { ListeRdvPageRoutingModule } from './liste-rdv-routing.module';
 
 import { ListeRdvPage } from './liste-rdv.page';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+import timeGridPlugin from '@fullcalendar/timegrid';
 
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  timeGridPlugin,
+  interactionPlugin
+]);
 @NgModule({
   imports: [
     CommonModule,

@@ -28,7 +28,15 @@ import { ImprimeRecuComponent } from './imprime-recu/imprime-recu.component';
 import { DetailRdvPage } from './detail-rdv/detail-rdv.page';
 import { DetailRdvPageModule } from './detail-rdv/detail-rdv.module';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+import timeGridPlugin from '@fullcalendar/timegrid';
 
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  timeGridPlugin,
+  interactionPlugin
+]);
 @NgModule({
   declarations: [AppComponent,TabsComponent,ImprimeRecuComponent],
   entryComponents: [],
