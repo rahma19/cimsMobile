@@ -1,42 +1,68 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import {  ViewChild } from '@angular/core';
+import { CalendarComponent } from 'ionic2-calendar';
 import { Router } from '@angular/router';
 import { CalendarOptions, EventClickArg } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { DataService } from '../data.service';
-import { environment } from 'src/environments/environment';@Component({
+import { environment } from 'src/environments/environment';
+import { ModalController } from '@ionic/angular';
+import { DecalerRdvPage } from '../decaler-rdv/decaler-rdv.page';
+@Component({
   selector: 'app-liste-rdv',
   templateUrl: './liste-rdv.page.html',
   styleUrls: ['./liste-rdv.page.scss'],
 })
 export class ListeRdvPage implements OnInit {
   user:any;
-  role:any;
+  currentDate = new Date();
+  currentMonth: string;
+  @ViewChild(CalendarComponent, {static: false}) myCalendar: CalendarComponent;
+  type:any;
   test=false;
   idMed:any="";
   events: any[]=[];
 isup:any=false;
-  calendarOptions: CalendarOptions = {
-    headerToolbar: {
-      left: 'prev,next',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-    },
-    eventClick: function(info) {
-      alert('clicked ' + info.event.title);
-    },
-        selectable: true
-
-  };
-
 rdv:any[]=[];
   options: any;
 rv:any="";
+showAddEvent: boolean;
 id:any="";
-    constructor(private http:HttpClient,private dataService:DataService,private router:Router) {
-
+allEvents = [];
+newEvent = {
+  title: '',
+  description: '',
+  imageURL: '',
+  startTime: '',
+  endTime: ''
+};
+    constructor(private http:HttpClient,private dataService:DataService,public modalController: ModalController ) {
+      this.loadEvent();
+    }
+    showHideForm() {
+      this.showAddEvent = !this.showAddEvent;
+      this.newEvent = {
+        title: '',
+        description: '',
+        imageURL: '',
+        startTime: new Date().toISOString(),
+        endTime: new Date().toISOString()
+      };
+    }
+    addEvent() {
+      console.log(this.newEvent);
+      this.allEvents.push({
+        title: this.newEvent.title,
+        startTime:  new Date(this.newEvent.startTime),
+        endTime: new Date(this.newEvent.endTime),
+        description: this.newEvent.description,
+        imageURL: this.newEvent.imageURL
+      });
+      console.log(this.allEvents);
+      this.showHideForm();
     }
     handleEventClick(clickInfo: EventClickArg) {
       /*if (confirm(`Vous etes sur de vouloir annuler ce rendez-vous? '${clickInfo.event.title}'`)) {
@@ -50,12 +76,35 @@ id:any="";
          this.rv=data['data'];
        });
     }
+    loadEvent() {
+      this.allEvents=[];
+      this.rdv.forEach(action => {
+          console.log('action: ' + action.payload.exportVal().title);
+          this.allEvents.push({
+            title: action.payload.exportVal().title,
+            startTime:  new Date(action.payload.exportVal().startTime),
+            endTime: new Date(action.payload.exportVal().endTime),
+            description: action.payload.exportVal().description,
+            imageURL: action.payload.exportVal().imageURL
+          });
+          this.myCalendar.loadEvents();
+        });
+      }
 
     /*this.events=[
   { title: 'event 1', date: '2021-05-06 11:00' },
   { title: 'event 2', date: '2021-04-02' }
 ];*/
-
+onViewTitleChanged(title: string) {
+  this.currentMonth = title;
+  console.log(title);
+}
+onTimeSelected(ev: any) {
+  const selected = new Date(ev.selectedTime);
+  this.newEvent.startTime = selected.toISOString();
+  selected.setHours(selected.getHours() + 1);
+  this.newEvent.endTime = (selected.toISOString());
+}
     ngOnInit(): void {
       this.user=this.dataService.user;
 
@@ -63,21 +112,29 @@ id:any="";
         this.rdv=data['data'];
         console.log(this.rdv);
         for(let i=0;i<this.rdv.length;i++){ //this.rdv[i].title
-          this.events.push({title:this.rdv[i].nom_med+" "+this.rdv[i].prenom_med,date:this.rdv[i].date_rdv+' '+this.rdv[i].heure_rdv });
         }
         console.log(this.events);
+        let dt=new Date(this.rdv[0].date_rdv+" "+this.rdv[0].heure_rdv);
+        console.log(dt);
+        this.events.push({title: "kmjh", description: "iuh", imageURL: "iuhy", startTime: new Date(dt), endTime: new Date(this.rdv[0].endTime)});
 
-        this.calendarOptions={
-          events: this.events,
-          dateClick: (e) =>  {
-            console.log(e.dateStr);
-          },
-        }
       });
 
 
     }
+    async onEventSelected(event: any) {
+      console.log('Event: ' + JSON.stringify(event));
+      const modal = await this.modalController.create({
+        component: DecalerRdvPage,
+        componentProps: event
+      });
+      return await modal.present();
 
+    }
+    onChange($event) {
+      console.log($event.target.value);
+      console.log($event);
+    }
     modif(f){
       console.log(f);
       this.http.patch(environment.api+"rdv/updaterdv"+`/${this.id}`, f).subscribe((res) => {

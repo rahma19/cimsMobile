@@ -11,6 +11,12 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { NgCalendarModule } from 'ionic2-calendar';
+import { CalendarModule } from 'ion2-calendar';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { DecalerRdvPage } from '../decaler-rdv/decaler-rdv.page';
+registerLocaleData(localeFr, 'fr');
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -19,11 +25,11 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule,NgCalendarModule,CalendarModule,
     FormsModule,FullCalendarModule,
     IonicModule,
     ListeRdvPageRoutingModule
   ],
-  declarations: [ListeRdvPage]
+  declarations: [ListeRdvPage,DecalerRdvPage]
 })
 export class ListeRdvPageModule {}

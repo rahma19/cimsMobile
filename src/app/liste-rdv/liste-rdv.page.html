@@ -1,10 +1,64 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>listeRdv</ion-title>
-  </ion-toolbar>
+    <ion-buttons slot="start">
+    <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+  <!--<ion-title style="text-align: end;">
+    list Medecin
+  </ion-title>-->
+  <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
+  <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
+  <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
+  <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>
+
+</ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <full-calendar [options]="calendarOptions" ></full-calendar><!--(click)="handleDateClick(this)"-->
+  <div class="ion-padding">
+    <div *ngIf="showAddEvent" class="ion-padding">
+      <ion-item>
+        <ion-label><b>Titre:</b></ion-label>
+        <ion-input type="text" placeholder="Titre" [(ngModel)]="newEvent.title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Description:</b></ion-label>
+        <ion-input type="text" placeholder="Description" [(ngModel)]="newEvent.description"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Image:</b></ion-label>
+        <ion-input type="text" placeholder="URL de l'image" [(ngModel)]="newEvent.imageURL"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Début</b></ion-label>
+        <ion-datetime doneText="OK" cancelText="Annuler" i18n displayFormat="DD/MM/YYYY HH:mm" pickerFormat="MMM D HH:mm" [(ngModel)]="newEvent.startTime" [min]="minDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label><b>Fin</b></ion-label>
+        <ion-datetime doneText="OK" cancelText="Annuler" displayFormat="DD/MM/YYYY HH:mm" pickerFormat="MMM D HH:mm" [(ngModel)]="newEvent.endTime" [min]="minDate"></ion-datetime>
+      </ion-item>
+      <ion-button color="warning" expand="block" (click)="addEvent()">Ajouter</ion-button>
+    </div>
 
+    <calendar *ngIf="!showAddEvent" id="myCalendar"
+    locale="fr-FR"
+    [eventSource]="events"
+    calendarMode="month"
+    [currentDate]="currentDate"
+    (onTitleChanged)="onViewTitleChanged($event)"
+    (onEventSelected)="onEventSelected($event)"
+    (onTimeSelected)="onTimeSelected($event)"
+    startHour="6"
+    endHour="20"
+    step="30"
+    startingDayWeek="1">
+</calendar>
+
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="showHideForm()">
+      <ion-icon *ngIf="!showAddEvent" name="add"></ion-icon>
+      <ion-icon *ngIf="showAddEvent" name="close"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

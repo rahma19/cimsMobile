@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import {CalendarModule} from 'primeng/calendar';
+import { CalendarModule } from 'ion2-calendar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataService } from './data.service';
 import { GlobalHttpInterceptorService } from './GlobalHttpInterceptorService';

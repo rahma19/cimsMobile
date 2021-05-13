@@ -53,15 +53,16 @@ httpOptions = {
   Submit(form) {
     console.log(this.code);
     console.log(form.value.code);
-  
+
    if(this.code==form.value.code){
    console.log ("form.value", form.value)
    let addedData = JSON.stringify(form.value);
    console.log ("addedData", addedData);
     this.dataService.getCurrentUser(form,"auth/loginPatientanc");
-   
+    this.router.navigate(['/home']);
+
  /*this.http.post(environment.api+"auth/loginPatientanc", addedData,this.httpOptions).subscribe((res) => {
-   this.messageService.add({severity:'success', summary: 'Message', detail:'Succes'}); 
+   this.messageService.add({severity:'success', summary: 'Message', detail:'Succes'});
    this.router.navigate(['/Home']);
    },
      error => {
@@ -69,8 +70,8 @@ httpOptions = {
      });*/
      } else {
    this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-    console.log("erreruurr"); 
+    console.log("erreruurr");
   }
- 
+
   }
 }

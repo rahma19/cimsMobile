@@ -20,7 +20,7 @@
       <form #f="ngForm"  (ngSubmit)="Submit(f)">
           <h3 style="color: black;font-weight: bold;text-align: center;">Choisir la date et l'heure du rendez-vous</h3><br>
           <p-calendar name="date_rdv" [(ngModel)]="date" (click)="affiche(date)" [inline]="true" [showWeek]="true"></p-calendar>
-
+        <input type="hidden" name="endTime" [(ngModel)]="date"  />
           <div [hidden]=test>
             <mat-form-field appearance="fill" style="width: 100%;" >
               <mat-label>Choisissez l'heure du rendez-vous</mat-label>

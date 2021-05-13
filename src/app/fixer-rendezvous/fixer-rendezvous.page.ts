@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -50,7 +51,7 @@ heurMed:any[]=[
 ]
   date: Date;
 
-  constructor(private http:HttpClient,private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService) { }
+  constructor(private datePipe: DatePipe,private http:HttpClient,private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService) { }
 
 
   ngOnInit(): void {
@@ -193,17 +194,15 @@ Submit(f){
     cod_benef:this.user.cod_benef,
     gsm:this.user.tel_benef,
     regime:f.regime,
-    num_carnet:f.num_carnet,
+    num_carnet:f.value.num_carnet,
     date_valide:f.date_valide,
     num_assure:f.value.num_assure,
     montant_rdv:this.montant,
-
-
+    endTime:new Date(f.value.endTime),
+    //etat:f.value.etat
   }
- let month=f.value.date_rdv.getMonth()+1;
-  let date =f.value.date_rdv.getDate()+"-"+month+"-"+f.value.date_rdv.getFullYear();
-  f.value.date_rdv=date;
-
+  var ddMMyyyy = this.datePipe.transform(f.value.date_rdv,"yyyy-MM-dd");
+  f.value.date_rdv=ddMMyyyy;
   f.value.etat=true;
   console.log(f.value);
   this.dataService.fixerRdv(f).subscribe((res:any) => {

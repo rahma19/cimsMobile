@@ -101,7 +101,11 @@ const routes: Routes = [
   {
     path: 'detail-rdv',
     loadChildren: () => import('./detail-rdv/detail-rdv.module').then( m => m.DetailRdvPageModule)
+  },  {
+    path: 'decaler-rdv',
+    loadChildren: () => import('./decaler-rdv/decaler-rdv.module').then( m => m.DecalerRdvPageModule)
   },
+
 
 
 
