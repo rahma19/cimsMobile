@@ -64,6 +64,7 @@ num_carnet:any;
 rendezvous:any;
 soins:any[]=[];
 soin:any;
+date:any="";
 disabled: boolean = true;
  somme:Number;
 
@@ -76,6 +77,7 @@ disabled: boolean = true;
  }
 
   async showModal(item) {
+    console.log(item);
     const modal = await this.modalCtrl.create({
       component: DetailRdvPage,
       componentProps: {

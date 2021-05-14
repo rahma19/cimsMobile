@@ -112,12 +112,12 @@ onTimeSelected(ev: any) {
         this.rdv=data['data'];
         console.log(this.rdv);
         for(let i=0;i<this.rdv.length;i++){ //this.rdv[i].title
+          let dt=new Date(this.rdv[i].date_rdv+" "+this.rdv[i].heure_rdv);
+        console.log(dt);
+        this.events.push({title: this.rdv[i].nom_med+" "+this.rdv[i].prenom_med, description: this.rdv[i]._id, imageURL: "iuhy", startTime: new Date(dt), endTime: new Date(this.rdv[i].endTime)});
+
         }
         console.log(this.events);
-        let dt=new Date(this.rdv[0].date_rdv+" "+this.rdv[0].heure_rdv);
-        console.log(dt);
-        this.events.push({title: "kmjh", description: "iuh", imageURL: "iuhy", startTime: new Date(dt), endTime: new Date(this.rdv[0].endTime)});
-
       });
 
 

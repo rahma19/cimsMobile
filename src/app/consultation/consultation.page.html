@@ -16,23 +16,23 @@
 
 <ion-content  color="tertiary">
   <div style="margin:10px;color:#154f57;font-family:Open Sans,Arial, Helvetica, sans-serif;">
-    <h1 style="font-weight: bold;margin:30px">Payer Votre Consultation!</h1>
+    <h1 style="font-weight: bold;margin:30px">Payer Votre Consultation pour confirmer votre rendez-vous!</h1>
 </div>
 
   <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
     <mat-step label="Information" matStepperIcon="edit" >
-      <h2 style="color:#43cebb">Bonjour {{user.nom_pren_benef}} {{user.pren_benef}} </h2>
+      <div *ngIf="rv.length==0"> <h1>Vous n'avez aucune consultation a payer</h1></div>
       <h2 style="color:black">Consultations a venir</h2>
       <ion-list>
         <ion-item-sliding *ngFor="let item of rv">
           <ion-item>
             <ion-label>Le {{item.date_rdv}} a {{item.heure_rdv}} </ion-label>
-            <button mat-button style="padding: 12px;background-color:#43cebb;color: white;float:right;" (click)="passrdv(item)"  matStepperNext >Confirmer</button>
+            <button mat-button style="padding: 12px;background-color:#43cebb;color: white;float:right;margin: 10px;" (click)="passrdv(item)"  matStepperNext >Confirmer</button>
 
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option (click)="unread(item)">
-              <ion-button expand="round" color="warning" (click)="showModal(item)">
+              <ion-button expand="round"  (click)="showModal(item)">
               Detail
             </ion-button>
           </ion-item-option>
@@ -73,36 +73,44 @@
          <div *ngIf="testsoin==true">
           <h3 style="color: black;font-weight: bold;text-align: center;">Confirmez vos informations</h3><br>
 
-          <div class="form-group">
-           <ion-item appearance="fill" style="width: 100%; padding: 10px;" required>
-            <ion-label color="primary">Choisir votre régime </ion-label>
-            <mat-select   [(ngModel)]="reg" name="regime">
-              <mat-option *ngFor="let montants of montant" (click)="calculerMontant(montants.montant)" [selected]="montants.type" value="{{montants.regime}}">
-                {{montants.type}}
-              </mat-option>
-            </mat-select>
-          </ion-item>
-          <ion-item appearance="fill" style="width: 100%; padding: 10px;" required>
-            <ion-label color="primary">Date de validité </ion-label>
-            <input matInput name="date_valide" [(ngModel)]="soin.date_valide" required>
+          <div class="form-group"  style="width: 100%;">
+            <div class="ui-inputgroup">
+              <span class="ui-float-label">
+                <mat-form-field appearance="fill" style="width: 100%; padding: 15px;" >
+                  <mat-label>        <label style="color: black;">Régime </label>
+                  </mat-label>
+                  <mat-select   [(ngModel)]="soin.regime" name="regime">
+                    <mat-option *ngFor="let montants of montant" (click)="calculerMontant(montants.montant)" [selected]="montants.type" value="{{montants.regime}}">
+                      {{montants.type}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+            </span>
+            </div>
+          </div>
 
-          </ion-item>
+                <div style="width: 100%;" class="p-field p-col-12 p-md-4">
+                  <label for="basic">Date valide</label>
+                  <p-calendar inputId="basic"  name="date_valide" [(ngModel)]="date"></p-calendar>
+              </div>
 
-        </div>
 
+                  <div class="mb-6" style="width: 100%;">
+                    <label style="color: black;" class=" block text-center text-balck text-sm mb-2">
+                       Numero d'assurance :
+                    </label>
+                    <input name="num_assure" style="width: 100%;" [(ngModel)]="soin.num_assure"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required/>
+                </div>
 
-        <div class="form-group">
-          <ion-item class="example-full-width"  style="width: 100%; height: 25px; padding: 10px;">
-            <ion-label>Numéro assurance</ion-label>
-            <textarea matInput [(ngModel)]="soin.num_assure" name="num_assure"></textarea>
-          </ion-item>
-          <ion-item class="example-full-width"   style="width: 50%;  padding: 10px;">
-            <ion-label>Numéro de carnet</ion-label>
-            <textarea matInput [(ngModel)]="soin.num_carnet" name="num_carnet"></textarea>
-            </ion-item>
-        </div>
+        <div class="mb-6" style="width: 100%;">
+          <label style="color: black;" class=" block text-center text-balck text-sm mb-2">
+             Numero du carnet :
+          </label>
+          <input name="num_carnet" style="width: 100%;" [(ngModel)]="soin.num_carnet" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required />
+      </div>
+
         <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br><h4> {{somme}}</h4>
-        <ion-button expand="round" type="submit" style="background-color: #43cebb;">
+        <ion-button expand="round" type="submit" color="warning">
           Payer
         </ion-button>
    </div>
@@ -151,7 +159,7 @@
     <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br>
     <h4 style="color: black;"> {{somme}}</h4>
     <div  style="float:right;margin:10px">
-      <ion-button expand="round" color="#FFC909" color="warning" type="submit">
+      <ion-button expand="round" color="warning" type="submit">
         Payer
       </ion-button>
 </div>

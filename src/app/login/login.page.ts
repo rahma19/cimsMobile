@@ -50,7 +50,7 @@ httpOptions = {
         console.log("error");
     })
   }
-  Submit(form) {
+  async Submit(form) {
     console.log(this.code);
     console.log(form.value.code);
 
@@ -59,7 +59,7 @@ httpOptions = {
    let addedData = JSON.stringify(form.value);
    console.log ("addedData", addedData);
     this.dataService.getCurrentUser(form,"auth/loginPatientanc");
-    this.router.navigate(['/home']);
+   await this.router.navigate(['/home']);
 
  /*this.http.post(environment.api+"auth/loginPatientanc", addedData,this.httpOptions).subscribe((res) => {
    this.messageService.add({severity:'success', summary: 'Message', detail:'Succes'});

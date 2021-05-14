@@ -105,6 +105,10 @@ const routes: Routes = [
     path: 'decaler-rdv',
     loadChildren: () => import('./decaler-rdv/decaler-rdv.module').then( m => m.DecalerRdvPageModule)
   },
+  {
+    path: 'imprimer-recu',
+    loadChildren: () => import('./imprimer-recu/imprimer-recu.module').then( m => m.ImprimerRecuPageModule)
+  },
 
 
 

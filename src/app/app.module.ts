@@ -31,6 +31,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { DatePipe } from '@angular/common';
+import {NgxPrintModule} from 'ngx-print';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -40,13 +42,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 @NgModule({
   declarations: [AppComponent,TabsComponent,ImprimeRecuComponent],
   entryComponents: [],
-  imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,MatSelectModule,
+  imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,MatSelectModule,NgxPrintModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,ToastModule,DetailRdvPageModule,
     MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule,MatFormFieldModule,CalendarModule,DialogModule,FullCalendarModule,
     NgxStripeModule.forRoot('pk_test_51Ij5m9IPiJHJ7ZlG94Xwog7FwWTBzW7P2b7Ikx3yyIoVYqD08gTA2owW2b0NGZPi538y1As1nRb8eJvX8wlVHPqQ004GAY8dTY')
   ],
   exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,MatSelectModule],
-  providers: [StatusBar,SplashScreen,DataService, { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  providers: [DatePipe,StatusBar,SplashScreen,DataService, { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

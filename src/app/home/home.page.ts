@@ -11,13 +11,13 @@ import { DataService } from '../data.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-user:any=false;
+user:any="";
   constructor(private menu: MenuController,private dataService:DataService,private http:HttpClient,private router:Router) { }
 
   logout(){
     this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
     this.router.navigate(['/login']);
- 
+
  }
   openFirst() {
     this.menu.enable(true, 'first');
@@ -32,7 +32,12 @@ user:any=false;
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
   }
-
+payerCons(){
+  console.log(this.user);
+  if(this.user!=""){
+    this.router.navigate(['/consultation']);
+  }
+}
   ngOnInit() {
     this.user=this.dataService.user;
   }

@@ -15,7 +15,7 @@ import { DataService } from '../data.service';
 })
 export class FixerRendezvousPage implements OnInit {
   identifiant:any="";
-  medecin?:any=null;
+  medecin?:any="";
   soin?:any[];
   soins?:any;
   testsoin?:Boolean;
