@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { DataService } from 'src/app/data.service';
 @Component({
   selector: 'app-imprimer-recu',
@@ -12,12 +13,13 @@ export class ImprimerRecuPage implements OnInit {
 
   @Input() rdv:any;
 
-  constructor(private activateroute:ActivatedRoute,private restaurantService:DataService,private http:HttpClient,private router:Router) {
+  constructor(private dataServie:DataService, public modalController: ModalController) {
 
   }
-  closeModal() {
-   this.display=false;
- }
+
+  close() {
+    this.modalController.dismiss();
+  }
  ngOnInit() {
    this.display = true;
      console.log(this.rdv);

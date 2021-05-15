@@ -49,10 +49,10 @@ newEvent = {
         description: '',
         imageURL: '',
         startTime: new Date().toISOString(),
-        endTime: new Date().toISOString()
+        //endTime: new Date().toISOString()
       };
     }
-    addEvent() {
+   /* addEvent() {
       console.log(this.newEvent);
       this.allEvents.push({
         title: this.newEvent.title,
@@ -63,7 +63,7 @@ newEvent = {
       });
       console.log(this.allEvents);
       this.showHideForm();
-    }
+    }*/
     handleEventClick(clickInfo: EventClickArg) {
       /*if (confirm(`Vous etes sur de vouloir annuler ce rendez-vous? '${clickInfo.event.title}'`)) {
         clickInfo.event.remove();
@@ -83,7 +83,7 @@ newEvent = {
           this.allEvents.push({
             title: action.payload.exportVal().title,
             startTime:  new Date(action.payload.exportVal().startTime),
-            endTime: new Date(action.payload.exportVal().endTime),
+          //  endTime: new Date(action.payload.exportVal().endTime),
             description: action.payload.exportVal().description,
             imageURL: action.payload.exportVal().imageURL
           });
@@ -103,7 +103,7 @@ onTimeSelected(ev: any) {
   const selected = new Date(ev.selectedTime);
   this.newEvent.startTime = selected.toISOString();
   selected.setHours(selected.getHours() + 1);
-  this.newEvent.endTime = (selected.toISOString());
+ // this.newEvent.endTime = (selected.toISOString());
 }
     ngOnInit(): void {
       this.user=this.dataService.user;

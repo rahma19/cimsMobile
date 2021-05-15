@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { loadStripe } from '@stripe/stripe-js';
 import { ModalController } from '@ionic/angular';
 import { DetailRdvPage } from '../detail-rdv/detail-rdv.page';
+import { ImprimerRecuPage } from '../imprimer-recu/imprimer-recu.page';
 @Component({
   selector: 'app-consultation',
   templateUrl: './consultation.page.html',
@@ -75,6 +76,17 @@ disabled: boolean = true;
     this.router.navigate(['/login']);
 
  }
+
+ async imprimer(item) {
+  console.log(item);
+  const modal = await this.modalCtrl.create({
+    component: ImprimerRecuPage,
+    componentProps: {
+      rdv: item
+    }
+  });
+  return await modal.present();
+}
 
   async showModal(item) {
     console.log(item);
@@ -210,14 +222,19 @@ passrdv(rdv){
     console.log(this.somme);
   }
 
+  getRdvBenef(id){
+    this.dataservice.getRdvBenef(id).subscribe((data)=>{
+      this.rdv=data['data'];
+    })
+  }
 
 Submit(f){
    f.value.etat=true;
    this.dataservice.updateRdv(f.value,this.rdv._id).subscribe((res:any) => {
      console.log("succes");
    //  this.messageService.add({severity:'success', summary: ' Message', detail:'Ajout avec succes'});
-     this.rdv=f.value;
-     this.isup=true;
+    this.getRdvBenef(f.value.cod_benef);
+    this.imprimer(this.rdv);
     if(this.testsoin==true)
 
          this.dataservice.updateSoinBenef(f.value,this.soin._id).subscribe( (Response) => {

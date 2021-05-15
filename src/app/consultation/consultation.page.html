@@ -27,7 +27,7 @@
         <ion-item-sliding *ngFor="let item of rv">
           <ion-item>
             <ion-label>Le {{item.date_rdv}} a {{item.heure_rdv}} </ion-label>
-            <button mat-button style="padding: 12px;background-color:#43cebb;color: white;float:right;margin: 10px;" (click)="passrdv(item)"  matStepperNext >Confirmer</button>
+            <button mat-button style="padding: 12px;background-color:#ffc409;color: white;float:right;margin: 10px;" (click)="passrdv(item)"  matStepperNext >Confirmer</button>
 
           </ion-item>
           <ion-item-options side="end">
@@ -99,7 +99,8 @@
                     <label style="color: black;" class=" block text-center text-balck text-sm mb-2">
                        Numero d'assurance :
                     </label>
-                    <input name="num_assure" style="width: 100%;" [(ngModel)]="soin.num_assure"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required/>
+                    <ion-input [(ngModel)]="soin.num_assure"  name="num_assure" style="width: 100%;"  name="num_assure" style="width: 100%;" type="text"></ion-input>
+
                 </div>
 
         <div class="mb-6" style="width: 100%;">

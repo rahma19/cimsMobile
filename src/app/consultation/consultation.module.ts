@@ -14,10 +14,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import { ImprimeRecuComponent } from '../imprime-recu/imprime-recu.component';
 import {DialogModule} from 'primeng/dialog';
+import { InputModule } from '../input/input.module';
 
 @NgModule({
   imports: [
-    CommonModule,DialogModule,
+    CommonModule,DialogModule,InputModule,
     FormsModule,MatStepperModule,MatFormFieldModule,
     IonicModule,MatInputModule,ReactiveFormsModule,
     ConsultationPageRoutingModule,MatIconModule,MatSelectModule

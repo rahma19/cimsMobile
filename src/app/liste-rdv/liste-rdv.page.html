@@ -16,6 +16,7 @@
 
 <ion-content>
   <div class="ion-padding">
+    <h2>Liste des rendez-vous a venir</h2>
     <div *ngIf="showAddEvent" class="ion-padding">
       <ion-item>
         <ion-label><b>Titre:</b></ion-label>
@@ -55,7 +56,7 @@
 </calendar>
 
   </div>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab vertical="bottom" color="warning" horizontal="end" slot="fixed">
     <ion-fab-button (click)="showHideForm()">
       <ion-icon *ngIf="!showAddEvent" name="add"></ion-icon>
       <ion-icon *ngIf="showAddEvent" name="close"></ion-icon>
