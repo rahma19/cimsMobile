@@ -17,9 +17,7 @@
 <ion-content  color="tertiary">
   <ion-card ><!--style="margin-top: 30px;"-->
     <ion-card-content>
-
-      <form #f="ngForm" (ngSubmit)="Submit(f)">
-        <div class="ion-padding" >
+      <form #f="ngForm"  (ngSubmit)="Submit(f)">
           <h3 style="color: black;font-weight: bold;text-align: center;">Choisir la date et l'heure du rendez-vous</h3><br>
           <p-calendar name="date_rdv" [(ngModel)]="date" (click)="affiche(date)" [inline]="true" [showWeek]="true"></p-calendar>
         <input type="hidden" name="endTime" [(ngModel)]="date"  />
@@ -124,9 +122,7 @@
     </div>
 </div>
 </div>
-        </div>
     </form>
-
     </ion-card-content>
   </ion-card>
 

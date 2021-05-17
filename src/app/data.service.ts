@@ -21,6 +21,10 @@ export class DataService {
     return this.http.get<any[]>(environment.api+"rdv");
 }
 
+getBenef(cod_benef,code_hop){
+  return this.http.get<any[]>(environment.api+"auth/benef"+`/${cod_benef}`+`/${code_hop}`);
+}
+
 getAllMedecinsHop(code_hop): Observable<any[]> {
   return this.http.get<any[]>(environment.api+"users/medecins"+`/${code_hop}`);
 }

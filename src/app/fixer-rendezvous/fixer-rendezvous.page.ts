@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
@@ -51,7 +51,7 @@ heurMed:any[]=[
 ]
   date: Date;
 
-  constructor(private datePipe: DatePipe,private http:HttpClient,private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService) { }
+  constructor(private datePipe: DatePipe,private http:HttpClient,private router:Router,private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService) { }
 
 
   ngOnInit(): void {
@@ -233,5 +233,10 @@ Submit(f){
     this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
 
   });
+}
+logout(){
+  this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
+  this.router.navigate(['/login']);
+
 }
 }

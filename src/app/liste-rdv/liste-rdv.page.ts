@@ -39,7 +39,7 @@ newEvent = {
   startTime: '',
   endTime: ''
 };
-    constructor(private http:HttpClient,private dataService:DataService,public modalController: ModalController ) {
+    constructor(private http:HttpClient,private dataService:DataService,private router:Router,public modalController: ModalController ) {
       this.loadEvent();
     }
     showHideForm() {
@@ -49,7 +49,7 @@ newEvent = {
         description: '',
         imageURL: '',
         startTime: new Date().toISOString(),
-        //endTime: new Date().toISOString()
+        endTime: new Date().toISOString()
       };
     }
    /* addEvent() {
@@ -76,6 +76,13 @@ newEvent = {
          this.rv=data['data'];
        });
     }
+
+    logout(){
+      this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
+      this.router.navigate(['/login']);
+
+   }
+
     loadEvent() {
       this.allEvents=[];
       this.rdv.forEach(action => {
@@ -83,7 +90,7 @@ newEvent = {
           this.allEvents.push({
             title: action.payload.exportVal().title,
             startTime:  new Date(action.payload.exportVal().startTime),
-          //  endTime: new Date(action.payload.exportVal().endTime),
+            endTime: new Date(action.payload.exportVal().endTime),
             description: action.payload.exportVal().description,
             imageURL: action.payload.exportVal().imageURL
           });
