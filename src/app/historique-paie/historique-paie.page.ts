@@ -14,13 +14,16 @@ export class HistoriquePaiePage implements OnInit {
   user=null;
 rdv:any
 isup=false;
-
+codhop:any;
 rv:any[]=[];
+
   constructor(private dataService: DataService,private router:Router,private http:HttpClient) { }
 
   ngOnInit() {
     this.user=this.dataService.user;
-    this.dataService.getRdvBenef(this.user.cod_benef).subscribe(data=>{
+    this.codhop=this.dataService.codhop;
+
+    this.dataService.getRdvBenef(this.user.cod_benef,this.codhop).subscribe(data=>{
       console.log(data['data']);
       for(let i=0;i<data['data'].length;i++)
     {

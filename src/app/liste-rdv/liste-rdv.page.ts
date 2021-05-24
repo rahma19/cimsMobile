@@ -24,6 +24,7 @@ export class ListeRdvPage implements OnInit {
   type:any;
   test=false;
   idMed:any="";
+  codhop:any;
   events: any[]=[];
 isup:any=false;
 rdv:any[]=[];
@@ -115,7 +116,7 @@ onTimeSelected(ev: any) {
     ngOnInit(): void {
       this.user=this.dataService.user;
 
-      this.dataService.getRdvBenef(this.user.cod_benef).subscribe((data)=>{
+      this.dataService.getRdvBenef(this.user.cod_benef,this.codhop).subscribe((data)=>{
         this.rdv=data['data'];
         console.log(this.rdv);
         for(let i=0;i<this.rdv.length;i++){ //this.rdv[i].title

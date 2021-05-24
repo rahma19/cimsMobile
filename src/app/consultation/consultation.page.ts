@@ -50,6 +50,7 @@ firstFormGroup: FormGroup;
 rdv:any;
 rv:any[]=[];
 user:any=null;
+codhop:any;
 i:any;
   httpOptions = {
     headers: new HttpHeaders({
@@ -101,10 +102,9 @@ disabled: boolean = true;
 
   ngOnInit(): void {
     this.user=this.dataservice.user;
-    console.log(this.user);
-   console.log(this.user.cod_benef);
+    this.codhop=this.dataservice.codhop;
 
-    this.dataservice.getRdvBenef(this.user.cod_benef).subscribe(data=>{
+    this.dataservice.getRdvBenef(this.user.cod_benef,this.codhop).subscribe(data=>{
       console.log(data['data']);
       for(let i=0;i<data['data'].length;i++)
     {
@@ -223,7 +223,7 @@ passrdv(rdv){
   }
 
   getRdvBenef(id){
-    this.dataservice.getRdvBenef(id).subscribe((data)=>{
+    this.dataservice.getRdvBenef(id,this.codhop).subscribe((data)=>{
       this.rdv=data['data'];
     })
   }

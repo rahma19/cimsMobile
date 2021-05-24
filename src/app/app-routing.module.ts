@@ -109,6 +109,10 @@ const routes: Routes = [
     path: 'imprimer-recu',
     loadChildren: () => import('./imprimer-recu/imprimer-recu.module').then( m => m.ImprimerRecuPageModule)
   },
+  {
+    path: 'liste-medicament',
+    loadChildren: () => import('./liste-medicament/liste-medicament.module').then( m => m.ListeMedicamentPageModule)
+  },
 
 
 

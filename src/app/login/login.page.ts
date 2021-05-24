@@ -71,7 +71,7 @@ httpOptions = {
    console.log ("form.value", form.value)
    let addedData = JSON.stringify(form.value);
    console.log ("addedData", addedData);
-    this.dataService.getCurrentUser(form,"auth/loginPatientanc");
+    this.dataService.getCurrentUser(form,"auth/loginPatientanc",this.codhop);
    await this.router.navigate(['/home']);
 
  /*this.http.post(environment.api+"auth/loginPatientanc", addedData,this.httpOptions).subscribe((res) => {

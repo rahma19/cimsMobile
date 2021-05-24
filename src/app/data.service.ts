@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DataService {
   user:any;
+  codhop:any;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -21,6 +22,10 @@ export class DataService {
     return this.http.get<any[]>(environment.api+"rdv");
 }
 
+getAllMedicament(cod_hop:any): Observable<any[]>{
+  return this.http.get<any[]>(environment.api+"users/medics"+`/${cod_hop}`);
+ }
+ 
 getBenef(cod_benef,code_hop){
   return this.http.get<any[]>(environment.api+"auth/benef"+`/${cod_benef}`+`/${code_hop}`);
 }
@@ -30,13 +35,13 @@ getAllMedecinsHop(code_hop): Observable<any[]> {
 }
 
 
-async getCurrentUser(f:any,path:any){
+async getCurrentUser(f:any,path:any,codhop:any){
 let addedData = JSON.stringify(f.value);
        console.log ("addedData", addedData);
  await this.http.post(environment.api+path, addedData,this.httpOptions).subscribe((res:any) => {
         localStorage.setItem("token",res.token)
         this.user=res.user;
-
+        this.codhop=codhop,
         console.log(this.user);
       });
       }
@@ -108,8 +113,8 @@ return this.http.post(environment.api+"rdv/soins", addedData,this.httpOptions);
 updateRdv(f,id){
 return this.http.patch(environment.api+"rdv/updaterdv"+`/${id}`,f );
 }
-getRdvBenef(cod_benef):  Observable<any[]> {
-  return this.http.get<any[]>(environment.api+"rdv/RdvBenef"+`/${cod_benef}`);
+getRdvBenef(cod_benef,codhop):  Observable<any[]> {
+  return this.http.get<any[]>(environment.api+"rdv/RdvBenef"+`/${cod_benef}`+`/${codhop}`);
 }
 
 }
