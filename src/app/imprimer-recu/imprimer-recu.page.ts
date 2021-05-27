@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { DataService } from 'src/app/data.service';
 @Component({
   selector: 'app-imprimer-recu',
@@ -10,10 +10,11 @@ import { DataService } from 'src/app/data.service';
 })
 export class ImprimerRecuPage implements OnInit {
   display: boolean;
-
+  nombenef:any;
   @Input() rdv:any;
 
-  constructor(private dataServie:DataService, public modalController: ModalController) {
+  constructor(private dataServie:DataService, public modalController: ModalController, public navParams: NavParams) {
+    this.nombenef = navParams.get('nom_pren_benef');
 
   }
 
@@ -22,6 +23,6 @@ export class ImprimerRecuPage implements OnInit {
   }
  ngOnInit() {
    this.display = true;
-     console.log(this.rdv);
+     console.log(this.nombenef);
  }
 }

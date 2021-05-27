@@ -88,32 +88,52 @@
        <div class="mb-6" style="width: 100%;">
         <mat-form-field appearance="fill" style="width: 100%;" required>
           <mat-label>Régime </mat-label>
-          <mat-select   [(ngModel)]="reg" name="regime">
+          <mat-select   [(ngModel)]="reg" name="regime" #hop="ngModel" required>
             <mat-option *ngFor="let montant of montants" (click)="calculerMontant(montant.montant)"  value="{{montant.regime}}">
               {{montant.type}}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <div *ngIf="hop.invalid && (hop.dirty || hop.touched)" class="alert alert-danger">
+          <div *ngIf="hop.errors?.required">
+            le regime est un champs obligatoire
+          </div>
+        </div>
        </div>
 
     <ion-item class="ion-margin-bottom">
-      <ion-input type="text" name="num_carnet" placeholder="Numero du carnet" [(ngModel)]="numC"></ion-input>
+      <ion-input type="text" name="num_carnet" placeholder="Numero du carnet" [(ngModel)]="numC" #num="ngModel" required></ion-input>
     </ion-item>
+    <div *ngIf="num.invalid && (num.dirty || num.touched)" class="alert alert-danger">
+      <div *ngIf="num.errors?.required">
+        le numero du carnet est un champs obligatoire
+      </div>
+    </div>
 
     <ion-item class="ion-margin-bottom">
       <ion-label position="floating">Date valide</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" min="1994-12-12" max="2050-12-12" name="date_valide" [(ngModel)]="dateV" value="2002-09-23T15:03:46.789"></ion-datetime>
+      <ion-datetime displayFormat="MM/DD/YYYY" min="1994-12-12" max="2050-12-12" name="date_valide" [(ngModel)]="dateV" #dte="ngModel" required value="2002-09-23T15:03:46.789"></ion-datetime>
         </ion-item>
-
+        <div *ngIf="dte.invalid && (dte.dirty || dte.touched)" class="alert alert-danger">
+          <div *ngIf="dte.errors?.required">
+            la date est un champs obligatoire
+          </div>
+        </div>
 
     <ion-item class="ion-margin-bottom">
-      <ion-input name="num_assure" [(ngModel)]="numA" placeholder="Numero d'assurance" ></ion-input>
+      <ion-input name="num_assure" [(ngModel)]="numA" #assur="ngModel" required placeholder="Numero d'assurance" ></ion-input>
     </ion-item>
+    <div *ngIf="assur.invalid && (assur.dirty || assur.touched)" class="alert alert-danger">
+      <div *ngIf="assur.errors?.required">
+        le numero d'assurance est un champs obligatoire
+      </div>
+    </div>
+
     <div>
       <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br>
       {{montant}}
       <div  style="float: right;margin:10px">
-        <button pButton pRipple type="submit" label="Payer" class="button-raised button-text text-black" style="background-color: #43cebb;"></button>
+        <button pButton pRipple type="submit" [disabled]="!f.valid" label="Payer" class="button-raised button-text text-black" style="background-color: #43cebb;"></button>
   </div>
     </div>
 
@@ -124,9 +144,9 @@
   </ion-card>
 </form>
 
-  <div *ngIf="isup">
+  <!--<div *ngIf="isup">
     <app-imprime-recu [rdv]="rdv"></app-imprime-recu>
-    </div>
+    </div>-->
 
     <ion-footer>
       <ion-title>

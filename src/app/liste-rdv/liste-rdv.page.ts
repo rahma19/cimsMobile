@@ -140,6 +140,7 @@ onTimeSelected(ev: any) {
       return await modal.present();
 
     }
+    
     onChange($event) {
       console.log($event.target.value);
       console.log($event);

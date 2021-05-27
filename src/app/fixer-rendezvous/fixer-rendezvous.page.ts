@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
+import { ImprimerRecuPage } from '../imprimer-recu/imprimer-recu.page';
 
 @Component({
   selector: 'app-fixer-rendezvous',
@@ -53,7 +54,7 @@ heurMed:any[]=[
   date: Date;
 fiche:any[];
 
-  constructor(public toastCtrl: ToastController,private datePipe: DatePipe,private http:HttpClient,private router:Router,private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService) { }
+  constructor(private modalController:ModalController,public toastCtrl: ToastController,private datePipe: DatePipe,private http:HttpClient,private router:Router,private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService) { }
 
   async openToast(msg) {
     const toast = await this.toastCtrl.create({
@@ -63,6 +64,16 @@ fiche:any[];
     toast.present();
   }
 
+  async onEventSelected(event: any) {
+    console.log('Event: ' + JSON.stringify(event));
+    const modal = await this.modalController.create({
+      component: ImprimerRecuPage,
+      componentProps: event
+    });
+    return await modal.present();
+  
+  }
+  
   ngOnInit(): void {
     this.identifiant= this.activatedRoute.snapshot.params['id'];
     console.log(this.identifiant);
@@ -232,7 +243,8 @@ Submit(f){
   this.dataService.fixerRdv(f).subscribe((res:any) => {
     this.openToast('rendez-vous fixé avec succés');
     this.rdv=f.value;
-    this.isup=true;
+    //this.isup=true;
+    this.onEventSelected(this.rdv);
     if(this.testsoin==true)
         this.dataService.updateSoinBenef(f.value,this.soin[0]._id).subscribe( (Response) => {
         console.log("success");

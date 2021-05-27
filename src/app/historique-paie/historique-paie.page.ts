@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
+import { DecalerRdvPage } from '../decaler-rdv/decaler-rdv.page';
+import { ImprimerRecuPage } from '../imprimer-recu/imprimer-recu.page';
 
 @Component({
   selector: 'app-historique-paie',
@@ -17,7 +20,7 @@ isup=false;
 codhop:any;
 rv:any[]=[];
 
-  constructor(private dataService: DataService,private router:Router,private http:HttpClient) { }
+  constructor(private dataService: DataService,private router:Router,private http:HttpClient,private modalController:ModalController) { }
 
   ngOnInit() {
     this.user=this.dataService.user;
@@ -43,6 +46,15 @@ rv:any[]=[];
     this.router.navigate(['/login']);
 
  }
+ async onEventSelected(event: any) {
+  console.log('Event: ' + JSON.stringify(event));
+  const modal = await this.modalController.create({
+    component: ImprimerRecuPage,
+    componentProps: event
+  });
+  return await modal.present();
+
+}
 
  imprimer(item){
 this.rdv=item;

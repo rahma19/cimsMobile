@@ -20,12 +20,12 @@
         <h2 style="font-weight: bold;">Le {{item.date_rdv}}</h2>
         <h3>Dr. {{item.nom_med}} {{item.prenom_med}}</h3>
         <p> Montant payé : {{item.montant_rdv}} Dt</p>
-        <ion-button slot="end" style="font-size: 12px;float: right;" color="warning" (click)="imprimer(item)">Imprimer</ion-button>
+        <ion-button slot="end" style="font-size: 12px;float: right;" color="warning" (click)="onEventSelected(item)">Imprimer</ion-button>
       </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
 
-<div *ngIf="isup">
+<!--<div *ngIf="isup">
   <app-imprime-recu [rdv]="rdv"></app-imprime-recu>
-  </div>
+  </div>-->
