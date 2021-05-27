@@ -37,6 +37,7 @@ httpOptions = {
       console.log(this.hopitals);
     })
   }
+  
   async openToast(msg) {
     const toast = await this.toastCtrl.create({
       message:msg,
@@ -44,6 +45,7 @@ httpOptions = {
     });
     toast.present();
   }
+
   notify(){
     console.log(this.cod_benef,this.selDmn);
     this.dataService.getBenef(this.cod_benef,this.selDmn).subscribe((res) => {
@@ -58,7 +60,6 @@ httpOptions = {
           console.log(this.code);
          },
            error => {
-            this.messageService.add({severity:'error', summary: ' Message', detail:'Code invalide'});
             console.log("error");
         });
       }
@@ -67,13 +68,12 @@ httpOptions = {
       }
       },
        error => {
-        this.messageService.add({severity:'error', summary: ' Message', detail:'Index invalide'});
        console.log("error");
     })
 
   }
 
-  async Submit(form) {
+   Submit(form) {
     console.log(this.code);
     console.log(form.value.code);
 
@@ -83,19 +83,9 @@ httpOptions = {
    console.log ("addedData", addedData);
    console.log(this.selDmn);
     this.dataService.getCurrentUser(form,"auth/loginPatientanc",this.selDmn);
-   await this.router.navigate(['/home']);
-
- /*this.http.post(environment.api+"auth/loginPatientanc", addedData,this.httpOptions).subscribe((res) => {
-   this.messageService.add({severity:'success', summary: 'Message', detail:'Succes'});
-   this.router.navigate(['/Home']);
-   },
-     error => {
-     this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-     });*/
      } else {
-   this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-    console.log("erreruurr");
-  }
+        this.openToast('Code erroné');
+    }
 
   }
 }

@@ -10,14 +10,16 @@ import { SignupPage } from './signup.page';
 import { InputModule } from '../input/input.module';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import { CalendarModule } from 'primeng/calendar';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule,MatInputModule,
     FormsModule,RadioButtonModule,
     IonicModule,CalendarModule,
-    InputModule,
-    SignupPageRoutingModule
+    InputModule,MatFormFieldModule,
+    SignupPageRoutingModule,MatSelectModule
   ],
   declarations: [SignupPage]
 })

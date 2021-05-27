@@ -7,7 +7,7 @@ import { DataService } from '../data.service';
 import { StripeService } from "ngx-stripe";
 import { environment } from 'src/environments/environment';
 import { loadStripe } from '@stripe/stripe-js';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { DetailRdvPage } from '../detail-rdv/detail-rdv.page';
 import { ImprimerRecuPage } from '../imprimer-recu/imprimer-recu.page';
 @Component({
@@ -40,7 +40,7 @@ dateV:any="";
   test:boolean=true;
 firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-
+fiche:any[];
   montantrdv: any;
   isup: boolean;
   eta:boolean=false;
@@ -71,12 +71,20 @@ disabled: boolean = true;
  somme:Number;
 
 
-  constructor(public modalCtrl: ModalController,private _formBuilder: FormBuilder,private router:Router,private http:HttpClient, private dataservice: DataService, private stripeService: StripeService) { }
+  constructor(private toastCntrl:ToastController,public modalCtrl: ModalController,private _formBuilder: FormBuilder,private router:Router,private http:HttpClient, private dataservice: DataService, private stripeService: StripeService) { }
+
   logout(){
     this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
     this.router.navigate(['/login']);
-
  }
+
+ async openToast(msg) {
+  const toast = await this.toastCntrl.create({
+    message:msg,
+    duration: 2000
+  });
+  toast.present();
+}
 
  async imprimer(item) {
   console.log(item);
@@ -228,17 +236,32 @@ passrdv(rdv){
     })
   }
 
+  verifFiche(f){
+    this.dataservice.getFichePatient(this.rendezvous.cod_med,this.user.cod_benef).subscribe((res)=>{
+      console.log(res['data']);
+      this.fiche=res['data'];
+      console.log(this.fiche);
+      if(this.fiche.length==0){
+        this.dataservice.ajouterFichePatient(f).subscribe((res)=>{
+          console.log("succeess");
+        },(error)=>{
+          console.log("erreur");
+        });
+      }
+    });
+  }
+
 Submit(f){
    f.value.etat=true;
    this.dataservice.updateRdv(f.value,this.rdv._id).subscribe((res:any) => {
      console.log("succes");
-   //  this.messageService.add({severity:'success', summary: ' Message', detail:'Ajout avec succes'});
-    this.getRdvBenef(f.value.cod_benef);
+     this.getRdvBenef(f.value.cod_benef);
     this.imprimer(this.rdv);
     if(this.testsoin==true)
 
          this.dataservice.updateSoinBenef(f.value,this.soin._id).subscribe( (Response) => {
          console.log("success");
+         this.openToast('Votre rendez-vous a été confirmé avec succés');
       },
        (error) =>{
          console.log("error");
@@ -247,14 +270,17 @@ Submit(f){
    if(this.testsoin==false)
        this.dataservice.ajoutSoin(f).subscribe((res) => {
          console.log("success");
+         this.openToast('Votre rendez-vous a été confirmé avec succés');
+
           },
            error => {
              console.log("error");
            });
+     this.verifFiche(f);
    },
    err =>{
-    // this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
- console.log(err);
+      this.openToast('Erreur');
+    console.log(err);
    });
  }
 

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { duration } from 'moment';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -38,15 +39,25 @@ getAllMedecinsHop(code_hop): Observable<any[]> {
 async getCurrentUser(f:any,path:any,codhop:any){
 let addedData = JSON.stringify(f.value);
        console.log ("addedData", addedData);
- await this.http.post(environment.api+path, addedData,this.httpOptions).subscribe((res:any) => {
+  this.http.post(environment.api+path, addedData,this.httpOptions).subscribe(async (res:any) => {
         localStorage.setItem("token",res.token)
         this.user=res.user;
-        this.codhop=codhop,
+        this.codhop=codhop;
         console.log(this.codhop);
-      });
+        await this.router.navigate(['/home']);
+        });
       }
 
+      getFichePatient(cod_med,cod_benef){
+        return this.http.get<any>(environment.api+"users/fiche"+`/${cod_med}`+`/${cod_benef}`);
+       }
 
+       ajouterFichePatient(f){
+        let addedData = JSON.stringify(f.value);
+        console.log ("addedData", addedData);
+      return this.http.post(environment.api+"users/fiche", addedData,this.httpOptions);
+
+       }
 
 getAllRdvs(){
 return this.http.get<any[]>(environment.api+"rdv/rdvs");

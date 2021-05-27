@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
@@ -50,9 +51,17 @@ heurMed:any[]=[
   {heur:'12:00',value:'12:00'},
 ]
   date: Date;
+fiche:any[];
 
-  constructor(private datePipe: DatePipe,private http:HttpClient,private router:Router,private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService) { }
+  constructor(public toastCtrl: ToastController,private datePipe: DatePipe,private http:HttpClient,private router:Router,private activatedRoute:ActivatedRoute,private messageService:MessageService,private dataService:DataService) { }
 
+  async openToast(msg) {
+    const toast = await this.toastCtrl.create({
+      message:msg,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   ngOnInit(): void {
     this.identifiant= this.activatedRoute.snapshot.params['id'];
@@ -179,6 +188,21 @@ if(this.medecin.specialite=="specialiste")
 
   }
 
+  verifFiche(f){
+    this.dataService.getFichePatient(f.value.cod_med,this.user.cod_benef).subscribe((res)=>{
+      console.log(res['data']);
+      this.fiche=res['data'];
+      console.log(this.fiche);
+      if(this.fiche.length==0){
+        this.dataService.ajouterFichePatient(f).subscribe((res)=>{
+          console.log("succeess");
+        },(error)=>{
+          console.log("ororo");
+        });
+      }
+    });
+  }
+
 Submit(f){
   let form={
     nom_med:this.medecin.nom_med,
@@ -206,7 +230,7 @@ Submit(f){
   f.value.etat=true;
   console.log(f.value);
   this.dataService.fixerRdv(f).subscribe((res:any) => {
-    this.messageService.add({severity:'success', summary: ' Message', detail:'Ajout avec succes'});
+    this.openToast('rendez-vous fixé avec succés');
     this.rdv=f.value;
     this.isup=true;
     if(this.testsoin==true)
@@ -227,11 +251,12 @@ Submit(f){
           error => {
             console.log("error");
           });
-        }
+     }
+     this.verifFiche(f);
+
   },
   err =>{
-    this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-
+      this.openToast('Erreur lors du paiement');
   });
 }
 logout(){
