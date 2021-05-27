@@ -115,7 +115,8 @@ onTimeSelected(ev: any) {
 }
     ngOnInit(): void {
       this.user=this.dataService.user;
-
+      this.codhop=this.dataService.codhop;
+      
       this.dataService.getRdvBenef(this.user.cod_benef,this.codhop).subscribe((data)=>{
         this.rdv=data['data'];
         console.log(this.rdv);

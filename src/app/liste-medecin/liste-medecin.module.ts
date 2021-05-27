@@ -9,12 +9,14 @@ import { ListeMedecinPageRoutingModule } from './liste-medecin-routing.module';
 import { ListeMedecinPage } from './liste-medecin.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {ToastModule} from 'primeng/toast';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   imports: [
-    CommonModule,
+    CommonModule,MatInputModule,MatSelectModule,
     FormsModule,Ng2SearchPipeModule,
-    IonicModule,ToastModule,
+    IonicModule,ToastModule,MatFormFieldModule,
     ListeMedecinPageRoutingModule
   ],
   declarations: [ListeMedecinPage]

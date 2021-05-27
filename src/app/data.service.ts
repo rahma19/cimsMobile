@@ -25,7 +25,7 @@ export class DataService {
 getAllMedicament(cod_hop:any): Observable<any[]>{
   return this.http.get<any[]>(environment.api+"users/medics"+`/${cod_hop}`);
  }
- 
+
 getBenef(cod_benef,code_hop){
   return this.http.get<any[]>(environment.api+"auth/benef"+`/${cod_benef}`+`/${code_hop}`);
 }
@@ -42,7 +42,7 @@ let addedData = JSON.stringify(f.value);
         localStorage.setItem("token",res.token)
         this.user=res.user;
         this.codhop=codhop,
-        console.log(this.user);
+        console.log(this.codhop);
       });
       }
 

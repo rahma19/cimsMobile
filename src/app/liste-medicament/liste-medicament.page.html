@@ -1,25 +1,29 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-    <ion-menu-button color="dark"></ion-menu-button>
+      <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
 
-  <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
-  <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
-  <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
-  <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>
+    <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
+    <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter
+    </ion-button>
+    <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
+    <ion-button *ngIf="user!=null" (click)="logout()" slot="end" style="font-size: 12px; ">
+      <ion-icon name="log-out-outline"></ion-icon>
+    </ion-button>
 
-</ion-toolbar>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content color="tertiary" >
+<ion-content color="tertiary">
   <div id="carousel-example-1z" data-ride="carousel">
 
     <div class="carousel-inner" role="listbox">
 
       <!--First slide-->
       <div class="carousel-item active">
-        <div class="view" style="background-image:  url('/assets/med1.jpg') ; background-repeat: no-repeat; background-size: cover;height: 50%;">
+        <div class="view"
+          style="background-image:  url('/assets/med1.jpg') ; background-repeat: no-repeat; background-size: cover;height: 50%;">
 
           <!-- Mask & flexbox options-->
           <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
@@ -31,7 +35,8 @@
               <h1 class="mb-4 d-none d-md-block">
                 <strong>Bienvenue.</strong>
               </h1>
-              <h2 >La pharmacie virtuelle vous Aide a avoir une visibilité sur les medicaments disponible dans notre hopital
+              <h2>La pharmacie virtuelle vous Aide a avoir une visibilité sur les medicaments disponible dans notre
+                hopital
               </h2>
             </div>
 
@@ -53,60 +58,54 @@
     <div class="container">
 
       <!--Navbar-->
-          <div style="width: 100%;margin-top: 10px">
-            <mat-form-field appearance="fill" style="width: 100%;margin-top: 10px">
-              <mat-label>Choisissez le nom du l'hopital</mat-label>
-              <mat-select  [(ngModel)]="searchText" name="hop">
-                <mat-option *ngFor="let hopital of hopitals"  value="{{hopital.cod_hop}}">
-                  {{hopital.nom_hop}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <ion-searchbar animated="true" placeholder="Nom du medicament" [(ngModel)]="searchText" ></ion-searchbar>
-          </div>
+      <div style="width: 100%;margin-top: 10px">
+        <ion-searchbar animated="true" placeholder="Nom du medicament" [(ngModel)]="searchText"></ion-searchbar>
+        <mat-form-field appearance="fill" style="width: 100%;margin-bottom: 10px">
+          <mat-label>Choisissez le nom du l'hopital</mat-label>
+          <mat-select [(ngModel)]="searchText" name="hop">
+            <mat-option *ngFor="let hopital of hopitals" value="{{hopital.cod_hop}}">
+              {{hopital.nom_hop}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-        <section class="text-center mb-4">
-          <div class="wow fadeIn">
+      <section class="text-center">
+        <div class="wow fadeIn">
 
-            <div  *ngFor="let item of medics ">
+          <div *ngFor="let item of medics " #med><!--| filter:searchText-->
 
-              <!--Card-->
-              <div class="card" style="height:100%;">
-                <input type="hidden" value=" {{item.cod_hop}} " />
-                <div style="height:60%;" class="view overlay">
-                  <img src="{{item.img_medic}} " class="card-img-top" alt="" />
-                </div>
-
-                <div class="card-body text-center">
-                  <a class="grey-text">
-                    <h3>  <strong>{{item.nom_medic}}</strong></h3>
-                  </a>
-                  <h5>
-                      <a  class="dark-grey-text">{{item.desc_medic}}
-                      </a>
-                  </h5>
-                  <h4 class="font-weight-bold blue-text">
-                    <span *ngIf="item.quantite==0" class="badge badge-pill danger-color">Hors Stock</span>
-                      <span *ngIf="item.quantite!=0" class="badge badge-pill danger-color">Disponible <strong> {{item.quantite}} </strong></span>
-                  </h4>
-
-                </div>
+            <!--Card-->
+            <div class="card" style="color: black;margin-bottom: 10px;">
+              <input type="hidden" value=" {{item.cod_hop}} " />
+              <div>
+                <img src="{{item.img_medic}} " style="height: 150px;"/>
               </div>
-              <!--Card-->
 
+              <div class="card-body ">
+                <h4 class="grey-text text-center"><strong>{{item.nom_medic}}</strong></h4>
+                <p class="dark-grey-text">{{item.desc_medic}} </p>
+                <h4>
+                  <span style="color: black;" *ngIf="item.quantite==0" class="badge badge-pill danger-color">Hors Stock</span>
+                  <span style="color: black;" *ngIf="item.quantite!=0" class="badge badge-pill danger-color">Disponible :
+                    <strong> {{item.quantite}} </strong></span>
+                </h4>
+
+              </div>
             </div>
-
+            <!--Card-->
 
           </div>
+        </div>
 
-        </section>
+      </section>
 
     </div>
   </main>
 
   <ion-footer>
     <ion-title>
-       <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
+      <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 Cims Tous droits réservés</p>
     </ion-title>
   </ion-footer>
 </ion-content>

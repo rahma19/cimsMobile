@@ -22,7 +22,7 @@ rv:any[]=[];
   ngOnInit() {
     this.user=this.dataService.user;
     this.codhop=this.dataService.codhop;
-
+    console.log(this.user.cod_benef,this.codhop);
     this.dataService.getRdvBenef(this.user.cod_benef,this.codhop).subscribe(data=>{
       console.log(data['data']);
       for(let i=0;i<data['data'].length;i++)
