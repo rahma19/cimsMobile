@@ -30,14 +30,14 @@
     </mat-select>
   </mat-form-field>
 
-  <h1 class="title">{{selDmn}} à Ariana Tunisie </h1>
+  <h1 class="title">{{selDmn}} </h1>
   <div class="order-items">
     <ion-card *ngFor="let medecin of medecins | filter:selDmn " #med >
       <ion-card-content>
         <div class="item-info">
           <p>Dr {{medecin.nom_med}} {{medecin.prenom_med}} </p>
-          <p>{{medecin.service}}</p>
-          <p><ion-icon name="location-outline"></ion-icon> {{medecin.specialite}}</p>
+          <p style="color: #43cebb;">{{medecin.service}}</p>
+          <p style="color: black;"><ion-icon name="bag-add-outline"></ion-icon> {{medecin.specialite}}</p>
 
           <ion-button expand="block" (click)="fixezrdv(medecin)" class="main-button">Prendre Rendez-vous</ion-button>
         </div>
