@@ -15,14 +15,16 @@
 </ion-header>
 
 <ion-content  color="tertiary">
+
   <div style="margin:10px;color:#154f57;font-family:Open Sans,Arial, Helvetica, sans-serif;">
     <h1 style="font-weight: bold;margin:30px">Payer Votre Consultation pour confirmer votre rendez-vous!</h1>
 </div>
 
   <mat-horizontal-stepper linear labelPosition="bottom" #stepper>
     <mat-step label="Information" matStepperIcon="edit" >
-      <div *ngIf="rv.length==0"> <h1>Vous n'avez aucune consultation a payer</h1></div>
       <h2 style="color:black">Consultations a venir</h2>
+      <div style="color:#43cebb;text-align: center;" *ngIf="rv.length==0"> <h3>Vous n'avez aucune consultation a payer</h3></div>
+
       <ion-list>
         <ion-item-sliding *ngFor="let item of rv">
           <ion-item>

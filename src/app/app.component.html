@@ -12,17 +12,26 @@
           </ion-list-header>-->
           <ion-menu-toggle [autoHide]="false">
             <ion-item button [routerLink]="['/home']" routerDirection="forward">
-              <ion-icon slot="start" name='home'></ion-icon>
+              <ion-icon slot="start" name='home-outline'></ion-icon>
               <ion-label>
                 Accueil
               </ion-label>
             </ion-item>
+
             <ion-item button [routerLink]="['/liste-hopital']" routerDirection="forward">
-              <ion-icon slot="start" name='home'></ion-icon>
+              <ion-icon slot="start" name="calendar-number-outline"></ion-icon>
               <ion-label>
                 Prise de rendez-vous
               </ion-label>
             </ion-item>
+
+            <ion-item button [routerLink]="['/liste-medicament']" routerDirection="forward">
+              <ion-icon slot="start" name='eye-outline'></ion-icon>
+              <ion-label>
+                Voir medicaments
+              </ion-label>
+            </ion-item>
+
           </ion-menu-toggle>
         </ion-list>
       </ion-content>

@@ -14,14 +14,16 @@
 </ion-header>
 
 
-<ion-content  color="tertiary">
-  <ion-card ><!--style="margin-top: 30px;"-->
-    <ion-card-content>
-      <form #f="ngForm"  (ngSubmit)="Submit(f)">
-          <h3 style="color: black;font-weight: bold;text-align: center;">Choisir la date et l'heure du rendez-vous</h3><br>
-          <p-calendar name="date_rdv" [(ngModel)]="date" (click)="affiche(date)" [inline]="true" [showWeek]="true"></p-calendar>
+<ion-content class="ion-padding" color="tertiary">
+
+  <h3 style="color: black;font-weight: bold;text-align: center;">Choisir la date et l'heure du rendez-vous</h3><br>
+  <form #f="ngForm"  (ngSubmit)="Submit(f)">
+  <p-calendar name="date_rdv" [(ngModel)]="date" (click)="affiche(date)" [inline]="true" [showWeek]="true"></p-calendar>
+
+  <ion-card [hidden]=test><!--style="margin-top: 30px;"-->
+    <ion-card-content  >
         <input type="hidden" name="endTime" [(ngModel)]="date"  />
-          <div [hidden]=test>
+          <div >
             <mat-form-field appearance="fill" style="width: 100%;" >
               <mat-label>Choisissez l'heure du rendez-vous</mat-label>
               <mat-select [(ngModel)]="selectedValue" name="heure_rdv">
@@ -47,15 +49,15 @@
         <!--<ion-input type="hidden" name="nom_hop" [(ngModel)]="hop[0].nom_hop" ></ion-input>
         <ion-input type="hidden" name="adr_hop" [(ngModel)]="hop[0].adr_hop" ></ion-input>-->
 
-        <div class="container" *ngIf="testsoin==true" style="width: 50%;">
+        <div class="container" *ngIf="testsoin==true" style="width: 100%;">
 
-        <h3 style="color: black;font-weight: bold;text-align: center;">Saisissez vos informations</h3><br>
+        <h3 style="color: black;font-weight: bold;text-align: center;">Confirmez vos informations</h3><br>
 
         <div class="mb-6" style="width: 100%;">
           <mat-form-field appearance="fill" style="width: 100%;" required>
             <mat-label>Régime </mat-label>
             <mat-select   [(ngModel)]="reg" name="regime">
-              <mat-option *ngFor="let montant of montants" (click)="calculerMontant(montant.montant)" [selected]="montant.type" value="{{montant.regime}}">
+              <mat-option *ngFor="let montant of montants" (click)="calculerMontant(montant.montant)"  value="{{montant.regime}}">
                 {{montant.type}}
               </mat-option>
             </mat-select>
@@ -79,56 +81,72 @@
       </div>
 
        <!--si soin == null-->
-       <div class="container" [hidden]="testsoin" style="width: 50%;">
+       <div class="container" [hidden]="testsoin" style="width: 100%;">
 
         <h3 style="color: black;font-weight: bold;text-align: center;">Saisissez vos informations</h3><br>
 
        <div class="mb-6" style="width: 100%;">
         <mat-form-field appearance="fill" style="width: 100%;" required>
           <mat-label>Régime </mat-label>
-          <mat-select   [(ngModel)]="reg" name="regime">
-            <mat-option *ngFor="let montant of montants" (click)="calculerMontant(montant.montant)" [selected]="montant.type" value="{{montant.regime}}">
+          <mat-select   [(ngModel)]="reg" name="regime" #hop="ngModel" required>
+            <mat-option *ngFor="let montant of montants" (click)="calculerMontant(montant.montant)"  value="{{montant.regime}}">
               {{montant.type}}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <div *ngIf="hop.invalid && (hop.dirty || hop.touched)" class="alert alert-danger">
+          <div *ngIf="hop.errors?.required">
+            le regime est un champs obligatoire
+          </div>
+        </div>
        </div>
 
-    <div class="mb-6" style="width: 100%;">
-        <label class=" block text-center text-gray-500 text-sm mb-2">
-           Numero du carnet :
-        </label>
-        <input name="num_carnet" [(ngModel)]="numC" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
+    <ion-item class="ion-margin-bottom">
+      <ion-input type="text" name="num_carnet" placeholder="Numero du carnet" [(ngModel)]="numC" #num="ngModel" required></ion-input>
+    </ion-item>
+    <div *ngIf="num.invalid && (num.dirty || num.touched)" class="alert alert-danger">
+      <div *ngIf="num.errors?.required">
+        le numero du carnet est un champs obligatoire
+      </div>
     </div>
 
-    <div class="mb-6" style="width: 100%;">
-      <label class=" block text-center text-gray-500 text-sm mb-2">
-         Date valide :
-      </label>
-      <p-calendar inputId="basic" name="date_valide" [(ngModel)]="dateV" ></p-calendar>
-  </div>
+    <ion-item class="ion-margin-bottom">
+      <ion-label position="floating">Date valide</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" min="1994-12-12" max="2050-12-12" name="date_valide" [(ngModel)]="dateV" #dte="ngModel" required value="2002-09-23T15:03:46.789"></ion-datetime>
+        </ion-item>
+        <div *ngIf="dte.invalid && (dte.dirty || dte.touched)" class="alert alert-danger">
+          <div *ngIf="dte.errors?.required">
+            la date est un champs obligatoire
+          </div>
+        </div>
 
-      <div class="mb-6" style="width: 100%;">
-        <label class=" block text-center text-gray-500 text-sm mb-2">
-           Numero d'assurance :
-        </label>
-        <input name="num_assure" [(ngModel)]="numA"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
+    <ion-item class="ion-margin-bottom">
+      <ion-input name="num_assure" [(ngModel)]="numA" #assur="ngModel" required placeholder="Numero d'assurance" ></ion-input>
+    </ion-item>
+    <div *ngIf="assur.invalid && (assur.dirty || assur.touched)" class="alert alert-danger">
+      <div *ngIf="assur.errors?.required">
+        le numero d'assurance est un champs obligatoire
+      </div>
     </div>
-  <div>
-      <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br><input value="{{montant}}" disabled class="itm"/>
+
+    <div>
+      <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br>
+      {{montant}}
+      <div  style="float: right;margin:10px">
+        <button pButton pRipple type="submit" [disabled]="!f.valid" label="Payer" class="button-raised button-text text-black" style="background-color: #43cebb;"></button>
   </div>
-        <div  style="float: left;margin:10px">
-          <button pButton pRipple type="submit" label="Payer" class="button-raised button-text text-black" style="background-color: #FFC909;"></button>
     </div>
+
+
 </div>
 </div>
-    </form>
     </ion-card-content>
   </ion-card>
+</form>
 
-  <div *ngIf="isup">
+  <!--<div *ngIf="isup">
     <app-imprime-recu [rdv]="rdv"></app-imprime-recu>
-    </div>
+    </div>-->
 
     <ion-footer>
       <ion-title>

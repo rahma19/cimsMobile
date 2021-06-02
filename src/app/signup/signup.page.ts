@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
@@ -33,7 +34,7 @@ export class SignupPage implements OnInit {
   hopitals:any[];
   test: boolean=true;
   
-    constructor(private dataService: DataService,private router:Router,private http:HttpClient,private messageService:MessageService) { }
+    constructor(private dataService: DataService,private router:Router,private toastCntrl:ToastController,private http:HttpClient,private messageService:MessageService) { }
   
     ngOnInit() {
       this.dataService.getAllHopitals().subscribe(data=>{
@@ -51,17 +52,25 @@ export class SignupPage implements OnInit {
       return this.http.post(environment.api+"users/mailing", object).subscribe((res:any) => {
         console.log("success");
         console.log(code);
-        
-        this.messageService.add({severity:'success', summary: 'Success', detail: 'email envoyée avec succées'});
+        this.openToast('email envoyée avec succées');
        },
          error => {
-          this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
+          this.openToast('Erreur');
           console.log("error");
       });
      
     }
 
-
+    async openToast(msg) {
+      const toast = await this.toastCntrl.create({
+        message:msg,
+        duration: 2000,
+        animated:true,
+        color:"warning"
+      });
+      toast.present();
+    }
+    
     Submit(form){
       console.log(this.code);     
       console.log(form.value.code);  
@@ -74,17 +83,15 @@ export class SignupPage implements OnInit {
      let addedData = JSON.stringify(form.value);
      console.log ("addedData", addedData);
    this.http.post(environment.api+"auth/signupPatientanc", addedData,this.httpOptions).subscribe((res) => {
-     this.messageService.add({severity:'success', summary: 'Message', detail:'Succes'});
-     //this.notify("voici votre index",res['user']._id); 
+    //this.notify("voici votre index",res['user']._id); 
      this.notify("voici votre index",form.value.cod_benef); 
      this.router.navigate(['/login']);
      },
        error => {
-       this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-       });
+        this.openToast('Erreur');
+      });
     } else {
-     this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-      console.log("erreruurr"); 
+      this.openToast('Code invalide');
     }}
 
 }

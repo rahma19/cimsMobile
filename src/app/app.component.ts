@@ -41,7 +41,7 @@ export class AppComponent {
         url   : "/chat",
         icon  : "chatboxes"
       },
-    
+
     ]
   }
 }

@@ -18,15 +18,18 @@
 <ion-content  color="tertiary">
   <ion-img src='../assets/hopitals.jpg'></ion-img>
   <h3 style="font-family: cursive;color:rgb(22, 107, 86);font-size: 15px;margin:10px">Votre santé est notre <br> Priorité.</h3>
-  <ion-searchbar animated="true" placeholder="Nom de l hopital" [(ngModel)]="selDmn" ></ion-searchbar>
-  <ion-item style="border-radius: 10px;margin:5px;">
-    <ion-label>Emplacement</ion-label>
-    <select style="width: 100%;" (change)="hop.filterGlobal($event.target.value, 'contains')" [(ngModel)]="selDmn" >
-      <option *ngFor="let hopital of hopitals" [selected]="hopital.adr_hop" value="{{hopital.adr_hop}}" >{{hopital.adr_hop}}</option>
-  </select>
-  </ion-item>
-  <h1 style="font-weight: bold;margin:10px" class="title">Hopital {{selDmn}} </h1>
-    <ion-card *ngFor="let hopital of hopitals | filter:selDmn " #hop>
+  <ion-searchbar animated="true" placeholder="Nom de l hopital" [(ngModel)]="region" ></ion-searchbar>
+    <mat-form-field appearance="fill" style="width: 95%;margin-left:10px ;" required>
+      <mat-label>Choisir region </mat-label>
+      <mat-select  [(ngModel)]="region" name="region"  >
+        <mat-option  *ngFor="let reg of regions" value="{{reg.value}}">
+          {{reg.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <h1 style="font-weight: bold;margin:10px" class="title">Hopital a {{region}} </h1>
+    <ion-card *ngFor="let hopital of hopitals | filter:region:'adr_hop','nom_hop' " #hop>
       <ion-card-content>
         <div class="c">
           <img [src]='hopital.img_hop' />
@@ -35,7 +38,7 @@
             <p><ion-icon color="primary" name="location-outline"></ion-icon> {{hopital.adr_hop}} </p>
           </div>
         </div>
-        <ion-button expand="block" (click)="afficheMed(hopital)" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
+        <ion-button  style="width: 100%;" expand="block" (click)="afficheMed(hopital)" class="btn"><ion-icon name="eye-outline"></ion-icon></ion-button>
       </ion-card-content>
     </ion-card>
 

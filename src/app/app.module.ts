@@ -33,6 +33,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { DatePipe } from '@angular/common';
 import {NgxPrintModule} from 'ngx-print';
+import { ButtonModule } from 'primeng/button';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -43,7 +44,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   declarations: [AppComponent,TabsComponent,ImprimeRecuComponent],
   entryComponents: [],
   imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,MatSelectModule,NgxPrintModule,
-    AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,ToastModule,DetailRdvPageModule,
+    AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,ToastModule,DetailRdvPageModule,ButtonModule,
     MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule,MatFormFieldModule,CalendarModule,DialogModule,FullCalendarModule,
     NgxStripeModule.forRoot('pk_test_51Ij5m9IPiJHJ7ZlG94Xwog7FwWTBzW7P2b7Ikx3yyIoVYqD08gTA2owW2b0NGZPi538y1As1nRb8eJvX8wlVHPqQ004GAY8dTY')
   ],

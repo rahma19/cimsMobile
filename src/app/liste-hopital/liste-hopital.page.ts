@@ -13,6 +13,8 @@ export class ListeHopitalPage implements OnInit {
 hopitals:any[];
 selDmn:any="";
 user=null;
+regions:any[]=[{value:'ariana'},{value:'ben arous'},{value:'la marssa'}];
+region:any="";
 
   constructor(private dataService: DataService,private router:Router,private http:HttpClient) { }
 
@@ -28,7 +30,7 @@ user=null;
   logout(){
     this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
     this.router.navigate(['/login']);
- 
+
  }
   afficheMed(hopital){
     console.log(hopital);

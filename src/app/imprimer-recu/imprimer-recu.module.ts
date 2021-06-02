@@ -5,14 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ImprimerRecuPageRoutingModule } from './imprimer-recu-routing.module';
+import {NgxPrintModule} from 'ngx-print';
 
 import { ImprimerRecuPage } from './imprimer-recu.page';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    IonicModule,
+    FormsModule,ButtonModule,
+    IonicModule,NgxPrintModule,
     ImprimerRecuPageRoutingModule
   ],
   declarations: [ImprimerRecuPage]

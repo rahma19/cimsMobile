@@ -1,7 +1,7 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { NavParams } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
@@ -32,7 +32,7 @@ heurMed:any[]=[
 ]
 heurs: any[] = [];
 date:any="";
-  constructor(private http:HttpClient, private datePipe: DatePipe,private dataService:DataService,public modalController: ModalController, public navParams: NavParams) {
+  constructor(private toastCtrl:ToastController,private http:HttpClient, private datePipe: DatePipe,private dataService:DataService,public modalController: ModalController, public navParams: NavParams) {
     this.title = navParams.get('title');
     this.imageURL = navParams.get('imageURL');
     this.decsription = navParams.get('description');
@@ -43,6 +43,13 @@ date:any="";
   close() {
     this.modalController.dismiss();
   }
+  async openToast(msg) {
+    const toast = await this.toastCtrl.create({
+      message:msg,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   Submit(f){
     var dt = this.datePipe.transform(f.value.date_rdv,"yyyy-MM-dd");
@@ -51,15 +58,13 @@ date:any="";
     f.endTime=new Date(f.value.endTime);
     console.log(f.value);
     this.http.patch(environment.api+"rdv/updaterdv"+`/${this.decsription}`, f.value).subscribe((res) => {
+      this.openToast('Votre rendez-vous a été repporté avec succés')
       console.log("Le rendezvous a été modifié avec succès");
-     // this.msgs = [{severity:'info', summary:'Succés de modification', detail:''}];
-
     },
       error => {
+        this.openToast('Erreur');
         console.log('Erreur lors de la modification du rendez vous');
-  //this.msgs = [{severity:'error', summary:'Erreur lors de la modification du restaurant', detail:''}];
-
-      })
+      });
   }
 
   ngOnInit() {

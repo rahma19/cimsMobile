@@ -11,66 +11,70 @@
 
 <ion-content color="light">
 
-  <ion-card style="margin-top:15px">
+  <ion-card id="print" style="margin-top:15px">
     <ion-card-content>
-      <div id="print" class="container ">
+      <div class="container ">
 
         <div class="push">
-            <div class="text-sm lg:flex-grow">
-              <h2 class="block mt-4 lg:inline-block text-left lg:mt-0">République Tunisienne<br>Ministère de la santé</h2>
-              <img class="block lg:inline-block lg:mt-0" style="width:15%;height:70px;float: right;" src="../../../assets/tunis.jpg"/>
+          <div class="text-sm lg:flex-grow">
+            <h2 class="block mt-4 lg:inline-block text-left lg:mt-0">République Tunisienne<br>Ministère de la santé</h2>
+            <img class="block lg:inline-block lg:mt-0" style="width:15%;height:70px;float: right;"
+              src="../../../assets/tunis.jpg" />
+          </div>
+          <hr style="width: 100%;">
+          <div class="text-center lg:flex-grow">
+            <h2 style="color: #ffc409;font-weight: bold;" class="block mt-4 lg:inline-block text-center lg:mt-0">Accusé
+              de paiement des frais<br>du rendez-vous<br>2020-2021</h2>
+          </div>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h2 style="font-weight: bold;">Nom et prenom</h2>
+            <span class=" p-1 badge-pill">{{rdv.nom_pren_benef}} {{rdv.pren_benef}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h2 style="font-weight: bold;">Date de naissance</h2>
+            <span class=" p-1 badge-pill">{{rdv.date_nai_benef | date: 'dd/MM/yyyy'}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h2 style="font-weight: bold;"> Numero de telephone</h2>
+            <span class=" p-1 badge-pill">{{rdv.gsm}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h2 style="font-weight: bold;">Hopital</h2>
+            <span class=" p-1 badge-pill">{{rdv.nom_hop}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h2 style="font-weight: bold;">Adresse de l'hopital</h2>
+            <span class=" p-1 badge-pill"> {{rdv.adr_hop}} </span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h2 style="font-weight: bold;">Nom et prenom du medecin</h2>
+            <span class=" p-1 badge-pill">Dr {{rdv.nom_med}} {{rdv.pren_med}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h2 style="font-weight: bold;">Service</h2>
+            <span class=" p-1 badge-pill">{{rdv.service}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h2 style="font-weight: bold;">Date et heure du rendez-vous</h2>
+            <span class=" p-1 badge-pill">le {{rdv.date_rdv}} a {{rdv.heure_rdv}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <h2 style="font-weight: bold;">Montant a payer</h2>
+            <span class=" p-1 badge-pill">{{rdv.montant_rdv}}</span>
+          </li>
+        </ul>
+
+        <hr style="width: 100%;">
+        <button pButton
+          style="background-color: #FFC909;float: right;margin-bottom: 5px;border-radius: 30%;box-shadow: beige;width: 80%;height: 80%;"
+          printSectionId="print" ngxPrint type="button" class="block mt-4  mr-4">
+          <ion-icon name="print-outline"></ion-icon>Imprimer
+        </button>
       </div>
-      <hr style="width: 100%;">
-      <div class="text-center lg:flex-grow">
-        <h2 style="color: #ffc409;font-weight: bold;" class="block mt-4 lg:inline-block text-center lg:mt-0">Accusé de paiement des frais<br>du rendez-vous<br>2020-2021</h2>
-  </div>
-    </div>
-    <ul class="list-group">
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <h2 style="font-weight: bold;">Nom et prenom</h2>
-        <span class=" p-1 badge-pill">{{rdv.nom_pren_benef}} {{rdv.pren_benef}}</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <h2 style="font-weight: bold;">Date de naissance</h2>
-        <span class=" p-1 badge-pill">{{rdv.date_nai_benef}}</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <h2 style="font-weight: bold;"> Numero de telephone</h2>
-        <span class=" p-1 badge-pill">{{rdv.gsm}}</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <h2 style="font-weight: bold;">Hopital</h2>
-        <span class=" p-1 badge-pill">{{rdv.nom_hop}}</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <h2 style="font-weight: bold;">Adresse de l'hopital</h2>
-        <span class=" p-1 badge-pill"> {{rdv.adr_hop}} </span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <h2 style="font-weight: bold;">Nom et prenom du medecin</h2>
-        <span class=" p-1 badge-pill">Dr {{rdv.nom_med}} {{rdv.pren_med}}</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <h2 style="font-weight: bold;">Service</h2>
-        <span class=" p-1 badge-pill">{{rdv.service}}</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <h2 style="font-weight: bold;">Date et heure du rendez-vous</h2>
-        <span class=" p-1 badge-pill">le {{rdv.date_rdv}} a {{rdv.heure_rdv}}</span>
-      </li>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <h2 style="font-weight: bold;">Montant a payer</h2>
-        <span class=" p-1 badge-pill">{{rdv.montant_rdv}}</span>
-      </li>
-    </ul>
 
-    <hr style="width: 100%;">
-    <ion-button printSectionId="print" ngxPrint style="float: right;" expand="round" color="warning" type="button">
-      Imprimer
-    </ion-button>
-  </div>
-
-   </ion-card-content>
+    </ion-card-content>
   </ion-card>
 
 </ion-content>

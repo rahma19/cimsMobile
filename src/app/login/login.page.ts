@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
@@ -27,7 +28,7 @@ httpOptions = {
   })
 }
   test: boolean=true;
-  constructor(private dataService:DataService,private router:Router,private http:HttpClient, private messageService: MessageService) { }
+  constructor(private dataService:DataService,private router:Router,private http:HttpClient, private messageService: MessageService,public toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.dataService.getAllHopitals().subscribe(data=>{
@@ -36,34 +37,43 @@ httpOptions = {
       console.log(this.hopitals);
     })
   }
+  
+  async openToast(msg) {
+    const toast = await this.toastCtrl.create({
+      message:msg,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   notify(){
     console.log(this.cod_benef,this.selDmn);
     this.dataService.getBenef(this.cod_benef,this.selDmn).subscribe((res) => {
       console.log(res['data']);
-      if(res.length!=0){
+      if(res['data'].length!=0){
+        this.openToast('Email envoyée avec succées');
         this.email=res['data'][0].email;
         let object={"to":res['data'][0].email,"sub":"Confirmation","text":this.code+" est le code de confirmation de votre nouveau compte sur CIMS "};
         return this.http.post(environment.api+"users/mailing", object).subscribe((res:any) => {
           console.log("success");
           this.test=false;
           console.log(this.code);
-          this.messageService.add({severity:'success', summary: 'Success', detail: 'Email envoyée avec succées'});
          },
            error => {
-            this.messageService.add({severity:'error', summary: ' Message', detail:'Code invalide'});
             console.log("error");
         });
       }
+      else{
+        this.openToast('Index introuvable');
+      }
       },
        error => {
-        this.messageService.add({severity:'error', summary: ' Message', detail:'Index invalide'});
        console.log("error");
     })
 
   }
 
-  async Submit(form) {
+   Submit(form) {
     console.log(this.code);
     console.log(form.value.code);
 
@@ -71,20 +81,11 @@ httpOptions = {
    console.log ("form.value", form.value)
    let addedData = JSON.stringify(form.value);
    console.log ("addedData", addedData);
-    this.dataService.getCurrentUser(form,"auth/loginPatientanc");
-   await this.router.navigate(['/home']);
-
- /*this.http.post(environment.api+"auth/loginPatientanc", addedData,this.httpOptions).subscribe((res) => {
-   this.messageService.add({severity:'success', summary: 'Message', detail:'Succes'});
-   this.router.navigate(['/Home']);
-   },
-     error => {
-     this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-     });*/
+   console.log(this.selDmn);
+    this.dataService.getCurrentUser(form,"auth/loginPatientanc",this.selDmn);
      } else {
-   this.messageService.add({severity:'error', summary: ' Message', detail:'Erreur'});
-    console.log("erreruurr");
-  }
+        this.openToast('Code erroné');
+    }
 
   }
 }
