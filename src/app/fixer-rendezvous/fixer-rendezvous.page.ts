@@ -122,7 +122,7 @@ export class FixerRendezvousPage implements OnInit {
     if (date > datejour) {
     this.test = false;
     let month = date.getMonth() + 1;
-    let dt = date.getDate() + "-" + month + "-" + date.getFullYear();
+    let dt = this.datePipe.transform(date, "yyyy-MM-dd");
     this.dataService.getHeurMedecin(this.identifiant, dt).subscribe(data => {
       console.log(data['data']);
       this.heurs = data['data'];
@@ -153,22 +153,21 @@ export class FixerRendezvousPage implements OnInit {
   }
 
   afficheDateDispo() {
-
     for (let i = 0; i < this.heurMed.length; i++) {
       let j = 0;
       let teste = true;
-      while (j < this.heurs.length && teste == true) {
-        console.log(j + "ggg" + this.heurs[j].heure_rdv);
+      while (j < this.heurs.length ) {
+
         if (this.heurMed[i].value == this.heurs[j].heure_rdv) {
           console.log(this.heurMed[i].value + "/ " + this.heurs[j].heure_rdv);
           teste = false;
-          j++;
+          break;
         }
-        else
-          j++;
+        j++;
       }
-      if (j >= this.heurs.length) { this.tab.push(this.heurMed[i].value); }
+      if (teste==true) { this.tab.push(this.heurMed[i].value); }
     }
+    console.log(this.tab);
   }
 
   calculerMontant(montant) {
@@ -254,9 +253,9 @@ export class FixerRendezvousPage implements OnInit {
           });
       else
         if (this.testsoin == false) {
-          let m = f.value.date_valide.getMonth() + 1;
-          let dt = f.value.date_valide.getDate() + "-" + m + "-" + f.value.date_valide.getFullYear();
-          f.value.date_valide = dt;
+         // let m = f.value.date_valide.getMonth() + 1;
+          //let dt = f.value.date_valide.getDate() + "-" + m + "-" + f.value.date_valide.getFullYear();
+          //f.value.date_valide = dt;
           this.dataService.ajoutSoin(f).subscribe((res) => {
             console.log("success");
           },

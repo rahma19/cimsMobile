@@ -37,7 +37,7 @@ httpOptions = {
       console.log(this.hopitals);
     })
   }
-  
+
   async openToast(msg) {
     const toast = await this.toastCtrl.create({
       message:msg,
@@ -51,7 +51,7 @@ httpOptions = {
     this.dataService.getBenef(this.cod_benef,this.selDmn).subscribe((res) => {
       console.log(res['data']);
       if(res['data'].length!=0){
-        this.openToast('Email envoyée avec succées');
+        this.openToast('Code envoyée avec succées');
         this.email=res['data'][0].email;
         let object={"to":res['data'][0].email,"sub":"Confirmation","text":this.code+" est le code de confirmation de votre nouveau compte sur CIMS "};
         return this.http.post(environment.api+"users/mailing", object).subscribe((res:any) => {

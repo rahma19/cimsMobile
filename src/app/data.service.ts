@@ -111,23 +111,23 @@ export class DataService {
 
 
   updateSoinBenef(f, id) {
-    return this.http.patch(environment.api + "rdv/soins" + `/${id}`, f);
+    return this.http.patch(environment.api +"rdv/soins"+`/${id}`, f);
   }
 
   getSoinsBenef(cod_benef): Observable<any[]> {
-    return this.http.get<any[]>(environment.api + "rdv/soin" + `/${cod_benef}`);
+    return this.http.get<any[]>(environment.api+"rdv/soin"+`/${cod_benef}`);
 
   }
   ajoutSoin(f) {
     let addedData = JSON.stringify(f.value);
     console.log("addedData", addedData);
-    return this.http.post(environment.api + "rdv/soins", addedData, this.httpOptions);
+    return this.http.post(environment.api+"rdv/soins", addedData, this.httpOptions);
   }
   updateRdv(f, id) {
-    return this.http.patch(environment.api + "rdv/updaterdv" + `/${id}`, f);
+    return this.http.patch(environment.api+"rdv/updaterdv"+`/${id}`, f);
   }
   getRdvBenef(cod_benef, codhop): Observable<any[]> {
-    return this.http.get<any[]>(environment.api + "rdv/RdvBenef" + `/${cod_benef}` + `/${codhop}`);
+    return this.http.get<any[]>(environment.api+"rdv/RdvBenef"+`/${cod_benef}` + `/${codhop}`);
   }
 
 }

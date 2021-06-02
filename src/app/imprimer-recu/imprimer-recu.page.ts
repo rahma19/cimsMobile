@@ -24,6 +24,8 @@ nomed:any;
 prenom:any;
 dte:any;
 pren_med:any;
+daterdv:any;
+heure:any;
 
   constructor(private dataServie:DataService, public modalController: ModalController, public navParams: NavParams) {
     this.id = navParams.get('_id');
@@ -36,6 +38,8 @@ pren_med:any;
     this.dte= navParams.get('date_nai_benef');
     this.nom = navParams.get('nom_pren_benef');
     this.montant= navParams.get('montant_rdv');
+    this.daterdv = navParams.get('date_rdv');
+    this.heure = navParams.get('heure_rdv');
   }
 
   close() {
@@ -63,6 +67,8 @@ pren_med:any;
         adr_hop: this.adr_hop,
         gsm: this.tel_benef,
         montant_rdv: this.montant,
+        heure_rdv:this.heure,
+        date_rdv:this.daterdv
       };
       console.log(this.rdv);
      /*this.dataServie.getRdvPatient(this.codbenef,this.codmed).subscribe((data)=>{
