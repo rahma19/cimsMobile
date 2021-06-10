@@ -10,6 +10,7 @@ import { ListeMedicamentPage } from './liste-medicament.page';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { BnNgIdleService } from 'bn-ng-idle';
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +18,8 @@ import {MatSelectModule} from '@angular/material/select';
     IonicModule,MatFormFieldModule,MatInputModule,MatSelectModule,
     ListeMedicamentPageRoutingModule
   ],
-  declarations: [ListeMedicamentPage]
+  declarations: [ListeMedicamentPage],
+  providers:[BnNgIdleService]
+
 })
 export class ListeMedicamentPageModule {}

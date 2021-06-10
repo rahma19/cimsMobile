@@ -34,6 +34,9 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { DatePipe } from '@angular/common';
 import {NgxPrintModule} from 'ngx-print';
 import { ButtonModule } from 'primeng/button';
+import { BnNgIdleService } from 'bn-ng-idle';
+import { SidebarModule } from 'primeng/sidebar';
+import { HomePageModule } from './home/home.module';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -43,13 +46,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 @NgModule({
   declarations: [AppComponent,TabsComponent,ImprimeRecuComponent],
   entryComponents: [],
-  imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,MatSelectModule,NgxPrintModule,
+  imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,MatSelectModule,NgxPrintModule,HomePageModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,ToastModule,DetailRdvPageModule,ButtonModule,
-    MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule,MatFormFieldModule,CalendarModule,DialogModule,FullCalendarModule,
+    MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule,MatFormFieldModule,CalendarModule,DialogModule,FullCalendarModule,SidebarModule,
     NgxStripeModule.forRoot('pk_test_51Ij5m9IPiJHJ7ZlG94Xwog7FwWTBzW7P2b7Ikx3yyIoVYqD08gTA2owW2b0NGZPi538y1As1nRb8eJvX8wlVHPqQ004GAY8dTY')
   ],
   exports:[ MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,MatSelectModule],
-  providers: [DatePipe,StatusBar,SplashScreen,DataService, { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  providers: [DatePipe,StatusBar,SplashScreen,DataService,BnNgIdleService, { provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true  },{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

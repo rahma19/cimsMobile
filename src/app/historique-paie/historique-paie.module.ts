@@ -8,6 +8,7 @@ import { HistoriquePaiePageRoutingModule } from './historique-paie-routing.modul
 import { ImprimeRecuComponent } from '../imprime-recu/imprime-recu.component';
 import { HistoriquePaiePage } from './historique-paie.page';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   imports: [
@@ -16,6 +17,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     IonicModule,Ng2SearchPipeModule,
     HistoriquePaiePageRoutingModule
   ],
-  declarations: [HistoriquePaiePage,ImprimeRecuComponent]
+  declarations: [HistoriquePaiePage,ImprimeRecuComponent],
+  providers:[BnNgIdleService]
+
 })
 export class HistoriquePaiePageModule {}

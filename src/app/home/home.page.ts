@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Printer } from '@ionic-native/printer';
 import { MenuController } from '@ionic/angular';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
 
@@ -13,21 +14,7 @@ import { DataService } from '../data.service';
 })
 export class HomePage {
 user:any="";
-  constructor(private menu: MenuController,private dataService:DataService,private http:HttpClient,private router:Router) { }
-
-  print(){
-
-    Printer.isAvailable().then(function(){
-        Printer.print("https://www.techiediaries.com").then(function(){
-        alert("printing done successfully !");
-        },function(){
-        alert("Error while printing !");
-        });
-    }, function(){
-    alert('Error : printing is unavailable on your device ');
-    });
-
-}
+  constructor(private menu: MenuController,private dataService:DataService,private http:HttpClient,private router:Router,private bnIdle:BnNgIdleService) { }
 
   logout(){
     this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
@@ -54,6 +41,13 @@ payerCons(){
   }
 }
   ngOnInit() {
+    this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+      if (isTimedOut) {
+        this.router.navigate(['/login']);
+        console.log('session expired');
+      }
+    });
     this.user=this.dataService.user;
+    console.log(this.user);
   }
 }

@@ -12,6 +12,7 @@ import {ToastModule} from 'primeng/toast';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { BnNgIdleService } from 'bn-ng-idle';
 @NgModule({
   imports: [
     CommonModule,MatInputModule,MatSelectModule,
@@ -19,6 +20,8 @@ import {MatSelectModule} from '@angular/material/select';
     IonicModule,ToastModule,MatFormFieldModule,
     ListeMedecinPageRoutingModule
   ],
-  declarations: [ListeMedecinPage]
+  declarations: [ListeMedecinPage],
+  providers:[BnNgIdleService]
+
 })
 export class ListeMedecinPageModule {}

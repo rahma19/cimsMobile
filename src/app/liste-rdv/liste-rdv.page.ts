@@ -11,6 +11,7 @@ import { DataService } from '../data.service';
 import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { DecalerRdvPage } from '../decaler-rdv/decaler-rdv.page';
+import { BnNgIdleService } from 'bn-ng-idle';
 @Component({
   selector: 'app-liste-rdv',
   templateUrl: './liste-rdv.page.html',
@@ -40,7 +41,7 @@ newEvent = {
   startTime: '',
   endTime: ''
 };
-    constructor(private http:HttpClient,private dataService:DataService,private router:Router,public modalController: ModalController ) {
+    constructor(private http:HttpClient,private dataService:DataService,private router:Router,public modalController: ModalController,private bnIdle:BnNgIdleService ) {
       this.loadEvent();
     }
     showHideForm() {
@@ -114,9 +115,15 @@ onTimeSelected(ev: any) {
  // this.newEvent.endTime = (selected.toISOString());
 }
     ngOnInit(): void {
+      this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+        if (isTimedOut) {
+          this.router.navigate(['/login']);
+          console.log('session expired');
+        }
+      });
       this.user=this.dataService.user;
       this.codhop=this.dataService.codhop;
-      
+
       this.dataService.getRdvBenef(this.user.cod_benef,this.codhop).subscribe((data)=>{
         this.rdv=data['data'];
         console.log(this.rdv);
@@ -140,7 +147,7 @@ onTimeSelected(ev: any) {
       return await modal.present();
 
     }
-    
+
     onChange($event) {
       console.log($event.target.value);
       console.log($event);

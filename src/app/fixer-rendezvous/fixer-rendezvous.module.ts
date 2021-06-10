@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { ImprimeRecuComponent } from '../imprime-recu/imprime-recu.component';
 import {DialogModule} from 'primeng/dialog';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   imports: [
@@ -23,6 +24,8 @@ import {DialogModule} from 'primeng/dialog';
     FixerRendezvousPageRoutingModule,MatInputModule
   ],
   exports:[ MatFormFieldModule,MatInputModule,MatSelectModule],
-  declarations: [FixerRendezvousPage,ImprimeRecuComponent]
+  declarations: [FixerRendezvousPage,ImprimeRecuComponent],
+  providers:[BnNgIdleService]
+
 })
 export class FixerRendezvousPageModule {}

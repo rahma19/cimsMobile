@@ -7,12 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { NotifPageRoutingModule } from './notif-routing.module';
 
 import { NotifPage } from './notif.page';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule,
+    IonicModule,SidebarModule,
     NotifPageRoutingModule
   ],
   declarations: [NotifPage]

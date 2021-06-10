@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { DataService } from '../data.service';
 
 @Component({
@@ -13,9 +15,15 @@ export class ListeMedicamentPage implements OnInit {
   searchText: string;
 user:any;
 
-    constructor(private dataService:DataService) { }
+    constructor(private dataService:DataService,private router:Router,private bnIdle:BnNgIdleService) { }
 
     ngOnInit(): void {
+      this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+        if (isTimedOut) {
+          this.router.navigate(['/login']);
+          console.log('session expired');
+        }
+      });
       this.user=this.dataService.user;
 
       this.dataService.getAllHopitals().subscribe(data=>{

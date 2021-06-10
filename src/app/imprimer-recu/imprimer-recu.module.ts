@@ -9,6 +9,7 @@ import {NgxPrintModule} from 'ngx-print';
 
 import { ImprimerRecuPage } from './imprimer-recu.page';
 import {ButtonModule} from 'primeng/button';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   imports: [
@@ -17,6 +18,8 @@ import {ButtonModule} from 'primeng/button';
     IonicModule,NgxPrintModule,
     ImprimerRecuPageRoutingModule
   ],
-  declarations: [ImprimerRecuPage]
+  declarations: [ImprimerRecuPage],
+  providers:[BnNgIdleService]
+
 })
 export class ImprimerRecuPageModule {}

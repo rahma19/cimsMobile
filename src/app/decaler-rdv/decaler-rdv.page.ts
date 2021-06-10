@@ -1,8 +1,10 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
 import { NavParams } from '@ionic/angular';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
 @Component({
@@ -32,7 +34,7 @@ heurMed:any[]=[
 ]
 heurs: any[] = [];
 date:any="";
-  constructor(private toastCtrl:ToastController,private http:HttpClient, private datePipe: DatePipe,private dataService:DataService,public modalController: ModalController, public navParams: NavParams) {
+  constructor(private router:Router,private bnIdle:BnNgIdleService,private toastCtrl:ToastController,private http:HttpClient, private datePipe: DatePipe,private dataService:DataService,public modalController: ModalController, public navParams: NavParams) {
     this.title = navParams.get('title');
     this.imageURL = navParams.get('imageURL');
     this.decsription = navParams.get('description');
@@ -68,6 +70,12 @@ date:any="";
   }
 
   ngOnInit() {
+    this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+      if (isTimedOut) {
+        this.router.navigate(['/login']);
+        console.log('session expired');
+      }
+    });
     this.dataService.getRdvById(this.decsription).subscribe((data)=>{
       this.rv=data['data'];
       console.log(this.rv);

@@ -15,6 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { ImprimeRecuComponent } from '../imprime-recu/imprime-recu.component';
 import {DialogModule} from 'primeng/dialog';
 import { InputModule } from '../input/input.module';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   imports: [
@@ -27,6 +28,8 @@ import { InputModule } from '../input/input.module';
         MatStepperModule,MatFormFieldModule,
     MatInputModule,MatIconModule,MatSelectModule
   ],
-  declarations: [ConsultationPage,ImprimeRecuComponent]
+  declarations: [ConsultationPage,ImprimeRecuComponent],
+  providers:[BnNgIdleService]
+
 })
 export class ConsultationPageModule {}

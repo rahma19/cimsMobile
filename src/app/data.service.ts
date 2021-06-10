@@ -36,15 +36,20 @@ export class DataService {
   }
 
 
-  async getCurrentUser(f: any, path: any, codhop: any) {
+   getCurrentUser(f: any, path: any, codhop: any) {
     let addedData = JSON.stringify(f.value);
     console.log("addedData", addedData);
-    this.http.post(environment.api + path, addedData, this.httpOptions).subscribe(async (res: any) => {
+     this.http.post(environment.api + path, addedData, this.httpOptions).subscribe((res: any) => {
       localStorage.setItem("token", res.token)
       this.user = res.user;
       this.codhop = codhop;
       console.log(this.codhop);
-      await this.router.navigate(['/home']);
+      this.router.navigate(['/home']);
+
+      /*setTimeout (() => {
+        this.router.navigate(['/home']);
+        console.log("Hello from setTimeout");
+     }, 5000);*/
     });
   }
 

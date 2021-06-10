@@ -10,6 +10,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { ModalController, ToastController } from '@ionic/angular';
 import { DetailRdvPage } from '../detail-rdv/detail-rdv.page';
 import { ImprimerRecuPage } from '../imprimer-recu/imprimer-recu.page';
+import { BnNgIdleService } from 'bn-ng-idle';
 @Component({
   selector: 'app-consultation',
   templateUrl: './consultation.page.html',
@@ -71,7 +72,7 @@ disabled: boolean = true;
  somme:Number;
 
 
-  constructor(private toastCntrl:ToastController,public modalCtrl: ModalController,private _formBuilder: FormBuilder,private router:Router,private http:HttpClient, private dataservice: DataService, private stripeService: StripeService) { }
+  constructor(private bnIdle:BnNgIdleService,private toastCntrl:ToastController,public modalCtrl: ModalController,private _formBuilder: FormBuilder,private router:Router,private http:HttpClient, private dataservice: DataService, private stripeService: StripeService) { }
 
   logout(){
     this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
@@ -109,6 +110,12 @@ disabled: boolean = true;
   }
 
   ngOnInit(): void {
+    this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+      if (isTimedOut) {
+        this.router.navigate(['/login']);
+        console.log('session expired');
+      }
+    });
     this.user=this.dataservice.user;
     this.codhop=this.dataservice.codhop;
 

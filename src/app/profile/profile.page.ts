@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
 
@@ -14,7 +15,7 @@ export class ProfilePage implements OnInit {
 
   user:any="";
 
-  constructor(private toastCntrl:ToastController,private dataService:DataService,private router:Router,private http:HttpClient) { }
+  constructor(private toastCntrl:ToastController,private dataService:DataService,private router:Router,private http:HttpClient,private bnIdle:BnNgIdleService) { }
 
   async openToast(msg) {
     const toast = await this.toastCntrl.create({
@@ -32,6 +33,12 @@ export class ProfilePage implements OnInit {
 
  }
   ngOnInit() {
+    this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+      if (isTimedOut) {
+        this.router.navigate(['/login']);
+        console.log('session expired');
+      }
+    });
    this.user=this.dataService.user;
   }
 

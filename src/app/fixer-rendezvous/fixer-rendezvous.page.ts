@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
@@ -54,7 +55,7 @@ export class FixerRendezvousPage implements OnInit {
   date: Date;
   fiche: any[];
 
-  constructor(private modalController: ModalController, public toastCtrl: ToastController, private datePipe: DatePipe, private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private messageService: MessageService, private dataService: DataService) { }
+  constructor(private bnIdle:BnNgIdleService,private modalController: ModalController, public toastCtrl: ToastController, private datePipe: DatePipe, private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private messageService: MessageService, private dataService: DataService) { }
 
   async openToast(msg) {
     const toast = await this.toastCtrl.create({
@@ -75,6 +76,12 @@ export class FixerRendezvousPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+      if (isTimedOut) {
+        this.router.navigate(['/login']);
+        console.log('session expired');
+      }
+    });
     this.identifiant = this.activatedRoute.snapshot.params['id'];
     console.log(this.identifiant);
     this.user = this.dataService.user;

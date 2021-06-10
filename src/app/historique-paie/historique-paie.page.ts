@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
 import { DecalerRdvPage } from '../decaler-rdv/decaler-rdv.page';
@@ -20,9 +21,15 @@ isup=false;
 codhop:any;
 rv:any[]=[];
 
-  constructor(private dataService: DataService,private router:Router,private http:HttpClient,private modalController:ModalController) { }
+  constructor(private dataService: DataService,private router:Router,private http:HttpClient,private modalController:ModalController,private bnIdle:BnNgIdleService) { }
 
   ngOnInit() {
+    this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+      if (isTimedOut) {
+        this.router.navigate(['/login']);
+        console.log('session expired');
+      }
+    });
     this.user=this.dataService.user;
     this.codhop=this.dataService.codhop;
     console.log(this.user.cod_benef,this.codhop);

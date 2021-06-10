@@ -16,6 +16,7 @@ import { CalendarModule } from 'ion2-calendar';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { DecalerRdvPage } from '../decaler-rdv/decaler-rdv.page';
+import { BnNgIdleService } from 'bn-ng-idle';
 registerLocaleData(localeFr, 'fr');
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -30,6 +31,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     IonicModule,
     ListeRdvPageRoutingModule
   ],
-  declarations: [ListeRdvPage,DecalerRdvPage]
+  declarations: [ListeRdvPage,DecalerRdvPage],
+  providers:[BnNgIdleService]
+
 })
 export class ListeRdvPageModule {}

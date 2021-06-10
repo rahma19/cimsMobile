@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { InputModule } from '../input/input.module';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   imports: [
@@ -19,6 +20,8 @@ import { InputModule } from '../input/input.module';
     IonicModule,MatSelectModule,
     DecalerRdvPageRoutingModule
   ],
-  declarations: [DecalerRdvPage]
+  declarations: [DecalerRdvPage],
+  providers:[BnNgIdleService]
+
 })
 export class DecalerRdvPageModule {}

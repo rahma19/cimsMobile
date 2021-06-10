@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DetailRdvPageRoutingModule } from './detail-rdv-routing.module';
 
 import { DetailRdvPage } from './detail-rdv.page';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @NgModule({
   imports: [
@@ -15,6 +16,8 @@ import { DetailRdvPage } from './detail-rdv.page';
     IonicModule,
     DetailRdvPageRoutingModule
   ],
-  declarations: [DetailRdvPage]
+  declarations: [DetailRdvPage],
+  providers:[BnNgIdleService]
+
 })
 export class DetailRdvPageModule {}

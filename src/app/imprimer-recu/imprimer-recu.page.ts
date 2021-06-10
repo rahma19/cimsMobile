@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, NavParams } from '@ionic/angular';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { DataService } from 'src/app/data.service';
 @Component({
   selector: 'app-imprimer-recu',
@@ -27,7 +28,7 @@ pren_med:any;
 daterdv:any;
 heure:any;
 
-  constructor(private dataServie:DataService, public modalController: ModalController, public navParams: NavParams) {
+  constructor(private dataServie:DataService, public modalController: ModalController, public navParams: NavParams,private router:Router,private bnIdle:BnNgIdleService) {
     this.id = navParams.get('_id');
     this.codbenef = navParams.get('cod_benef');
     this.prenom= navParams.get('pren_med');
@@ -46,6 +47,12 @@ heure:any;
     this.modalController.dismiss();
   }
  ngOnInit() {
+  this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+    if (isTimedOut) {
+      this.router.navigate(['/login']);
+      console.log('session expired');
+    }
+  });
    this.display = true;
    console.log(this.id);
     if(this.id!=null){
