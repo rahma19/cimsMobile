@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { ModalController } from '@ionic/angular';
 import { DecalerRdvPage } from '../decaler-rdv/decaler-rdv.page';
 import { BnNgIdleService } from 'bn-ng-idle';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-liste-rdv',
   templateUrl: './liste-rdv.page.html',
@@ -41,10 +42,11 @@ newEvent = {
   startTime: '',
   endTime: ''
 };
-    constructor(private http:HttpClient,private dataService:DataService,private router:Router,public modalController: ModalController,private bnIdle:BnNgIdleService ) {
+    constructor(private datePipe:DatePipe,private http:HttpClient,private dataService:DataService,private router:Router,public modalController: ModalController,private bnIdle:BnNgIdleService ) {
       this.loadEvent();
     }
     showHideForm() {
+      this.router.navigate(['/login']);
       this.showAddEvent = !this.showAddEvent;
       this.newEvent = {
         title: '',
@@ -127,11 +129,14 @@ onTimeSelected(ev: any) {
       this.dataService.getRdvBenef(this.user.cod_benef,this.codhop).subscribe((data)=>{
         this.rdv=data['data'];
         console.log(this.rdv);
+        let datejour = new Date();
+        let dat = this.datePipe.transform(datejour, "yyyy-MM-dd");
         for(let i=0;i<this.rdv.length;i++){ //this.rdv[i].title
-          let dt=new Date(this.rdv[i].date_rdv+" "+this.rdv[i].heure_rdv);
+          if(this.rdv[i].cod_hop==this.codhop && this.rdv[i].date_rdv > dat)
+          {let dt=new Date(this.rdv[i].date_rdv+" "+this.rdv[i].heure_rdv);
         console.log(dt);
         this.events.push({title: this.rdv[i].nom_med+" "+this.rdv[i].prenom_med, description: this.rdv[i]._id, imageURL: "iuhy", startTime: new Date(dt), endTime: new Date(this.rdv[i].endTime)});
-
+}
         }
         console.log(this.events);
       });

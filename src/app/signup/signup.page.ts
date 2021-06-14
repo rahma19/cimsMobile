@@ -33,9 +33,9 @@ export class SignupPage implements OnInit {
   }
   hopitals:any[];
   test: boolean=true;
-  
+
     constructor(private dataService: DataService,private router:Router,private toastCntrl:ToastController,private http:HttpClient,private messageService:MessageService) { }
-  
+
     ngOnInit() {
       this.dataService.getAllHopitals().subscribe(data=>{
         console.log(data['data']);
@@ -47,7 +47,7 @@ export class SignupPage implements OnInit {
     notify(subject,code){
       this.test=false;
       let ch=this.email;
-      
+
       let object={"to":ch,"sub":"Confirmation","text":code+subject};
       return this.http.post(environment.api+"users/mailing", object).subscribe((res:any) => {
         console.log("success");
@@ -58,7 +58,7 @@ export class SignupPage implements OnInit {
           this.openToast('Erreur');
           console.log("error");
       });
-     
+
     }
 
     async openToast(msg) {
@@ -70,21 +70,26 @@ export class SignupPage implements OnInit {
       });
       toast.present();
     }
-    
+    envoiCode(){
+      this.code=Math.floor(Math.random() * 999999) + 100000;
+      console.log(this.code);
+      this.notify('est le code de confirmation de votre nouveau compte sur CIMS ',this.code);
+    }
     Submit(form){
-      console.log(this.code);     
-      console.log(form.value.code);  
-     if(this.code==form.value.code){
-       form.value.cod_benef=Math.floor(Math.random() * 999999) + 100000+form.value.nom_pren_benef;
-     console.log ("form.value", form.value)
-     let month=form.value.date_nai_benef.getMonth();
-     let date =form.value.date_nai_benef.getDate()+"-"+month+"-"+form.value.date_nai_benef.getFullYear();
-     form.value.date_nai_benef=date;
-     let addedData = JSON.stringify(form.value);
-     console.log ("addedData", addedData);
+      console.log(this.code);
+      console.log(form.value.code);
+      if(this.code==form.value.code){
+        form.value.cod_benef=Math.floor(Math.random() * 999999) + 100000+form.value.nom_pren_benef;
+      console.log ("form.value", form.value)
+      let dt=new Date(form.value.date_nai_benef);
+      let month=dt.getMonth();
+      let date =dt.getDate()+"-"+month+"-"+dt.getFullYear();
+      form.value.date_nai_benef=date;
+      let addedData = JSON.stringify(form.value);
+      console.log ("addedData", addedData);
    this.http.post(environment.api+"auth/signupPatientanc", addedData,this.httpOptions).subscribe((res) => {
-    //this.notify("voici votre index",res['user']._id); 
-     this.notify("voici votre index",form.value.cod_benef); 
+    //this.notify("voici votre index",res['user']._id);
+     this.notify("voici votre index",form.value.cod_benef);
      this.router.navigate(['/login']);
      },
        error => {

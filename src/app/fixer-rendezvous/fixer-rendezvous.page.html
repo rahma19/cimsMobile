@@ -64,19 +64,22 @@
           </mat-form-field>
          </div>
 
+         <ion-label position="floating">Numero de carnet </ion-label>
         <ion-item class="ion-margin-bottom">
           <ion-input type="text" name="num_carnet" [(ngModel)]="soins.num_carnet" ></ion-input>
         </ion-item>
 
+        <ion-label position="floating">Date de validité</ion-label>
         <ion-item class="ion-margin-bottom">
           <ion-input name="date_valide" [(ngModel)]="soins.date_valide" required></ion-input>
         </ion-item>
 
+        <ion-label position="floating">Numero d'assurance</ion-label>
         <ion-item class="ion-margin-bottom">
           <ion-input name="num_assure" [(ngModel)]="soins.num_assure" ></ion-input>
         </ion-item>
 
-        <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br><input value="{{montant}}" disabled />
+        <h3 style="font-weight:bold;color:#43cebb">Montant a payer </h3><br>{{montant}}
         <ion-button type="submit" style="font-size: 12px;float: right;margin: 10px;">Confirmer </ion-button>
       </div>
 
@@ -147,12 +150,11 @@
   <!--<div *ngIf="isup">
     <app-imprime-recu [rdv]="rdv"></app-imprime-recu>
     </div>-->
-
-    <ion-footer>
-      <ion-title>
-         <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 EspaceRDV Tous droits réservés</p>
-      </ion-title>
-    </ion-footer>
 </ion-content>
+<ion-footer>
+  <ion-title>
+     <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 EspaceRDV Tous droits réservés</p>
+  </ion-title>
+</ion-footer>
 
 

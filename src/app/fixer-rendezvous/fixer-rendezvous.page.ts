@@ -127,7 +127,11 @@ export class FixerRendezvousPage implements OnInit {
     this.tab = [];
     let datejour = new Date();
     if (date > datejour) {
-    this.test = false;
+      if(date.getDay() == 6 || date.getDay() == 0){
+        this.openToast('Veuillez selectionner une date valide');
+      }
+      else
+   { this.test = false;
     let month = date.getMonth() + 1;
     let dt = this.datePipe.transform(date, "yyyy-MM-dd");
     this.dataService.getHeurMedecin(this.identifiant, dt).subscribe(data => {
@@ -154,7 +158,7 @@ export class FixerRendezvousPage implements OnInit {
                    if(j>this.heurs.length)
                         { this.tab.push(this.heurMed[i].value);}
          }*/
-    });
+    });}
   }else
     this.openToast('Veuillez selectionner une date valide');
   }

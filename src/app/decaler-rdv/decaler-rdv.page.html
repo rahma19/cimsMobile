@@ -17,19 +17,18 @@
     <ion-card-content>
       <ion-card-title style="margin: 10px;">Informations personnelles</ion-card-title>
 
-      <div style="width:100%">
-             <h2>Nom et Prenom :</h2>
-             <p> {{rv.nom_pren_benef}} {{rv.pren_benef}} </p>
+      <div  class="col-md-12" style="width:100%">
+             <h2 class="col-md-6 lg:inline-block lg:mt-0 ">Nom et Prenom :</h2><span class="col-md-6 lg:inline-block lg:mt-0 ">{{rv.nom_pren_benef}} {{rv.pren_benef}}</span>
      </div>
 
-     <div style="width:100%">
-      <h2>Date de naissance :</h2>
-      <p> {{rv.date_nai_benef | date: 'dd/MM/yyyy'}} </p>
+     <div class="col-md-12" style="width:100%">
+      <h2 class="col-md-6 lg:inline-block lg:mt-0 ">Date de naissance :</h2>
+      <p class="col-md-6 lg:inline-block lg:mt-0 "> {{rv.date_nai_benef}} </p>
 </div>
 
-<div style="width:100%">
-  <h2>Numero de telephone:</h2>
-  <p> {{rv.gsm}} </p>
+<div class="col-md-12" style="width:100%">
+  <h2 class="col-md-6 lg:inline-block lg:mt-0 ">Numero de telephone:</h2>
+  <p class="col-md-6 lg:inline-block lg:mt-0 "> {{rv.gsm}} </p>
 </div>
     </ion-card-content>
   </ion-card>
@@ -47,14 +46,13 @@
         </span>
         </div>
             </div>
-
+        
             <div class="form-group">
               <div class="ui-inputgroup">
                 <span class="ui-float-label">
-                  <label for="email">Heure du rendez-vous :</label><br>
                   <mat-form-field appearance="fill" style="width: 100%; padding: 15px;" >
                     <mat-label>Choisissez l'heure du rendez-vous</mat-label>
-                    <mat-select [(ngModel)]="rv.heure_rdv" name="heure_rdv">
+                    <mat-select [(ngModel)]="heure" name="heure_rdv">
                       <mat-option *ngFor="let heur of tab " [value]="heur" >
                         {{heur}}
                       </mat-option>

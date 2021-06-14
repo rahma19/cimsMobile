@@ -18,6 +18,7 @@ export class DecalerRdvPage implements OnInit {
   imageURL: string;
   decsription: string;
   start: string;
+  heure:any;
   end: string;
 rv:any;
 tab:any[]=[];
@@ -84,7 +85,14 @@ date:any="";
   affiche(date:any){
     console.log(date);
    this.tab=[];
-   var dt = this.datePipe.transform(date,"yyyy-MM-dd");
+   let datejour = new Date();
+    if (date > datejour) {
+  //     if(date.getDay() == 6 || date.getDay() == 0){
+  //       this.openToast('Veuillez selectionner une date valide');
+  //     }
+  //     else
+  // {
+     var dt = this.datePipe.transform(date,"yyyy-MM-dd");
    console.log(dt);
    this.dataService.getHeurMedecin(this.rv.cod_med,dt).subscribe(data=>{
      console.log(data['data']);
@@ -95,9 +103,9 @@ date:any="";
 
      console.log(this.heurMed.length)  ;
    console.log(this.heurs.length);
-   });
- }
-
+   });}
+ //}
+  }
  afficheDateDispo(){
 
  for(let i=0;i<this.heurMed.length;i++)

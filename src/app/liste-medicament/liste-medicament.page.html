@@ -79,7 +79,7 @@
             <div class="card" style="color: black;margin-bottom: 10px;">
               <input type="hidden" value=" {{item.cod_hop}} " />
               <div>
-                <img src="{{item.img_medic}} " style="height: 150px;"/>
+                <img [src]="'http://localhost:3000/uploads/'+item.img_medic" style="height: 150px;"/>
               </div>
 
               <div class="card-body ">

@@ -59,8 +59,10 @@
     </div>
 
     <div style="  display: inline-flex;align-items: center;width: 100%;" class="p-field p-col-12 p-md-4 form-controle">
-      <label for="icon">Date de naissance</label><br>
-      <p-calendar name="date_nai_benef" [(ngModel)]="date_nai_benef" #dte="ngModel" required></p-calendar>
+      <ion-item style="width: 100%;margin-bottom: 15px;" >
+        <ion-label position="floating">Date du rendez-vous :</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="1994-03-14" max="2030-12-09" style="width: 100%;" name="date_nai_benef" [(ngModel)]="date_nai_benef" #dte="ngModel" required></ion-datetime>
+      </ion-item>
     </div>
     <div *ngIf="dte.invalid && (dte.dirty || dte.touched)" class="alert alert-danger">
       <div *ngIf="dte.errors?.required">
@@ -73,7 +75,7 @@
         <ion-item  class="ion-margin-bottom">
           <td><ion-input name="pren_pere_benef" [(ngModel)]="pren_pere_benef" type="text" placeholder="prenom pere"></ion-input></td>
         </ion-item>-->
-        
+
         <mat-form-field appearance="fill" style="width: 100%;" >
           <mat-label>Choisir hopital </mat-label>
           <mat-select  [(ngModel)]="codhop" name="cod_hop" #hop="ngModel" required >
@@ -102,9 +104,20 @@
       (click)="notify('est le code de confirmation de votre nouveau compte sur CIMS ',code)">Confirmer</ion-button>
 
     <div [hidden]="test">
+      <div class="form-group">
+        <div class="p-field p-col-12 p-md-4">
+          <p>Merci de vérifier dans votre boite e-mails <br> que vous avez reçu un message avec votre code.
+              <br/> Celui-ci est composé de 6 chiffres.</p>
+              <p>Nous avons envoyé votre code à : {{email}}</p>
+        </div>
+</div>
+
       <ion-item style="  display: inline-flex;align-items: center;width: 100%;margin-top: 5px;" class="ion-margin-bottom">
         <ion-input name="code" [(ngModel)]="confemail" type="text" placeholder="Entrez le code"></ion-input>
       </ion-item>
+      <br/>
+      <h4 (click)="envoiCode()" style="color:brown; "> Renvoyer le code </h4>
+
       <ion-button expand="block" type="submit" [disabled]="!f.valid" shape="round">Rejoignez-nous</ion-button>
     </div>
   </form>
