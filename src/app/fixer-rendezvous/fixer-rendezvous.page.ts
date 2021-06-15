@@ -4,7 +4,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
+<<<<<<< Updated upstream
 import { BnNgIdleService } from 'bn-ng-idle';
+=======
+import { loadStripe } from '@stripe/stripe-js';
+>>>>>>> Stashed changes
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
@@ -17,6 +21,17 @@ import { ImprimerRecuPage } from '../imprimer-recu/imprimer-recu.page';
   providers: [MessageService]
 })
 export class FixerRendezvousPage implements OnInit {
+//stripe elements
+title = 'angular-stripe';
+priceId = 'price_1IkbegIPiJHJ7ZlGzziXTGtn';
+product = {
+  title: 'Consultation',
+  subTitle: 'payer votre rendez-vous',
+  description: '',
+  price: 18.00
+};
+quantity = 1;
+stripePromise = loadStripe(environment.stripe_key);
   identifiant: any = "";
   medecin?: any = "";
   soin?: any[];
@@ -286,4 +301,26 @@ export class FixerRendezvousPage implements OnInit {
     this.router.navigate(['/login']);
 
   }
+
+
+  //fonction paiement stripe
+async checkout() {
+  // Call your backend to create the Checkout session.
+  // When the customer clicks on the button, redirect them to Checkout.
+  let stripe = await this.stripePromise;
+
+  let { error } = await stripe.redirectToCheckout({
+    mode: "payment",
+    lineItems: [{ price: this.priceId, quantity: this.quantity }],
+    successUrl: "http://localhost:5000/",
+    cancelUrl: "http://localhost:5000/",
+  });
+  // If `redirectToCheckout` fails due to a browser or network
+  // error, display the localized error message to your customer
+  // using `error.message`.
+  if (error) {
+    console.log(error);
+  }
+}
+
 }

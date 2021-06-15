@@ -79,8 +79,13 @@
           <ion-input name="num_assure" [(ngModel)]="soins.num_assure" ></ion-input>
         </ion-item>
 
+<<<<<<< Updated upstream
         <h3 style="font-weight:bold;color:#43cebb">Montant a payer </h3><br>{{montant}}
         <ion-button type="submit" style="font-size: 12px;float: right;margin: 10px;">Confirmer </ion-button>
+=======
+        <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br><input value="{{montant}}" disabled />
+        <ion-button type="submit" style="font-size: 12px;float: right;margin: 10px;" (click)="checkout()">Confirmer </ion-button>
+>>>>>>> Stashed changes
       </div>
 
        <!--si soin == null-->
@@ -136,7 +141,7 @@
       <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br>
       {{montant}}
       <div  style="float: right;margin:10px">
-        <button pButton pRipple type="submit" [disabled]="!f.valid" label="Payer" class="button-raised button-text text-black" style="background-color: #43cebb;"></button>
+        <button pButton pRipple type="submit" [disabled]="!f.valid" label="Payer" class="button-raised button-text text-black" style="background-color: #43cebb;" (click)="checkout()"></button>
   </div>
     </div>
 
