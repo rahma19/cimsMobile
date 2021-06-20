@@ -4,11 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController, ToastController } from '@ionic/angular';
-<<<<<<< Updated upstream
-import { BnNgIdleService } from 'bn-ng-idle';
-=======
 import { loadStripe } from '@stripe/stripe-js';
->>>>>>> Stashed changes
+import { BnNgIdleService } from 'bn-ng-idle';
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';

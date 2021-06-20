@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Printer } from '@ionic-native/printer';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { environment } from 'src/environments/environment';
 import { DataService } from '../data.service';
@@ -14,7 +14,7 @@ import { DataService } from '../data.service';
 })
 export class HomePage {
 user:any="";
-  constructor(private menu: MenuController,private dataService:DataService,private http:HttpClient,private router:Router,private bnIdle:BnNgIdleService) { }
+  constructor(private toastCntrl:ToastController,private menu: MenuController,private dataService:DataService,private http:HttpClient,private router:Router,private bnIdle:BnNgIdleService) { }
 
   logout(){
     this.http.delete(environment.api+"/logout" +`/${this.user._id}`);
@@ -34,12 +34,17 @@ user:any="";
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
   }
-payerCons(){
-  console.log(this.user);
-  if(this.user!=""){
-    this.router.navigate(['/consultation']);
+
+  async openToast(msg) {
+    const toast = await this.toastCntrl.create({
+      message:msg,
+      duration: 2000,
+      animated:true,
+      color:"dark"
+    });
+    toast.present();
   }
-}
+
   ngOnInit() {
     this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
       if (isTimedOut) {
@@ -50,4 +55,15 @@ payerCons(){
     this.user=this.dataService.user;
     console.log(this.user);
   }
+
+  payerCons(){
+    console.log(this.user);
+    if(this.user!=null){
+      this.router.navigate(['/consultation']);
+    }else{
+      this.openToast("Veuillez s'authentifier ");
+
+    }
+  }
+
 }

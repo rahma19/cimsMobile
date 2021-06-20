@@ -6,7 +6,7 @@
   <!--<ion-title style="text-align: end;">
     list Medecin
   </ion-title>-->
-  <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
+  <ion-button [routerLink]="['/home']" style="font-size: 15px;">EspaceRDV</ion-button>
   <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
   <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
   <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>

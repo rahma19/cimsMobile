@@ -1,4 +1,45 @@
-<ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+    <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+  <!--<ion-title style="text-align: end;">
+    list Medecin
+  </ion-title>-->
+  <ion-button style="font-size: 15px;margin-left: 20%;">Notification</ion-button>
   <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
-  <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
   <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>
+
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="notifs.length==0">
+    <img style="width:150px;height: 150px;margin-top:45%;margin-left: 30%;" src="../../assets/bell.png">
+    <h2 class="text-center text-gray">Vous n'avez aucune notification !</h2>
+  </div>
+  <h2>Nouveautés</h2>
+  <ion-list>
+    <ion-item *ngFor="let notif of new">
+      <ion-avatar slot="start">
+        <img src="../../assets/bell.png">
+      </ion-avatar>
+      <ion-label>
+        <h2 style="font-weight: bold;">{{notif.title}}</h2>
+        <p>votre rendez-vous du {{notif.actdate}} a été <br>  decalé pour le <b style="color: brown;"> {{notif.message}}</b> <ion-badge style="float: right;">New</ion-badge> </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <h2>Anciens</h2>
+  <ion-list>
+    <ion-item *ngFor="let notif of late">
+      <ion-avatar slot="start">
+        <img src="../../assets/bell.png">
+      </ion-avatar>
+      <ion-label>
+        <h2 style="font-weight: bold;">{{notif.title}}</h2>
+        <p>votre rendez-vous du {{notif.actdate}} a été <br>  decalé pour le <b style="color: brown;"> {{notif.message}}</b> </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

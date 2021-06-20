@@ -6,7 +6,7 @@
   <!--<ion-title style="text-align: end;">
     list Medecin
   </ion-title>-->
-  <ion-button [routerLink]="['/home']" style="font-size: 15px;">Cims</ion-button>
+  <ion-button [routerLink]="['/home']" style="font-size: 15px;">EspaceRDV</ion-button>
   <ion-button *ngIf="user==null" slot="end" [routerLink]="['/login']" style="font-size: 12px;">se connecter</ion-button>
   <ion-button *ngIf="user!=null" slot="end" [routerLink]="['/profile']" style="font-size: 12px;">profil</ion-button>
   <ion-button *ngIf="user!=null"  (click)="logout()" slot="end" style="font-size: 12px; "> <ion-icon name="log-out-outline"></ion-icon></ion-button>
@@ -25,7 +25,7 @@
           </ion-card-content>
         </ion-card>
 
-        <ion-card [routerLink]="['/consultation']">
+        <ion-card  (click)="payerCons()">
           <ion-card-content>
             <img src='../assets/radio.jpg' style="width: 100%;"/>
             <ion-card-title style="margin: 10px;">Vous avez un rendez-vous ?</ion-card-title>
@@ -35,7 +35,7 @@
 
       <ion-footer>
         <ion-title>
-           <p style="color:rgb(184, 182, 182);font-size: 15px;margin:10px;">© Copyright 2021 EspaceRDV Tous droits réservés</p>
+           <p style="color:rgb(184, 182, 182);font-size: 13px;margin:10px;">© Copyright 2021 EspaceRDV Tous droits réservés</p>
         </ion-title>
     </ion-footer>
     </ion-content>

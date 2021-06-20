@@ -35,6 +35,8 @@ heurMed:any[]=[
 ]
 heurs: any[] = [];
 date:any="";
+benef:any;
+codhop:any="";
   constructor(private router:Router,private bnIdle:BnNgIdleService,private toastCtrl:ToastController,private http:HttpClient, private datePipe: DatePipe,private dataService:DataService,public modalController: ModalController, public navParams: NavParams) {
     this.title = navParams.get('title');
     this.imageURL = navParams.get('imageURL');
@@ -54,21 +56,25 @@ date:any="";
     toast.present();
   }
 
-  Submit(f){
-    var dt = this.datePipe.transform(f.value.date_rdv,"yyyy-MM-dd");
-    console.log(dt);
-    f.value.date_rdv=dt;
-    f.endTime=new Date(f.value.endTime);
-    console.log(f.value);
-    this.http.patch(environment.api+"rdv/updaterdv"+`/${this.decsription}`, f.value).subscribe((res) => {
-      this.openToast('Votre rendez-vous a été repporté avec succés')
-      console.log("Le rendezvous a été modifié avec succès");
-    },
-      error => {
-        this.openToast('Erreur');
-        console.log('Erreur lors de la modification du rendez vous');
-      });
-  }
+  Submit(f,benef){
+    console.log(this.benef._id,benef._id);
+   var dt = this.datePipe.transform(this.date,"yyyy-MM-dd");
+   f.value.date_rdv=dt
+
+       f.value.userId=this.rv.cod_med;
+   f.value.title=this.rv.nom_pren_benef+" "+this.rv.pren_benef;
+   f.value.message=f.value.date_rdv+" a "+f.value.heure_rdv;
+
+   console.log(f.value);
+   this.http.patch(environment.api+"rdv/updaterdv"+`/${this.decsription}`, f.value).subscribe((res) => {
+     console.log("Le rendezvous a été modifié avec succès");
+this.openToast('Votre rendez-vous a ete decalé avec succés');
+   },
+     error => {
+       console.log('Erreur lors de la modification du rendez vous');
+this.openToast('Erreur lors du modification');
+     })
+ }
 
   ngOnInit() {
     this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
@@ -77,9 +83,15 @@ date:any="";
         console.log('session expired');
       }
     });
-    this.dataService.getRdvById(this.decsription).subscribe((data)=>{
-      this.rv=data['data'];
-      console.log(this.rv);
+    this.codhop=this.dataService.codhop;
+    this.dataService.getRdvById(this.decsription).subscribe((data:any)=>{
+      console.log(data['data']);
+       this.rv=data['data'];
+       console.log(this.rv);
+       this.dataService.getBenef(this.rv.cod_benef,this.codhop).subscribe((data)=>{
+        this.benef=data['data'];
+        console.log(this.benef);
+      });
     });
   }
   affiche(date:any){

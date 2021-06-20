@@ -135,4 +135,7 @@ export class DataService {
     return this.http.get<any[]>(environment.api+"rdv/RdvBenef"+`/${cod_benef}` + `/${codhop}`);
   }
 
+  getNotfId(id:any){
+    return this.http.get<any[]>(environment.api+"notifications/getnotificationbyuser"+`/${id}`);
+  }
 }
