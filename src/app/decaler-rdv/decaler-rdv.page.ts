@@ -64,6 +64,7 @@ codhop:any="";
        f.value.userId=this.rv.cod_med;
    f.value.title=this.rv.nom_pren_benef+" "+this.rv.pren_benef;
    f.value.message=f.value.date_rdv+" a "+f.value.heure_rdv;
+   f.value.ancrdv=this.rv.date_rdv;
 
    console.log(f.value);
    this.http.patch(environment.api+"rdv/updaterdv"+`/${this.decsription}`, f.value).subscribe((res) => {

@@ -60,11 +60,13 @@ affiche(){
       var ddMMyyyy = this.datePipe.transform(date, "yyyy-MM-dd");
       var dt = this.datePipe.transform(this.notifs[i].date, "yyyy-MM-dd");
       var comp=ddMMyyyy.localeCompare(dt);
-      if(comp<=1){
+      if(comp==0){
           this.new.push(this.notifs[i]);
+          this.new.reverse();
       }
       else{
         this.late.push(this.notifs[i]);
+        this.late.reverse();
       }
     console.log(comp);
     }
