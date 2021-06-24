@@ -45,9 +45,10 @@ export class SignupPage implements OnInit {
     }
 
     notify(subject,code){
-      this.test=false;
       let ch=this.email;
-
+      if(this.email!="")
+      {
+        this.test=false;
       let object={"to":ch,"sub":"Confirmation","text":code+subject};
       return this.http.post(environment.api+"users/mailing", object).subscribe((res:any) => {
         console.log("success");
@@ -58,7 +59,10 @@ export class SignupPage implements OnInit {
           this.openToast('Erreur');
           console.log("error");
       });
-
+    }
+    else{
+      this.openToast('Veuillez saisir votre email');
+    }
     }
 
     async openToast(msg) {

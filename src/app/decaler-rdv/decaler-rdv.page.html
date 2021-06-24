@@ -46,21 +46,15 @@
         </span>
         </div>
             </div>
-        
-            <div class="form-group">
-              <div class="ui-inputgroup">
-                <span class="ui-float-label">
-                  <mat-form-field appearance="fill" style="width: 100%; padding: 15px;" >
-                    <mat-label>Choisissez l'heure du rendez-vous</mat-label>
-                    <mat-select [(ngModel)]="heure" name="heure_rdv">
-                      <mat-option *ngFor="let heur of tab " [value]="heur" >
-                        {{heur}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-              </span>
-              </div>
-                  </div>
+
+            <mat-form-field appearance="fill" style="width: 100%; padding: 15px;">
+              <mat-label>Choisissez l'heure du rendez-vous</mat-label>
+              <mat-select [(ngModel)]="selectedValue" name="heure_rdv">
+                <mat-option *ngFor="let heur of tab " [value]="heur">
+                  {{heur}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
                   <ion-button expand="block" style="margin: 10px;" type="submit" class="main-button">Confirmer</ion-button>
     </ion-card-content>
   </ion-card>

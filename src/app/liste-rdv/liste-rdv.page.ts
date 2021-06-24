@@ -46,7 +46,7 @@ newEvent = {
       this.loadEvent();
     }
     showHideForm() {
-      this.router.navigate(['/login']);
+      this.router.navigate(['liste-medecin',this.codhop]);
       this.showAddEvent = !this.showAddEvent;
       this.newEvent = {
         title: '',

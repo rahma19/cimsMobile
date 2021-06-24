@@ -32,23 +32,34 @@
         <label style="color: black;" class=" block text-center text-balck text-sm mb-2">
            Nom :
         </label>
-        <input name="nom_pren_benef" [(ngModel)]="user.nom_pren_benef" style="width: 100%;"   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
-    </div>
+        <input name="nom_pren_benef" [(ngModel)]="user.nom_pren_benef" style="width: 100%;" #pne="ngModel" pattern="[a-zA-Z]*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" >
+        <div *ngIf="pne.invalid && (pne.dirty || pne.touched)" class="alert alert-danger">
+          <div *ngIf="pne.errors?.pattern ">
+            Le nom doit etre alphabetique
+          </div>
+        </div>
+      </div>
+
      <div class="mb-6" style="width: 100%;">
       <label style="color: black;" class=" block text-center text-balck text-sm mb-2">
         Prenom :
       </label>
-      <input name="pren_benef" [(ngModel)]="user.pren_benef" style="width: 100%;"   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
-  </div>
+      <input name="pren_benef" [(ngModel)]="user.pren_benef" style="width: 100%;"  #nme="ngModel" pattern="[a-zA-Z]*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" >
+      <div *ngIf="nme.invalid && (nme.dirty || nme.touched)" class="alert alert-danger" >
+        <div *ngIf="nme.errors?.pattern ">
+          Le prenom doit etre alphabetique
+        </div>
+      </div>
+    </div>
 
   <div class="mb-6" style="width: 100%;">
     <label style="color: black;" class=" block text-center text-balck text-sm mb-2">
        Email :
     </label>
-    <input name="email" [(ngModel)]="user.email" style="width: 100%;" #email="ngModel"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
+    <input name="email" [(ngModel)]="user.email" style="width: 100%;" #email="ngModel"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" >
     <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-      <div *ngIf = "email.errors?.pattern && email.touched">
-        email invalide
+      <div *ngIf="email.errors?.pattern">
+        L'email est invalide
       </div>
     </div>
   </div>
@@ -57,10 +68,10 @@
     <label style="color: black;" class=" block text-center text-balck text-sm mb-2">
        Num tel :
     </label>
-    <input name="tel_benef" [(ngModel)]="user.tel_benef" style="width: 100%;" #numtel="ngModel" pattern="[0-9]{8}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
-    <div *ngIf="numtel.invalid && (numtel.dirty || numtel.touched)" class="alert alert-danger">
-      <div *ngIf = "numtel.errors?.pattern && numtel.touched">
-        numero de telephone invalide
+    <input name="tel_benef" [(ngModel)]="user.tel_benef" style="width: 100%;" #gh="ngModel" pattern="[0-9]{8}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" >
+    <div *ngIf="gh.invalid && (gh.dirty || gh.touched)" class="alert alert-danger">
+      <div *ngIf="gh.errors?.pattern">
+      Le numero de telephone doit etre numérique et de 8 chiffres
       </div>
     </div>
   </div>

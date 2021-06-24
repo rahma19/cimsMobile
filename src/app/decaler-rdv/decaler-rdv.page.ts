@@ -95,18 +95,21 @@ this.openToast('Erreur lors du modification');
       });
     });
   }
+
   affiche(date:any){
     console.log(date);
    this.tab=[];
+   var dt = this.datePipe.transform(date,"yyyy-MM-dd");
    let datejour = new Date();
-    if (date > datejour) {
+
+   console.log(new Date(dt),datejour);
+let dte=new Date(dt);
+    if (dte > datejour) {
   //     if(date.getDay() == 6 || date.getDay() == 0){
   //       this.openToast('Veuillez selectionner une date valide');
   //     }
   //     else
   // {
-     var dt = this.datePipe.transform(date,"yyyy-MM-dd");
-   console.log(dt);
    this.dataService.getHeurMedecin(this.rv.cod_med,dt).subscribe(data=>{
      console.log(data['data']);
      this.heurs=data['data'];
