@@ -9,102 +9,113 @@
       <ion-button routerLink="/login">S'authentifier</ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> 
 
 <ion-content>
   <h1>Nouveau Sur <span style="color: teal;">Cims</span>?</h1>
 
-  <form #f="ngForm" (ngSubmit)="Submit(f)" id="form">
+  <form  (ngSubmit)="Submit()" [formGroup]="Patient">
     <div style="text-align: center;">
-      <input type="hidden" pInputText [(ngModel)]="cod" name="cod_benef" >
+      <input type="hidden" pInputText  formControlName="cod_benef" >
       <h5>Merci de saisir vos informations</h5>
       <div style="margin: 10px;">
-        <p-radioButton name="sexe_benef" value="F" [(ngModel)]="sexe"></p-radioButton>Femme
-        <p-radioButton name="sexe_benef" value="M" [(ngModel)]="sexe"></p-radioButton>Homme
+        <p-radioButton formControlName="sexe_benef" value="F" ></p-radioButton>Femme
+        <p-radioButton formControlName="sexe_benef" value="M" ></p-radioButton>Homme
       </div>
+      <div *ngIf="sexe_benef.invalid && sexe_benef.dirty" class="alert alert-danger">
+        Le sexe est obligatoire
+    </div>
     </div>
     <ion-item class="ion-margin-bottom">
-      <ion-input name="nom_pren_benef" [(ngModel)]="nom_pren_benef" type="text" placeholder="nom" #nme="ngModel"
-        required></ion-input>
+      <ion-input formControlName="nom_pren_benef"  type="text" placeholder="nom" 
+        required pattern="[a-zA-Z]*"></ion-input>
     </ion-item>
-    <div *ngIf="nme.invalid && (nme.dirty || nme.touched)" class="alert alert-danger">
-      <div *ngIf="nme.errors?.required">
-        le nom est un champs obligatoire
+    <div *ngIf="nom_pren_benef.invalid && (nom_pren_benef.dirty || nom_pren_benef.touched)" class="alert alert-danger">
+      <div *ngIf="nom_pren_benef.errors.required">
+          Le nom est obligatoire
       </div>
-    </div>
+      <div *ngIf="nom_pren_benef.errors.pattern">
+        Le nom doit etre alphabetique
+      </div>
+   </div>
 
     <ion-item class="ion-margin-bottom">
-      <ion-input name="pren_benef" [(ngModel)]="pren_benef" type="text" placeholder="prenom" #pnc="ngModel" required>
+      <ion-input formControlName="pren_benef"  type="text" placeholder="prenom"  required pattern="[a-zA-Z]*">
       </ion-input>
     </ion-item>
-    <div *ngIf="pnc.invalid && (pnc.dirty || pnc.touched)" class="alert alert-danger">
-      <div *ngIf="pnc.errors?.required">
-        le prenom est un champs obligatoire
+    <div *ngIf="pren_benef.invalid && (pren_benef.dirty || pren_benef.touched)" class="alert alert-danger">
+      <div *ngIf="pren_benef.errors.required">
+          Le prenom est obligatoire
       </div>
-    </div>
+      <div *ngIf="pren_benef.errors.pattern">
+        Le prenom doit etre alphabetique
+      </div>
+   </div>
     <!--<ion-item class="ion-margin-bottom" style="  display: inline-flex;align-items: center;width: 50%;">
-          <ion-select name="cod_hop"  [(ngModel)]="codhop" >
+          <ion-select formControlName="cod_hop"  codhop" >
             <ion-select-option  *ngFor="let hopital of hopitals" value="{{hopital.cod_hop}}" style="width: 450px;">{{hopital.nom_hop}}</ion-select-option>
           </ion-select>
        </ion-item>-->
 
-    <ion-item class="ion-margin-bottom" style="  display: inline-flex;align-items: center;width: 100%;">
-      <ion-input name="tel_benef" [(ngModel)]="tel_benef" type="text" placeholder="num tel" #numtel="ngModel"
+    <ion-item class="ion-margin-bottom" style=" display: inline-flex;align-items: center;width: 100%;">
+      <ion-input formControlName="tel_benef"  type="text" placeholder="num tel" 
       pattern="[0-9]{8}" required></ion-input>
     </ion-item>
-    <div *ngIf="numtel.invalid && (numtel.dirty || numtel.touched)" class="alert alert-danger">
-      <div *ngIf="numtel.errors.required">
+    <div *ngIf="tel_benef.invalid && (tel_benef.dirty || tel_benef.touched)" class="alert alert-danger">
+      <div *ngIf="tel_benef.errors.required">
           Le numero de telephone est obligatoire
       </div>
-      <div *ngIf="numtel.errors.pattern">
+      <div *ngIf="tel_benef.errors.pattern">
         Le numero de telephone est invalide
       </div>
    </div>
 
     <div style="  display: inline-flex;align-items: center;width: 100%;" class="p-field p-col-12 p-md-4 form-controle">
       <ion-item style="width: 100%;margin-bottom: 15px;" >
-        <ion-label position="floating">Date du rendez-vous :</ion-label>
-        <ion-datetime displayFormat="MM/DD/YYYY" min="1994-03-14" max="2030-12-09" style="width: 100%;" name="date_nai_benef" [(ngModel)]="date_nai_benef" #dte="ngModel" required></ion-datetime>
+        <ion-label position="floating">Date de naissance :</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" min="1920-03-14" max="2030-12-09" style="width: 100%;" formControlName="date_nai_benef"  required></ion-datetime>
       </ion-item>
     </div>
-    <div *ngIf="dte.invalid && (dte.dirty || dte.touched)" class="alert alert-danger">
-      <div *ngIf="dte.errors?.required">
-        la date de naissance est un champs obligatoire
-      </div>
-    </div>
+    <div *ngIf="date_nai_benef.invalid && (date_nai_benef.dirty || date_nai_benef.touched)" class="alert alert-danger">
+      la date de naissance est obligatoire
+  </div>
     <!--<ion-item class="ion-margin-bottom">
-          <ion-input name="pren_mere_benef" [(ngModel)]="pren_mere_benef" type="text" placeholder="prenom mere"></ion-input>
+          <ion-input formControlName="pren_mere_benef" pren_mere_benef" type="text" placeholder="prenom mere"></ion-input>
         </ion-item>
         <ion-item  class="ion-margin-bottom">
-          <td><ion-input name="pren_pere_benef" [(ngModel)]="pren_pere_benef" type="text" placeholder="prenom pere"></ion-input></td>
+          <td><ion-input formControlName="pren_pere_benef" pren_pere_benef" type="text" placeholder="prenom pere"></ion-input></td>
         </ion-item>-->
 
         <mat-form-field appearance="fill" style="width: 100%;" >
           <mat-label>Choisir hopital </mat-label>
-          <mat-select  [(ngModel)]="codhop" name="cod_hop" #hop="ngModel" required >
+          <mat-select   formControlName="cod_hop"  required >
             <mat-option  *ngFor="let hopital of hopitals" value="{{hopital.cod_hop}}">
               {{hopital.nom_hop}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-    <div *ngIf="hop.invalid && (hop.dirty || hop.touched)" class="alert alert-danger">
-      <div *ngIf="hop.errors?.required">
-        l'hopital est un champs obligatoire
+        <div *ngIf="cod_hop.invalid && (cod_hop.dirty || cod_hop.touched)" class="alert alert-danger">
+          l'hopital est obligatoire
       </div>
-    </div>
+
+    <ion-item class="ion-margin-bottom" style="  display: inline-flex;align-items: center;width: 100%;">
+      <ion-input formControlName="img"  type="file" (change)="onFileSelect($event)"></ion-input>
+    </ion-item>
+   
 
     <ion-item style="  display: inline-flex;align-items: center;width: 100%;" class="ion-margin-bottom">
-      <ion-input name="email" [(ngModel)]="email" type="text" placeholder="email" #mail="ngModel" required
+      <ion-input formControlName="email"  type="text" placeholder="email"  required
         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"></ion-input>
     </ion-item>
-    <div *ngIf="mail.invalid && (mail.dirty || mail.touched)" class="alert alert-danger">
-      <div *ngIf="mail.errors.required">
+    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+      <div *ngIf="email.errors.required">
           L'email est obligatoire
       </div>
-      <div *ngIf="mail.errors.pattern">
+      <div *ngIf="email.errors.pattern">
         L'email est invalide
       </div>
    </div>
+  
 
     <ion-button expand="block" type="button" shape="round"
       (click)="notify('est le code de confirmation de votre nouveau compte sur CIMS ',code)">Confirmer</ion-button>
@@ -114,17 +125,20 @@
         <div class="p-field p-col-12 p-md-4">
           <p>Merci de vérifier dans votre boite e-mails <br> que vous avez reçu un message avec votre code.
               <br/> Celui-ci est composé de 6 chiffres.</p>
-              <p>Nous avons envoyé votre code à : {{email}}</p>
+              <p>Nous avons envoyé votre code à : {{mail}}</p>
         </div>
 </div>
 
       <ion-item style="  display: inline-flex;align-items: center;width: 100%;margin-top: 5px;" class="ion-margin-bottom">
-        <ion-input name="code" [(ngModel)]="confemail" type="text" placeholder="Entrez le code"></ion-input>
+        <ion-input formControlName="code"  type="text" placeholder="Entrez le code"></ion-input>
       </ion-item>
+      <div *ngIf="code.invalid && (code.dirty || code.touched)" class="alert alert-danger">
+        le code est obligatoire
+    </div>
       <br/>
       <h4 (click)="envoiCode()" style="color:brown; "> Renvoyer le code </h4>
 
-      <ion-button expand="block" type="submit" [disabled]="!f.valid" shape="round">Rejoignez-nous</ion-button>
+      <ion-button expand="block" type="submit"  shape="round">Rejoignez-nous</ion-button>
     </div>
   </form>
 
