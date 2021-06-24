@@ -28,7 +28,7 @@
       </mat-select>
     </mat-form-field>
 
-    <h1 style="font-weight: bold;margin:10px" class="title">Hopital a {{region}} </h1>
+    <h1 style="font-weight: bold;margin:10px" class="title">Hopital {{region}} </h1>
     <ion-card *ngFor="let hopital of hopitals | filter:region:'adr_hop','nom_hop' " #hop>
       <ion-card-content>
         <div class="c">
