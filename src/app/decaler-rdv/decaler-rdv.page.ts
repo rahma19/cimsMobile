@@ -36,6 +36,7 @@ heurMed:any[]=[
 heurs: any[] = [];
 date:any="";
 benef:any;
+user:any="";
 codhop:any="";
   constructor(private router:Router,private bnIdle:BnNgIdleService,private toastCtrl:ToastController,private http:HttpClient, private datePipe: DatePipe,private dataService:DataService,public modalController: ModalController, public navParams: NavParams) {
     this.title = navParams.get('title');
@@ -57,7 +58,7 @@ codhop:any="";
   }
 
   Submit(f,benef){
-    console.log(this.benef._id,benef._id);
+    console.log(this.user._id);
    var dt = this.datePipe.transform(this.date,"yyyy-MM-dd");
    f.value.date_rdv=dt
 
@@ -85,14 +86,15 @@ this.openToast('Erreur lors du modification');
       }
     });
     this.codhop=this.dataService.codhop;
+    this.user=this.dataService.user;
     this.dataService.getRdvById(this.decsription).subscribe((data:any)=>{
       console.log(data['data']);
        this.rv=data['data'];
        console.log(this.rv);
-       this.dataService.getBenef(this.rv.cod_benef,this.codhop).subscribe((data)=>{
+       /*this.dataService.getBenef(this.rv.cod_benef,this.codhop).subscribe((data)=>{
         this.benef=data['data'];
         console.log(this.benef);
-      });
+      });*/
     });
   }
 

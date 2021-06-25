@@ -46,8 +46,6 @@
         <ion-input type="hidden" name="prenom_med" [(ngModel)]="medecin.prenom_med" ></ion-input>
         <ion-input type="hidden" name="service" [(ngModel)]="medecin.service" ></ion-input>
         <ion-input type="hidden" name="specialite" [(ngModel)]="medecin.specialite" ></ion-input>
-        <!--<ion-input type="hidden" name="nom_hop" [(ngModel)]="hop[0].nom_hop" ></ion-input>
-        <ion-input type="hidden" name="adr_hop" [(ngModel)]="hop[0].adr_hop" ></ion-input>-->
 
         <div class="container" *ngIf="testsoin==true" style="width: 100%;">
 
@@ -66,21 +64,31 @@
 
          <ion-label position="floating">Numero de carnet </ion-label>
         <ion-item class="ion-margin-bottom">
-          <ion-input type="text" name="num_carnet" [(ngModel)]="soins.num_carnet" ></ion-input>
+          <ion-input type="text" name="num_carnet" [(ngModel)]="soins.num_carnet" #gh="ngModel" pattern="[0-9]{8}" ></ion-input>
         </ion-item>
+        <div *ngIf="gh.invalid && (gh.dirty || gh.touched)" class="alert alert-danger">
+          <div *ngIf="gh.errors?.pattern">
+          Le numero de carnet doit etre numérique et de 8 chiffres
+          </div>
+        </div>
 
         <ion-label position="floating">Date de validité</ion-label>
         <ion-item class="ion-margin-bottom">
-          <ion-input name="date_valide" [(ngModel)]="soins.date_valide" required></ion-input>
+          <ion-datetime displayFormat="MM/DD/YYYY" min="1994-12-12" max="2050-12-12" name="date_valide" [(ngModel)]="soins.date_valide"></ion-datetime>
         </ion-item>
 
         <ion-label position="floating">Numero d'assurance</ion-label>
         <ion-item class="ion-margin-bottom">
-          <ion-input name="num_assure" [(ngModel)]="soins.num_assure" ></ion-input>
+          <ion-input name="num_assure" [(ngModel)]="soins.num_assure" #num="ngModel" pattern="[0-9]{11}"></ion-input>
         </ion-item>
+        <div *ngIf="num.invalid && (num.dirty || num.touched)" class="alert alert-danger">
+          <div *ngIf="num.errors?.pattern">
+          Le numero d'assurance doit etre numérique et de 11 chiffres
+          </div>
+        </div>
 
         <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br>{{montant}}
-        <ion-button type="submit" style="font-size: 12px;float: right;margin: 10px;" (click)="checkout()">Confirmer </ion-button>
+        <ion-button type="submit" [disabled]="!f.valid" style="font-size: 12px;float: right;margin: 10px;" (click)="checkout()">Confirmer </ion-button>
       </div>
 
        <!--si soin == null-->
@@ -105,13 +113,16 @@
        </div>
 
     <ion-item class="ion-margin-bottom">
-      <ion-input type="text" name="num_carnet" placeholder="Numero du carnet" [(ngModel)]="numC" #num="ngModel" required></ion-input>
+      <ion-input type="text" name="num_carnet" placeholder="Numero du carnet" [(ngModel)]="numC" #tel_benef="ngModel" pattern="[0-9]{8}" required></ion-input>
     </ion-item>
-    <div *ngIf="num.invalid && (num.dirty || num.touched)" class="alert alert-danger">
-      <div *ngIf="num.errors?.required">
-        le numero du carnet est un champs obligatoire
+    <div *ngIf="tel_benef.invalid && (tel_benef.dirty || tel_benef.touched)" class="alert alert-danger">
+      <div *ngIf="tel_benef.errors.required">
+          Le numero de carnet est obligatoire
       </div>
-    </div>
+      <div *ngIf="tel_benef.errors.pattern">
+        Le numero de carnet doit etre numérique et de 8 chiffres
+      </div>
+   </div>
 
     <ion-item class="ion-margin-bottom">
       <ion-label position="floating">Date valide</ion-label>
@@ -124,13 +135,16 @@
         </div>
 
     <ion-item class="ion-margin-bottom">
-      <ion-input name="num_assure" [(ngModel)]="numA" #assur="ngModel" required placeholder="Numero d'assurance" ></ion-input>
+      <ion-input name="num_assure" [(ngModel)]="numA" #assur="ngModel" required placeholder="Numero d'assurance" #nm="ngModel" pattern="[0-9]{11}" ></ion-input>
     </ion-item>
-    <div *ngIf="assur.invalid && (assur.dirty || assur.touched)" class="alert alert-danger">
-      <div *ngIf="assur.errors?.required">
-        le numero d'assurance est un champs obligatoire
+    <div *ngIf="nm.invalid && (nm.dirty || nm.touched)" class="alert alert-danger">
+      <div *ngIf="nm.errors.required">
+          Le numero d'assurance est obligatoire
       </div>
-    </div>
+      <div *ngIf="nm.errors.pattern">
+        Le numero d'assurance doit etre numérique et de 11 chiffres
+      </div>
+   </div>
 
     <div>
       <h3 style="font-weight:bold;color:#43cebb">Montant a payer :</h3><br>

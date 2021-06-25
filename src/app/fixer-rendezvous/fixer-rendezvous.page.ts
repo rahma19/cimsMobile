@@ -34,7 +34,7 @@ stripePromise = loadStripe(environment.stripe_key);
   soin?: any[];
   soins?: any;
   testsoin?: Boolean;
-  hop?: any[];
+  hop?: any[]=[];
   isup = false;
   reg: any = "";
   numC: any = "";
@@ -66,7 +66,7 @@ stripePromise = loadStripe(environment.stripe_key);
   ]
   date: Date;
   fiche: any[];
-
+codhop:any="";
   constructor(private bnIdle:BnNgIdleService,private modalController: ModalController, public toastCtrl: ToastController, private datePipe: DatePipe, private http: HttpClient, private router: Router, private activatedRoute: ActivatedRoute, private messageService: MessageService, private dataService: DataService) { }
 
   async openToast(msg) {
@@ -97,16 +97,17 @@ stripePromise = loadStripe(environment.stripe_key);
     this.identifiant = this.activatedRoute.snapshot.params['id'];
     console.log(this.identifiant);
     this.user = this.dataService.user;
-
+    this.codhop=this.dataService.codhop;
+    this.dataService.getHopitalByCode(this.codhop).subscribe(data => {
+      console.log(data['data']);
+      this.hop = data['data'];
+      console.log(this.hop);
+    });
     this.dataService.getMedecinById(this.identifiant).subscribe(data => {
       console.log(data['data']);
       this.medecin = data['data'];
       console.log(this.medecin);
-      this.dataService.getHopitalByCode(this.medecin.cod_hop).subscribe(data => {
-        console.log(data['data']);
-        this.hop = data['data'];
-        console.log(this.hop);
-      });
+
     });
 
     console.log(this.user.cod_benef);
@@ -261,6 +262,8 @@ stripePromise = loadStripe(environment.stripe_key);
     var ddMMyyyy = this.datePipe.transform(f.value.date_rdv, "yyyy-MM-dd");
     f.value.date_rdv = ddMMyyyy;
     f.value.etat = true;
+    f.value.adr_hop=this.hop[0].adr_hop;
+    f.value.nom_hop=this.hop[0].nom_hop;
     console.log(f.value);
     this.dataService.fixerRdv(f).subscribe((res: any) => {
       this.openToast('rendez-vous fixé avec succés');

@@ -45,7 +45,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
 ]);
 @NgModule({
   declarations: [AppComponent,TabsComponent,ImprimeRecuComponent],
-  entryComponents: [],
+  entryComponents: [],  
   imports: [BrowserModule,ReactiveFormsModule, IonicModule.forRoot(), MatIconModule,RadioButtonModule,MatSelectModule,NgxPrintModule,HomePageModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatStepperModule,BrowserAnimationsModule,ToastModule,DetailRdvPageModule,ButtonModule,
     MatIconModule,CalendarModule,HttpClientModule,Ng2SearchPipeModule,MatFormFieldModule,CalendarModule,DialogModule,FullCalendarModule,SidebarModule,
